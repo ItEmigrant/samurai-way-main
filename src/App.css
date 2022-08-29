@@ -4,9 +4,9 @@
 
 .app-wrapper {
     display: grid;
-width: 1200px;
+    width: 1200px;
     margin: 0 auto;
-grid-template-areas: "h h"
+    grid-template-areas: "h h"
 "n c";
 
     grid-template-rows: 60px 1fr;
@@ -19,22 +19,6 @@ grid-template-areas: "h h"
     pointer-events: none;
 }
 
-.header {
-    grid-area: h;
-    background-color: #61dafb;
-}
-.header img {
-    width: 50px;
-}
-.nav {
-    grid-area: n;
-    background-color: yellow;
-}
-
-.content {
-    grid-area: c;
-    background-color: red;
-}
 
 @media (prefers-reduced-motion: no-preference) {
     .App-logo {
