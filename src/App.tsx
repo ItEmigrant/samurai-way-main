@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Header from "./Components/Header";
-import Navbar from "./Components/Navbar";
-import Profile from "./Components/Profile";
+import Header from "./Components/Header/Header";
+import Navbar from "./Components/Nawbar/Navbar";
+import Profile from "./Components/Profile/Profile";
 
 
 const App = () => {
@@ -11,6 +11,7 @@ const App = () => {
             <Header/>
             <Navbar/>
             <Profile/>
+
         </div>);
 }
 
