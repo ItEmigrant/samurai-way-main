@@ -14,6 +14,13 @@
     /*grid-gap: 10px;*/
 }
 
+.app-wrapper-content {
+
+    grid-area: c;
+    background-color: lightsalmon;
+
+}
+
 .App-logo {
     height: 40vmin;
     pointer-events: none;

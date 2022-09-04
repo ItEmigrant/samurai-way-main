@@ -1,12 +1,7 @@
-
-.content {
-    grid-area: c;
-    background-color: lightsalmon;
-
-}
 .item {
     color: red;
 }
- .image {
+
+.image {
     width: 700px;
 }
