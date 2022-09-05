@@ -5,6 +5,9 @@ import Navbar from "./Components/Nawbar/Navbar";
 import Profile from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
+import {ActualNews} from "./Components/ActualNews/ActualNews";
+import {Track} from "./Components/Track/Track";
+import {YourSettings} from "./Components/YourSettings/YourSettings";
 
 
 const App = () => {
@@ -18,7 +21,9 @@ const App = () => {
 
                     <Route path='/dialogs' component={Dialogs}/>
                     <Route path='/profile' component={Profile}/>
-
+                    <Route path='/news' component={ActualNews}/>
+                    <Route path='/music' component={Track}/>
+                    <Route path='/settings' component={YourSettings}/>
                 </div>
 
             </div>
