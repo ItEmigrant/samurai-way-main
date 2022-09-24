@@ -9,7 +9,6 @@ import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
 
-
 const App = () => {
     return (
         <BrowserRouter>

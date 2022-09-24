@@ -1,3 +1,7 @@
 .posts {
     color: mediumspringgreen;
+    padding: 5px;
+}
+.MyPostsBlock {
+    padding: 10px;
 }
