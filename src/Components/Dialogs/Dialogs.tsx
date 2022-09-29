@@ -2,13 +2,12 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 
-
 type DialogPropsType = {
-    id:number
-    name:string
+    id: number
+    name: string
 }
 type PropsMessageItemType = {
-    message:string
+    message: string
 }
 
 const DialogItem: React.FC<DialogPropsType> = (props) => {
@@ -27,19 +26,32 @@ const MessageItem: React.FC<PropsMessageItemType> = (props) => {
 
 
 export const Dialogs = () => {
+    let dialogsData = [
+        {id: 1, name: "Bogdan"},
+        {id: 2, name: "Adrian"},
+        {id: 3, name: "Adrian"},
+        {id: 4, name: "Artem"},
+        {id: 5, name: "Alisa"}
+    ];
+
+    let messageData = [
+        {id:1, message: "Hi!"},
+        {id:2, message: "Hello Bro!"},
+        {id:3, message: "Have a nice day!"}
+
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name={'Bogdan'} id={1}/>
-                <DialogItem name={'Adrian'} id={2}/>
-                <DialogItem name={'Luda'} id={3}/>
-                <DialogItem name={'Artem'} id={4}/>
-                <DialogItem name={'Alisa'} id={5}/>
+                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
+                <DialogItem name={dialogsData[4].name} id={dialogsData[4].id}/>
+
             </div>
             <div className={s.messages}>
-                <MessageItem message={'Hi!'}/>
-                <MessageItem message={'Hello Bro!'}/>
-                <MessageItem message={'Have a nice day'}/>
+                <MessageItem message={messageData[0].message}/>
+                <MessageItem message={messageData[2].message}/>
+                <MessageItem message={messageData[1].message}/>
 
             </div>
         </div>
