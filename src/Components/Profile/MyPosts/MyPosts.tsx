@@ -1,11 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
+import {message} from "antd";
 
 const MyPosts = () => {
 
-    let postData = [
-        {id: 1, message: "Hi, how are you?", likeCount: 0},
+    let posts= [
+        {id: 1, message: "Hi, how are you?", likeCount: 1},
         {id: 2, message: "My first post!", likeCount: 25}
     ]
 
@@ -18,9 +19,7 @@ const MyPosts = () => {
             <button>Add post</button>
         </div>
         <div className={s.posts}>
-            <Post message={postData[0].message} likeCount={postData[0].likeCount}/>
-            <Post message={postData[1].message} likeCount={postData[1].likeCount}/>
-
+            {posts.map(el=>(<Post message={el.message} likeCount={el.likeCount}/>))}
         </div>
     </div>
 };
