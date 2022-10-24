@@ -14,14 +14,14 @@
 .dialogsItems .active{
     color: gold;
 }
+.img {
+    height: 20px;
+    border-radius: 8px;
 
-
+}
 
 
 .messages {
     padding: 10px;
 }
 
-.message {
-
-}

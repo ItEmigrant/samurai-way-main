@@ -9,6 +9,7 @@ import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
 import {stateType} from "./Redux/state";
+import {MyFriends} from "./Components/Friends/myFriends";
 
 
 type AppTypeProps = {
@@ -31,6 +32,8 @@ const App: React.FC<AppTypeProps> = (props) => {
                     <Route path='/news' component={ActualNews}/>
                     <Route path='/music' component={Track}/>
                     <Route path='/settings' component={YourSettings}/>
+                    <Route path='/friends' render={()=><MyFriends state={props.state.sidebar.friends}/>}/>
+
                 </div>
 
             </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import s from './Nawbar.module.css';
 import {NavLink} from "react-router-dom";
 
+
 const Navbar = () => {
     return (
         <nav className={s.nav}>
@@ -11,6 +12,7 @@ const Navbar = () => {
             <div className={s.item}><NavLink to='/news' activeClassName={s.activeLink}> News </NavLink></div>
             <div className={s.item}><NavLink to='/music' activeClassName={s.activeLink}> Music</NavLink></div>
             <div className={s.item}><NavLink to='/settings' activeClassName={s.activeLink}> Settings</NavLink></div>
+            <div className={s.item}><NavLink to='/friends' activeClassName={s.activeLink}>Friends</NavLink></div>
         </nav>
     );
 };
