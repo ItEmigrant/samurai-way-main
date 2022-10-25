@@ -1,12 +1,25 @@
 import React from 'react';
-import s from "../Dialogs.module.css";
+
 
 type PropsMessageItemType = {
-  message: string
+    message: string
 }
 
 export const MessageItem: React.FC<PropsMessageItemType> = (props) => {
+
+    let newMessage = React.useRef<HTMLTextAreaElement>(null)
+
+    const addMessage = () => {
+        const textMessage = newMessage.current?.value;
+        alert(textMessage)
+    }
+
     return (
-        <div className={s.message}>{props.message}</div>
+        <div>
+            {props.message} <textarea ref={newMessage}>
+        </textarea>
+            <button onClick={addMessage}>+</button>
+
+        </div>
     )
 }
