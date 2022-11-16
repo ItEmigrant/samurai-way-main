@@ -7,11 +7,11 @@ type PropsMessageItemType = {
 
 export const MessageItem: React.FC<PropsMessageItemType> = (props) => {
 
-    let newMessage = React.useRef<HTMLTextAreaElement>(null)
+    let newMessage = React.createRef<HTMLTextAreaElement>()
 
     const addMessage = () => {
-        const textMessage = newMessage.current?.value;
-        alert(textMessage)
+
+        alert(newMessage.current?.value)
     }
 
     return (

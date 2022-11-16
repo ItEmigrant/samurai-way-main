@@ -3,6 +3,7 @@ export type postsType = {
     message: string
     likeCount: number
 }
+
 export type friendsType = {
     id: number
     friend: string
@@ -72,4 +73,19 @@ export let state: stateType = {
             {id: 3, friend: "Alex"}
         ]
     }
+}
+
+
+
+export const addStatePostMessage = (postMessage:string) => {
+
+    const newPost: postsType = {
+        id: 5,
+        message: postMessage,
+        likeCount: 1
+    };
+
+    state.profilePage.posts.push(newPost);
+    console.log(newPost)
+
 }

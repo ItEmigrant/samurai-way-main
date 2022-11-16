@@ -14,6 +14,7 @@ import {MyFriends} from "./Components/Friends/myFriends";
 
 type AppTypeProps = {
     state: stateType;
+    addStatePostMessage: (postMessage:string)=>void
 }
 
 const App: React.FC<AppTypeProps> = (props) => {
@@ -28,11 +29,15 @@ const App: React.FC<AppTypeProps> = (props) => {
                     <Route path='/dialogs' render={() => <Dialogs
                         state={props.state.dialogsPage}/>}/>
                     <Route path='/profile' render={() => <Profile
-                        state={props.state.profilePage}/>}/>
+                        addStatePostMessage={props.addStatePostMessage}
+                        state={props.state.profilePage}/>}
+                    />
                     <Route path='/news' component={ActualNews}/>
                     <Route path='/music' component={Track}/>
                     <Route path='/settings' component={YourSettings}/>
                     <Route path='/friends' render={()=><MyFriends state={props.state.sidebar.friends}/>}/>
+
+
 
                 </div>
 
