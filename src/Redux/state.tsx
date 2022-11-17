@@ -28,6 +28,7 @@ export type stateType = {
 }
 
 export type  profilePageType = {
+    messageForNewPosts: string
     posts: Array<postsType>
 }
 
@@ -45,6 +46,7 @@ export type sidebarType = {
 
 export let state: stateType = {
     profilePage: {
+        messageForNewPosts: "",
         posts: [
             {id: 1, message: "Hi, how are you?", likeCount: 1},
             {id: 2, message: "My first post!", likeCount: 25},
@@ -78,16 +80,21 @@ export let state: stateType = {
 }
 
 
-
-export const addStatePostMessage = (postMessage:string) => {
+export const addStatePostMessage = () => {
 
     const newPost: postsType = {
         id: new Date().getTime(),
-        message: postMessage,
+        message: state.profilePage.messageForNewPosts,
         likeCount: 1
     };
-
     state.profilePage.posts.push(newPost);
+    state.profilePage.messageForNewPosts = "";
+
     rerenderEntireTree(state);
 
+}
+
+export const updateNewPostText = (postMessage: string) => {
+    state.profilePage.messageForNewPosts = postMessage;
+    rerenderEntireTree(state);
 }
