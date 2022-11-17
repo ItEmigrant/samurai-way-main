@@ -15,7 +15,9 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-            props.addStatePostMessage(newPostElement.current.value)
+            props.addStatePostMessage(newPostElement.current.value);
+            newPostElement.current.value = "";
+
         }
     }
 
