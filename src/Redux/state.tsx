@@ -34,6 +34,7 @@ export type  profilePageType = {
 
 
 export type  dialogPageType = {
+    newMessagePostText: string
     dialogs: Array<dialogsType>
     messages: Array<messagesType>
 }
@@ -62,6 +63,7 @@ export let state: stateType = {
             {id: 4, name: "Artem"},
             {id: 5, name: "Alisa"}
         ],
+        newMessagePostText: "",
         messages: [
             {id: 1, message: "Hi!"},
             {id: 2, message: "Hello Bro!"},
@@ -94,7 +96,22 @@ export const addStatePostMessage = () => {
 
 }
 
-export const updateNewPostText = (postMessage: string) => {
-    state.profilePage.messageForNewPosts = postMessage;
+export const addNewMessagePost = () => {
+    const newMessage: messagesType = {
+        id: new Date().getTime(),
+        message: state.dialogsPage.newMessagePostText
+    };
+    state.dialogsPage.messages.push(newMessage)
+    state.dialogsPage.newMessagePostText = "";
+
+    rerenderEntireTree(state);
+}
+    export const updateNewPostText = (postMessage: string) => {
+        state.profilePage.messageForNewPosts = postMessage;
+        rerenderEntireTree(state);
+    }
+
+export const updateNewPostMessageText = (messageDialogs: string) => {
+    state.dialogsPage.newMessagePostText = messageDialogs;
     rerenderEntireTree(state);
 }

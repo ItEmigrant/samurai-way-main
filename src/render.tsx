@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import App from "./App";
-import {addStatePostMessage, stateType, updateNewPostText} from "./Redux/state";
+import {
+    addNewMessagePost,
+    addStatePostMessage,
+    stateType,
+    updateNewPostMessageText,
+    updateNewPostText
+} from "./Redux/state";
 
 
-export const rerenderEntireTree = (state:stateType) => {
+export const rerenderEntireTree = (state: stateType) => {
 
     ReactDOM.render(
         <App
+            updateNewPostMessageText={updateNewPostMessageText}
+            addNewMessagePost={addNewMessagePost}
             state={state}
             addStatePostMessage={addStatePostMessage}
-            updateNewPostText={updateNewPostText }/>,
+            updateNewPostText={updateNewPostText}/>,
         document.getElementById('root')
     );
 }

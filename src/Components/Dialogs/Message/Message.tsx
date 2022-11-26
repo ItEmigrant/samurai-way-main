@@ -1,23 +1,28 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 
 type PropsMessageItemType = {
     message: string
+    newMessagePostText: string
+    addNewMessagePost: (messageDialogs: string) => void
+    updateNewPostMessageText: (messageDialogs: string) => void
 }
 
 export const MessageItem: React.FC<PropsMessageItemType> = (props) => {
 
-    let newMessage = React.createRef<HTMLTextAreaElement>()
 
     const addMessage = () => {
+        props.addNewMessagePost(props.newMessagePostText)
+    }
 
-        alert(newMessage.current?.value)
+    const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostMessageText(e.currentTarget.value)
     }
 
     return (
         <div>
-            {props.message} <textarea ref={newMessage}>
-        </textarea>
+            {props.message} <textarea onChange={messagePostChange} value={props.newMessagePostText}/>
+
             <button onClick={addMessage}>+</button>
 
         </div>

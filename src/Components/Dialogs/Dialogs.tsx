@@ -7,11 +7,12 @@ import {dialogPageType} from "../../Redux/state";
 
 type DialogsPropsType = {
     state: dialogPageType
-
+    newMessagePostText: string
+    addNewMessagePost:(messageDialogs:string)=>void
+    updateNewPostMessageText:(messageDialogs:string)=>void
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
-
 
     return (
         <div className={s.dialogs}>
@@ -20,8 +21,16 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             </div>
 
             <div className={s.messages}>
-                {props.state.messages.map(m => <MessageItem message={m.message}/>)}
+                {props.state.messages.map(m => <MessageItem key={m.id}
+                    addNewMessagePost={props.addNewMessagePost}
+                    message={m.message}
+                    newMessagePostText={props.newMessagePostText}
+                    updateNewPostMessageText={props.updateNewPostMessageText}
+                />)}
+
+
             </div>
+
 
         </div>
     );

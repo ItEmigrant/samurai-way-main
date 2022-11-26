@@ -14,6 +14,8 @@ import {MyFriends} from "./Components/Friends/myFriends";
 
 type AppTypeProps = {
     state: stateType;
+    updateNewPostMessageText:(messageDialogs:string)=>void
+    addNewMessagePost:(messageDialogs:string)=>void
     addStatePostMessage: (postMessage: string) => void
     updateNewPostText: (postMessage: string) => void
 }
@@ -28,7 +30,12 @@ const App: React.FC<AppTypeProps> = (props) => {
                 <div className='app-wrapper-content'>
 
                     <Route path='/dialogs' render={() => <Dialogs
-                        state={props.state.dialogsPage}/>}/>
+                        state={props.state.dialogsPage}
+                        newMessagePostText={props.state.dialogsPage.newMessagePostText}
+                        addNewMessagePost={props.addNewMessagePost}
+                        updateNewPostMessageText={props.updateNewPostMessageText}
+                    />
+                    }/>
                     <Route path='/profile' render={() => <Profile
                         addStatePostMessage={props.addStatePostMessage}
                         state={props.state.profilePage}
