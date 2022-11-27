@@ -1,50 +1,39 @@
-import {rerenderEntireTree} from "../render";
+
 
 export type postsType = {
     id: number
     message: string
     likeCount: number
 }
-
 export type friendsType = {
     id: number
     friend: string
 }
-
 export type dialogsType = {
     id: number
     name: string
 }
-
 export type messagesType = {
     id: number
     message: string
 }
-
 export type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogPageType
     sidebar: sidebarType
 }
-
 export type  profilePageType = {
     messageForNewPosts: string
     posts: Array<postsType>
 }
-
-
 export type  dialogPageType = {
     newMessagePostText: string
     dialogs: Array<dialogsType>
     messages: Array<messagesType>
 }
-
-
 export type sidebarType = {
     friends: Array<friendsType>
 }
-
-
 export let state: stateType = {
     profilePage: {
         messageForNewPosts: "",
@@ -81,6 +70,7 @@ export let state: stateType = {
     }
 }
 
+let onChange = () => {}
 
 export const addStatePostMessage = () => {
 
@@ -92,7 +82,7 @@ export const addStatePostMessage = () => {
     state.profilePage.posts.push(newPost);
     state.profilePage.messageForNewPosts = "";
 
-    rerenderEntireTree(state);
+    onChange();
 
 }
 
@@ -104,14 +94,19 @@ export const addNewMessagePost = () => {
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newMessagePostText = "";
 
-    rerenderEntireTree(state);
+    onChange();
 }
     export const updateNewPostText = (postMessage: string) => {
         state.profilePage.messageForNewPosts = postMessage;
-        rerenderEntireTree(state);
+        onChange();
     }
 
 export const updateNewPostMessageText = (messageDialogs: string) => {
     state.dialogsPage.newMessagePostText = messageDialogs;
-    rerenderEntireTree(state);
+    onChange();
+}
+
+export const subscribe = (observer: ()=>void) => {
+    onChange=observer;
+
 }
