@@ -8,16 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
-import {stateType} from "./Redux/state";
+import {store, storeType} from "./Redux/state";
 import {MyFriends} from "./Components/Friends/myFriends";
 
 
 type AppTypeProps = {
-    state: stateType;
-    updateNewPostMessageText:(messageDialogs:string)=>void
-    addNewMessagePost:(messageDialogs:string)=>void
-    addStatePostMessage: (postMessage: string) => void
-    updateNewPostText: (postMessage: string) => void
+    store: storeType;
+
 }
 
 const App: React.FC<AppTypeProps> = (props) => {
@@ -30,23 +27,23 @@ const App: React.FC<AppTypeProps> = (props) => {
                 <div className='app-wrapper-content'>
 
                     <Route path='/dialogs' render={() => <Dialogs
-                        state={props.state.dialogsPage}
-                        newMessagePostText={props.state.dialogsPage.newMessagePostText}
-                        addNewMessagePost={props.addNewMessagePost}
-                        updateNewPostMessageText={props.updateNewPostMessageText}
+                        state={props.store.getState().dialogsPage}
+                        newMessagePostText={props.store.getState().dialogsPage.newMessagePostText}
+                        addNewMessagePost={props.store.addNewMessagePost.bind(props.store)}
+                        updateNewPostMessageText={props.store.updateNewPostMessageText.bind(props.store)}
                     />
                     }/>
                     <Route path='/profile' render={() => <Profile
-                        addStatePostMessage={props.addStatePostMessage}
-                        state={props.state.profilePage}
-                        messageForNewPosts={props.state.profilePage.messageForNewPosts}
-                        updateNewPostText={props.updateNewPostText}/>
+                        addStatePostMessage={props.store.addStatePostMessage.bind(store)}
+                        state={props.store.getState().profilePage}
+                        messageForNewPosts={props.store.getState().profilePage.messageForNewPosts}
+                        updateNewPostText={props.store.updateNewPostText.bind(store)}/>
                     }
                     />
                     <Route path='/news' component={ActualNews}/>
                     <Route path='/music' component={Track}/>
                     <Route path='/settings' component={YourSettings}/>
-                    <Route path='/friends' render={() => <MyFriends state={props.state.sidebar.friends}/>}/>
+                    <Route path='/friends' render={() => <MyFriends state={props.store.getState().sidebar.friends}/>}/>
 
 
                 </div>
