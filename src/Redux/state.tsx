@@ -33,16 +33,43 @@ export type sidebarType = {
     friends: Array<friendsType>
 }
 
+
 export type storeType = {
     _state: stateType
-    updateNewPostMessageText: (messageDialogs: string) => void
-    addNewMessagePost:() => void
-    _onChange:() => void
-    subscribe:(observer: () => void) => void
-    addStatePostMessage:() => void
-    updateNewPostText:(postMessage: string) => void
-    getState:() => stateType
+    _onChange: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => stateType
+    dispatch: (action: ActionsTypes) => void
+    /* addStatePostMessage: () => void*/
+    /* updateNewPostText: (postMessage: string) => void*/
+    /* updateNewPostMessageText: (messageDialogs: string) => void*/
+    /* addNewMessagePost: () => void*/
 }
+
+export type addNewMessagePostActionType = {
+    type: "ADD-NEW-MESSAGE-POST"
+    newMessage: string
+}
+
+export type updateNewPostMessageTextActionType = {
+    type: "UPDATE-NEW-POST-MESSAGE-TEXT"
+    messageDialogs: string
+}
+
+export type addStatePostMessageActionType = {
+    type: "ADD-STATE-POST-MESSAGE"
+    messageForNewPosts:string
+
+}
+
+export type  updateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    postMessage: string
+}
+
+export type ActionsTypes = addNewMessagePostActionType | updateNewPostMessageTextActionType
+| addStatePostMessageActionType | updateNewPostTextActionType
+
 
 export const store: storeType = {
     _state: {
@@ -83,7 +110,8 @@ export const store: storeType = {
     _onChange() {
         console.log('state changed')
     },
-    addStatePostMessage() {
+
+    /*addStatePostMessage() {
 
         const newPost: postsType = {
             id: new Date().getTime(),
@@ -95,32 +123,64 @@ export const store: storeType = {
 
         this._onChange();
 
-    },
-    addNewMessagePost() {
-        const newMessage: messagesType = {
-            id: new Date().getTime(),
-            message: this._state.dialogsPage.newMessagePostText
-        };
-        this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.newMessagePostText = "";
+    },*/
+    /* addNewMessagePost() {
+         const newMessage: messagesType = {
+             id: new Date().getTime(),
+             message: this._state.dialogsPage.newMessagePostText
+         };
+         this._state.dialogsPage.messages.push(newMessage)
+         this._state.dialogsPage.newMessagePostText = "";
 
-        this._onChange();
-    },
-    updateNewPostText(postMessage: string) {
+         this._onChange();
+     },*/
+   /* updateNewPostText(postMessage: string) {
         this._state.profilePage.messageForNewPosts = postMessage;
         this._onChange();
-    },
-    updateNewPostMessageText(messageDialogs: string) {
-        this._state.dialogsPage.newMessagePostText = messageDialogs;
-        this._onChange();
-    },
+    },*/
+    /* updateNewPostMessageText(messageDialogs: string) {
+         this._state.dialogsPage.newMessagePostText = messageDialogs;
+         this._onChange();
+     },*/
+
     subscribe(observer) {
         this._onChange = observer;
 
     },
-
     getState() {
         return this._state
+    },
+
+    dispatch(action) {
+        if (action.type === "ADD-NEW-MESSAGE-POST") {
+            const newMessage: messagesType = {
+                id: new Date().getTime(),
+                message: this._state.dialogsPage.newMessagePostText
+            };
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessagePostText = "";
+
+            this._onChange();
+
+        } else if (action.type === "UPDATE-NEW-POST-MESSAGE-TEXT") {
+            this._state.dialogsPage.newMessagePostText = action.messageDialogs;
+            this._onChange();
+
+        } else if (action.type === "ADD-STATE-POST-MESSAGE") {
+            const newPost: postsType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.messageForNewPosts,
+                likeCount: 1
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.messageForNewPosts = "";
+
+            this._onChange();
+        }
+        else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.messageForNewPosts = action.postMessage;
+            this._onChange();
+        }
     }
 }
 

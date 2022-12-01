@@ -2,14 +2,15 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
-import {dialogPageType} from "../../Redux/state";
+import {ActionsTypes, dialogPageType} from "../../Redux/state";
 
 
 type DialogsPropsType = {
+    dispatch: (action: ActionsTypes) =>void
     state: dialogPageType
     newMessagePostText: string
-    addNewMessagePost:(messageDialogs:string)=>void
-    updateNewPostMessageText:(messageDialogs:string)=>void
+    /*addNewMessagePost:(messageDialogs:string)=>void*/
+    /*updateNewPostMessageText:(messageDialogs:string)=>void*/
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -22,10 +23,11 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
             <div className={s.messages}>
                 {props.state.messages.map(m => <MessageItem key={m.id}
-                    addNewMessagePost={props.addNewMessagePost}
+                    /*addNewMessagePost={props.addNewMessagePost}*/
                     message={m.message}
                     newMessagePostText={props.newMessagePostText}
-                    updateNewPostMessageText={props.updateNewPostMessageText}
+                   /* updateNewPostMessageText={props.updateNewPostMessageText}*/
+                    dispatch={props.dispatch}
                 />)}
 
 

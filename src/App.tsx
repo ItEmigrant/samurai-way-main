@@ -8,12 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
-import {store, storeType} from "./Redux/state";
+import {storeType} from "./Redux/state";
 import {MyFriends} from "./Components/Friends/myFriends";
 
 
 type AppTypeProps = {
     store: storeType;
+
 
 }
 
@@ -29,15 +30,16 @@ const App: React.FC<AppTypeProps> = (props) => {
                     <Route path='/dialogs' render={() => <Dialogs
                         state={props.store.getState().dialogsPage}
                         newMessagePostText={props.store.getState().dialogsPage.newMessagePostText}
-                        addNewMessagePost={props.store.addNewMessagePost.bind(props.store)}
-                        updateNewPostMessageText={props.store.updateNewPostMessageText.bind(props.store)}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                       /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
                     />
                     }/>
                     <Route path='/profile' render={() => <Profile
-                        addStatePostMessage={props.store.addStatePostMessage.bind(store)}
+                        /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
                         state={props.store.getState().profilePage}
                         messageForNewPosts={props.store.getState().profilePage.messageForNewPosts}
-                        updateNewPostText={props.store.updateNewPostText.bind(store)}/>
+                       /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
+                        dispatch={props.store.dispatch.bind(props.store)}/>
                     }
                     />
                     <Route path='/news' component={ActualNews}/>
