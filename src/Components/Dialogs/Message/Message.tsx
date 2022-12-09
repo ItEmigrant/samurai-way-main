@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {ActionsTypes} from "../../../Redux/state";
+import {ActionsTypes, addMessageActionCreator, updateMessageActionCreator} from "../../../Redux/state";
 
 
 
@@ -16,12 +16,14 @@ export const MessageItem: React.FC<PropsMessageItemType> = (props) => {
 
     const addMessage = () => {
        /* props.addNewMessagePost(props.newMessagePostText)*/
-        props.dispatch({type: "ADD-NEW-MESSAGE-POST", newMessage:props.newMessagePostText})
+        /*props.dispatch({type: "ADD-NEW-MESSAGE-POST", newMessage:props.newMessagePostText})*/
+        props.dispatch(addMessageActionCreator(props.newMessagePostText))
     }
 
     const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
        /* props.updateNewPostMessageText(e.currentTarget.value)*/
-        props.dispatch({type:"UPDATE-NEW-POST-MESSAGE-TEXT", messageDialogs: (e.currentTarget.value)})
+       /* props.dispatch({type:"UPDATE-NEW-POST-MESSAGE-TEXT", messageDialogs: (e.currentTarget.value)})*/
+        props.dispatch(updateMessageActionCreator(e.currentTarget.value))
     }
 
     return (

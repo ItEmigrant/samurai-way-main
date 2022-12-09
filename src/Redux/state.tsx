@@ -46,29 +46,50 @@ export type storeType = {
     /* addNewMessagePost: () => void*/
 }
 
-export type addNewMessagePostActionType = {
-    type: "ADD-NEW-MESSAGE-POST"
-    newMessage: string
-}
-
-export type updateNewPostMessageTextActionType = {
+/*export type updateNewPostMessageTextActionType = {
     type: "UPDATE-NEW-POST-MESSAGE-TEXT"
     messageDialogs: string
-}
+}*/
 
-export type addStatePostMessageActionType = {
+/*export type addStatePostMessageActionType = {
     type: "ADD-STATE-POST-MESSAGE"
-    messageForNewPosts:string
+    messageForNewPosts: string
+}*/
 
-}
+/*export type addStatePostMessageActionType = ReturnType<typeof addPostActionCreator>*/
 
-export type  updateNewPostTextActionType = {
+/*export type  updateNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT"
     postMessage: string
-}
+}*/
 
-export type ActionsTypes = addNewMessagePostActionType | updateNewPostMessageTextActionType
-| addStatePostMessageActionType | updateNewPostTextActionType
+/*export type updateNewPostTextActionType = ReturnType<typeof updateNewPostActionCreator>*/
+
+export type ActionsTypes = ReturnType<typeof addMessageActionCreator> | ReturnType<typeof updateMessageActionCreator>
+    | ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostActionCreator>
+
+
+export const addPostActionCreator = (messageForNewPosts: string) => ({
+    type: "ADD-STATE-POST-MESSAGE",
+    messageForNewPosts: messageForNewPosts
+}) as const
+
+
+export const updateNewPostActionCreator = (postMessage: string) => ({
+    type: "UPDATE-NEW-POST-TEXT",
+    postMessage: postMessage
+}) as const
+
+export const addMessageActionCreator = (newMessage: string) => ({
+    type: "ADD-NEW-MESSAGE-POST",
+    newMessage: newMessage
+}) as const
+
+export const updateMessageActionCreator = (messageDialogs: string) => ({
+    type: "UPDATE-NEW-POST-MESSAGE-TEXT",
+    messageDialogs: messageDialogs
+
+}) as const
 
 
 export const store: storeType = {
@@ -111,38 +132,6 @@ export const store: storeType = {
         console.log('state changed')
     },
 
-    /*addStatePostMessage() {
-
-        const newPost: postsType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.messageForNewPosts,
-            likeCount: 1
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.messageForNewPosts = "";
-
-        this._onChange();
-
-    },*/
-    /* addNewMessagePost() {
-         const newMessage: messagesType = {
-             id: new Date().getTime(),
-             message: this._state.dialogsPage.newMessagePostText
-         };
-         this._state.dialogsPage.messages.push(newMessage)
-         this._state.dialogsPage.newMessagePostText = "";
-
-         this._onChange();
-     },*/
-   /* updateNewPostText(postMessage: string) {
-        this._state.profilePage.messageForNewPosts = postMessage;
-        this._onChange();
-    },*/
-    /* updateNewPostMessageText(messageDialogs: string) {
-         this._state.dialogsPage.newMessagePostText = messageDialogs;
-         this._onChange();
-     },*/
-
     subscribe(observer) {
         this._onChange = observer;
 
@@ -176,12 +165,46 @@ export const store: storeType = {
             this._state.profilePage.messageForNewPosts = "";
 
             this._onChange();
-        }
-        else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.messageForNewPosts = action.postMessage;
             this._onChange();
         }
     }
+
+
+
+    /*addStatePostMessage() {
+
+       const newPost: postsType = {
+           id: new Date().getTime(),
+           message: this._state.profilePage.messageForNewPosts,
+           likeCount: 1
+       };
+       this._state.profilePage.posts.push(newPost);
+       this._state.profilePage.messageForNewPosts = "";
+
+       this._onChange();
+
+   },*/
+    /* addNewMessagePost() {
+         const newMessage: messagesType = {
+             id: new Date().getTime(),
+             message: this._state.dialogsPage.newMessagePostText
+         };
+         this._state.dialogsPage.messages.push(newMessage)
+         this._state.dialogsPage.newMessagePostText = "";
+
+         this._onChange();
+     },*/
+    /* updateNewPostText(postMessage: string) {
+         this._state.profilePage.messageForNewPosts = postMessage;
+         this._onChange();
+     },*/
+    /* updateNewPostMessageText(messageDialogs: string) {
+         this._state.dialogsPage.newMessagePostText = messageDialogs;
+         this._onChange();
+     },*/
+
 }
 
 
