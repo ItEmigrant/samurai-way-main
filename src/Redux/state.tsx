@@ -111,14 +111,14 @@ export const store: storeType = {
                 {id: 4, name: "Artem"},
                 {id: 5, name: "Alisa"}
             ],
-            newMessagePostText: "",
             messages: [
                 {id: 1, message: "Hi!"},
                 {id: 2, message: "Hello Bro!"},
                 {id: 3, message: "Have a nice day!"},
                 {id: 4, message: "Yo!"},
                 {id: 5, message: ":-)!"}
-            ]
+            ],
+            newMessagePostText: "",
         },
         sidebar: {
             friends: [
@@ -148,7 +148,6 @@ export const store: storeType = {
             };
             this._state.dialogsPage.messages.push(newMessage)
             this._state.dialogsPage.newMessagePostText = "";
-
             this._onChange();
 
         } else if (action.type === "UPDATE-NEW-POST-MESSAGE-TEXT") {

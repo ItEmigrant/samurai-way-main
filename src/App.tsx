@@ -4,7 +4,7 @@ import Header from "./Components/Header/Header";
 import Navbar from "./Components/Nawbar/Navbar";
 import Profile from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
@@ -20,7 +20,7 @@ type AppTypeProps = {
 
 const App: React.FC<AppTypeProps> = (props) => {
     return (
-        <BrowserRouter>
+
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
@@ -31,14 +31,14 @@ const App: React.FC<AppTypeProps> = (props) => {
                         state={props.store.getState().dialogsPage}
                         newMessagePostText={props.store.getState().dialogsPage.newMessagePostText}
                         dispatch={props.store.dispatch.bind(props.store)}
-                       /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
+                        /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
                     />
                     }/>
                     <Route path='/profile' render={() => <Profile
                         /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
                         state={props.store.getState().profilePage}
                         messageForNewPosts={props.store.getState().profilePage.messageForNewPosts}
-                       /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
+                        /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
                         dispatch={props.store.dispatch.bind(props.store)}/>
                     }
                     />
@@ -52,7 +52,7 @@ const App: React.FC<AppTypeProps> = (props) => {
 
             </div>
 
-        </BrowserRouter>
+
     )
 }
 
