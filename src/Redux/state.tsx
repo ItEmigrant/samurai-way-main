@@ -66,7 +66,8 @@ export type storeType = {
 /*export type updateNewPostTextActionType = ReturnType<typeof updateNewPostActionCreator>*/
 
 export type ActionsTypes = ReturnType<typeof addMessageActionCreator> | ReturnType<typeof updateMessageActionCreator>
-    | ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostActionCreator>
+    | ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostActionCreator> |
+    ReturnType<typeof sendMessageActionCreator>
 
 
 export const addPostActionCreator = (messageForNewPosts: string) => ({
@@ -88,7 +89,11 @@ export const addMessageActionCreator = (newMessage: string) => ({
 export const updateMessageActionCreator = (messageDialogs: string) => ({
     type: "UPDATE-NEW-POST-MESSAGE-TEXT",
     messageDialogs: messageDialogs
+}) as const
 
+export const sendMessageActionCreator = (newSendMessage: string) => ({
+    type: "SEND-MESSAGE",
+    newSendMessage: newSendMessage
 }) as const
 
 
@@ -141,12 +146,12 @@ export const store: storeType = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-NEW-MESSAGE-POST") {
-            const newMessage: messagesType = {
+        if (action.type === "SEND-MESSAGE") {
+            const newSendMessage: messagesType = {
                 id: new Date().getTime(),
                 message: this._state.dialogsPage.newMessagePostText
             };
-            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.messages.push(newSendMessage)
             this._state.dialogsPage.newMessagePostText = "";
             this._onChange();
 

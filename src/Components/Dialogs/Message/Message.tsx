@@ -1,5 +1,5 @@
-import React, {ChangeEvent} from 'react';
-import {ActionsTypes, addMessageActionCreator, updateMessageActionCreator} from "../../../Redux/state";
+import React from 'react';
+import {ActionsTypes} from "../../../Redux/state";
 
 
 
@@ -13,24 +13,24 @@ type PropsMessageItemType = {
 
 export const MessageItem: React.FC<PropsMessageItemType> = (props) => {
 
-
-    const addMessage = () => {
-       /* props.addNewMessagePost(props.newMessagePostText)*/
-        /*props.dispatch({type: "ADD-NEW-MESSAGE-POST", newMessage:props.newMessagePostText})*/
+   /* const addMessage = () => {
+       /!* props.addNewMessagePost(props.newMessagePostText)*!/
+        /!*props.dispatch({type: "ADD-NEW-MESSAGE-POST", newMessage:props.newMessagePostText})*!/
         props.dispatch(addMessageActionCreator(props.newMessagePostText))
     }
-
-    const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       /* props.updateNewPostMessageText(e.currentTarget.value)*/
-       /* props.dispatch({type:"UPDATE-NEW-POST-MESSAGE-TEXT", messageDialogs: (e.currentTarget.value)})*/
+*/
+   /* const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+       /!* props.updateNewPostMessageText(e.currentTarget.value)*!/
+       /!* props.dispatch({type:"UPDATE-NEW-POST-MESSAGE-TEXT", messageDialogs: (e.currentTarget.value)})*!/
         props.dispatch(updateMessageActionCreator(e.currentTarget.value))
-    }
+    }*/
 
     return (
         <div>
-            {props.message} <textarea onChange={messagePostChange} value={props.newMessagePostText}/>
+            {props.message}
 
-            <button onClick={addMessage}>+</button>
+            {/*<textarea onChange={messagePostChange} value={props.newMessagePostText}/>
+            <button onClick={addMessage}>+</button>*/}
 
         </div>
     )

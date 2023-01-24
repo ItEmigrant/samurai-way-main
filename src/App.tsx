@@ -28,9 +28,8 @@ const App: React.FC<AppTypeProps> = (props) => {
                 <div className='app-wrapper-content'>
 
                     <Route path='/dialogs' render={() => <Dialogs
-                        state={props.store.getState().dialogsPage}
-                        newMessagePostText={props.store.getState().dialogsPage.newMessagePostText}
-                        dispatch={props.store.dispatch.bind(props.store)}
+                        store = {props.store}
+                      /*  dispatch={props.store.dispatch.bind(props.store)}*/
                         /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
                     />
                     }/>
