@@ -1,3 +1,6 @@
+import ProfileReducer from "./ProfileReducer";
+import DialogsReducer from "./DialogsReducer";
+
 export type postsType = {
     id: number
     message: string
@@ -146,7 +149,15 @@ export const store: storeType = {
     },
 
     dispatch(action) {
-        if (action.type === "SEND-MESSAGE") {
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action);
+
+        this._onChange();
+    }
+
+
+
+        /*if (action.type === "SEND-MESSAGE") {
             const newSendMessage: messagesType = {
                 id: new Date().getTime(),
                 message: this._state.dialogsPage.newMessagePostText
@@ -172,8 +183,8 @@ export const store: storeType = {
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.messageForNewPosts = action.postMessage;
             this._onChange();
-        }
-    }
+        }*/
+
 
 
 

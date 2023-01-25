@@ -2,7 +2,6 @@ import React from 'react';
 import {ActionsTypes} from "../../../Redux/state";
 
 
-
 type PropsMessageItemType = {
     dispatch: (action: ActionsTypes) =>void
     message: string

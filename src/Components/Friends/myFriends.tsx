@@ -10,7 +10,7 @@ type  MyFriendsPropsType = {
 export const MyFriends: React.FC<MyFriendsPropsType> = (props) => {
     return (
         <div className={s.friends}>
-            {props.state.map(el=>el.friend)}
+            {props.state.map(el=> el.friend)}
         </div>
     );
 };
