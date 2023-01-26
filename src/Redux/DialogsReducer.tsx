@@ -28,6 +28,19 @@ const DialogsReducer = (state: dialogPageType, action: ActionsTypes) => {
 };
 export default DialogsReducer;
 
+export type DialogActionType = ReturnType<typeof sendMessageActionCreator> |  ReturnType<typeof updateMessageActionCreator>
+
+export const sendMessageActionCreator = (newSendMessage: string) => ({
+    type: "SEND-MESSAGE",
+    newSendMessage: newSendMessage
+}) as const
+
+export const updateMessageActionCreator = (messageDialogs: string) => ({
+    type: "UPDATE-NEW-POST-MESSAGE-TEXT",
+    messageDialogs: messageDialogs
+}) as const
+
+
 /*
 if (action.type === "SEND-MESSAGE") {
     const newSendMessage: messagesType = {

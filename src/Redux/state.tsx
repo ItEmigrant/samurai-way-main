@@ -1,5 +1,5 @@
-import ProfileReducer from "./ProfileReducer";
-import DialogsReducer from "./DialogsReducer";
+import ProfileReducer, {ProfileActionsType} from "./ProfileReducer";
+import DialogsReducer, {DialogActionType} from "./DialogsReducer";
 
 export type postsType = {
     id: number
@@ -68,37 +68,7 @@ export type storeType = {
 
 /*export type updateNewPostTextActionType = ReturnType<typeof updateNewPostActionCreator>*/
 
-export type ActionsTypes = ReturnType<typeof addMessageActionCreator> | ReturnType<typeof updateMessageActionCreator>
-    | ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostActionCreator> |
-    ReturnType<typeof sendMessageActionCreator>
-
-
-export const addPostActionCreator = (messageForNewPosts: string) => ({
-    type: "ADD-STATE-POST-MESSAGE",
-    messageForNewPosts: messageForNewPosts
-}) as const
-
-
-export const updateNewPostActionCreator = (postMessage: string) => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    postMessage: postMessage
-}) as const
-
-export const addMessageActionCreator = (newMessage: string) => ({
-    type: "ADD-NEW-MESSAGE-POST",
-    newMessage: newMessage
-}) as const
-
-export const updateMessageActionCreator = (messageDialogs: string) => ({
-    type: "UPDATE-NEW-POST-MESSAGE-TEXT",
-    messageDialogs: messageDialogs
-}) as const
-
-export const sendMessageActionCreator = (newSendMessage: string) => ({
-    type: "SEND-MESSAGE",
-    newSendMessage: newSendMessage
-}) as const
-
+export type ActionsTypes = ProfileActionsType | DialogActionType
 
 export const store: storeType = {
     _state: {
@@ -157,33 +127,33 @@ export const store: storeType = {
 
 
 
-        /*if (action.type === "SEND-MESSAGE") {
-            const newSendMessage: messagesType = {
-                id: new Date().getTime(),
-                message: this._state.dialogsPage.newMessagePostText
-            };
-            this._state.dialogsPage.messages.push(newSendMessage)
-            this._state.dialogsPage.newMessagePostText = "";
-            this._onChange();
+    /*if (action.type === "SEND-MESSAGE") {
+        const newSendMessage: messagesType = {
+            id: new Date().getTime(),
+            message: this._state.dialogsPage.newMessagePostText
+        };
+        this._state.dialogsPage.messages.push(newSendMessage)
+        this._state.dialogsPage.newMessagePostText = "";
+        this._onChange();
 
-        } else if (action.type === "UPDATE-NEW-POST-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessagePostText = action.messageDialogs;
-            this._onChange();
+    } else if (action.type === "UPDATE-NEW-POST-MESSAGE-TEXT") {
+        this._state.dialogsPage.newMessagePostText = action.messageDialogs;
+        this._onChange();
 
-        } else if (action.type === "ADD-STATE-POST-MESSAGE") {
-            const newPost: postsType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.messageForNewPosts,
-                likeCount: 1
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.messageForNewPosts = "";
+    } else if (action.type === "ADD-STATE-POST-MESSAGE") {
+        const newPost: postsType = {
+            id: new Date().getTime(),
+            message: this._state.profilePage.messageForNewPosts,
+            likeCount: 1
+        };
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.messageForNewPosts = "";
 
-            this._onChange();
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.messageForNewPosts = action.postMessage;
-            this._onChange();
-        }*/
+        this._onChange();
+    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        this._state.profilePage.messageForNewPosts = action.postMessage;
+        this._onChange();
+    }*/
 
 
 

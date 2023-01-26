@@ -27,8 +27,23 @@ const ProfileReducer = (state: profilePageType, action: ActionsTypes) => {
     }
 }
 
-
 export default ProfileReducer;
+
+export type ProfileActionsType =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostActionCreator>
+
+export const addPostActionCreator = (messageForNewPosts: string) => ({
+    type: "ADD-STATE-POST-MESSAGE",
+    messageForNewPosts: messageForNewPosts
+}) as const
+
+export const updateNewPostActionCreator = (postMessage: string) => ({
+    type: "UPDATE-NEW-POST-TEXT",
+    postMessage: postMessage
+}) as const
+
+
 /*if (action.type === "ADD-STATE-POST-MESSAGE") {
             const newPost: postsType = {
         id: new Date().getTime(),
