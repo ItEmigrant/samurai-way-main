@@ -8,13 +8,13 @@ import {Route} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
-import {storeType} from "./Redux/state";
+import {storeType} from "./Redux/store";
 import {MyFriends} from "./Components/Friends/myFriends";
+import {ReduxStoreType} from "./Redux/reduxStore";
 
 
 type AppTypeProps = {
-    store: storeType;
-
+    store: ReduxStoreType;
 
 }
 
@@ -44,7 +44,7 @@ const App: React.FC<AppTypeProps> = (props) => {
                     <Route path='/news' component={ActualNews}/>
                     <Route path='/music' component={Track}/>
                     <Route path='/settings' component={YourSettings}/>
-                    <Route path='/friends' render={() => <MyFriends state={props.store.getState().sidebar.friends}/>}/>
+                    {/*<Route path='/friends' render={() => <MyFriends state={props.store.getState().sidebar.friends}/>}/>*/}
 
 
                 </div>

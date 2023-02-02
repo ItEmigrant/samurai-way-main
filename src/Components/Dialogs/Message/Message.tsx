@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActionsTypes} from "../../../Redux/state";
+import {ActionsTypes} from "../../../Redux/store";
 
 
 type PropsMessageItemType = {

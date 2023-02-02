@@ -1,8 +1,19 @@
 import React from 'react';
-import {ActionsTypes, postsType, profilePageType} from "./state";
+import {ActionsTypes, postsType, profilePageType} from "./store";
+
+let initialReducerState = {
+    messageForNewPosts: "",
+    posts: [
+        {id: 1, message: "Hi, how are you?", likeCount: 1},
+        {id: 2, message: "My first post!", likeCount: 25},
+        {id: 3, message: "Post!", likeCount: 5},
+        {id: 4, message: "yo!", likeCount: 20}
+    ]
+}
 
 
-const ProfileReducer = (state: profilePageType, action: ActionsTypes) => {
+
+const ProfileReducer = (state:profilePageType = initialReducerState, action: ActionsTypes) => {
 
     switch (action.type) {
         case "ADD-STATE-POST-MESSAGE":

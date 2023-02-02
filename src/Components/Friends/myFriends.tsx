@@ -1,5 +1,5 @@
 import React from 'react';
-import {friendsType} from "../../Redux/state";
+import {friendsType} from "../../Redux/store";
 import s from "./myFriends.module.css"
 
 

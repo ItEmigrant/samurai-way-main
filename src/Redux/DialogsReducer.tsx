@@ -1,7 +1,25 @@
 import React from 'react';
-import {ActionsTypes, dialogPageType, messagesType,} from "./state";
+import {ActionsTypes, dialogPageType, messagesType,} from "./store";
 
-const DialogsReducer = (state: dialogPageType, action: ActionsTypes) => {
+
+let initialDialogState = {
+    dialogs: [
+        {id: 1, name: "Bogdan"},
+        {id: 2, name: "Adrian"},
+        {id: 3, name: "Artur"},
+        {id: 4, name: "Artem"},
+        {id: 5, name: "Alisa"}
+    ],
+    messages: [
+        {id: 1, message: "Hi!"},
+        {id: 2, message: "Hello Bro!"},
+        {id: 3, message: "Have a nice day!"},
+        {id: 4, message: "Yo!"},
+        {id: 5, message: ":-)!"}
+    ],
+    newMessagePostText: "",
+}
+const DialogsReducer = (state: dialogPageType = initialDialogState, action: ActionsTypes) => {
 
     switch (action.type) {
         case "SEND-MESSAGE":

@@ -2,20 +2,21 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
-import {storeType} from "../../Redux/state";
+import {storeType} from "../../Redux/store";
 import {sendMessageActionCreator, updateMessageActionCreator} from "../../Redux/DialogsReducer";
+import {ReduxStoreType} from "../../Redux/reduxStore";
 
 
 
 type DialogsPropsType = {
-    store: storeType
+    store: ReduxStoreType
     /*addNewMessagePost:(messageDialogs:string)=>void*/
     /*updateNewPostMessageText:(messageDialogs:string)=>void*/
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let state = props.store.getState().dialogsPage
+    let state = props.store.getState().dialogPage
 
     let messagesElements = state.messages.map(m =>
         <MessageItem key={m.id}

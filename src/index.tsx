@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import App from "./App";
-import {
-    store
-} from "./Redux/state";
+
 import {BrowserRouter} from "react-router-dom";
+import {store} from "./Redux/reduxStore";
+
+
 
 
 const rerenderEntireTree = () => {
@@ -16,9 +17,11 @@ const rerenderEntireTree = () => {
         document.getElementById('root')
     );
 }
-store.subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree);
 
 rerenderEntireTree();
+
+
 
 
 
