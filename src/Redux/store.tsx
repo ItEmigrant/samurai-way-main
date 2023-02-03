@@ -34,6 +34,7 @@ export type  dialogPageType = {
 }
 export type sidebarType = {
     friends: Array<friendsType>
+    newFriend: string
 }
 
 
@@ -99,6 +100,7 @@ export const store: storeType = {
             newMessagePostText: "",
         },
         sidebar: {
+            newFriend: "",
             friends: [
                 {id: 1, friend: "Andre"},
                 {id: 2, friend: "Oleg"},

@@ -20,35 +20,36 @@ type AppTypeProps = {
 const App: React.FC<AppTypeProps> = (props) => {
     return (
 
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
 
-                <div className='app-wrapper-content'>
+            <div className='app-wrapper-content'>
 
-                    <Route path='/dialogs' render={() => <Dialogs
-                        store = {props.store}
-                      /*  dispatch={props.store.dispatch.bind(props.store)}*/
-                        /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
-                    />
-                    }/>
-                    <Route path='/profile' render={() => <Profile
-                        /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
-                        state={props.store.getState().profilePage}
-                        messageForNewPosts={props.store.getState().profilePage.messageForNewPosts}
-                        /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
-                        dispatch={props.store.dispatch.bind(props.store)}/>
-                    }
-                    />
-                    <Route path='/news' component={ActualNews}/>
-                    <Route path='/music' component={Track}/>
-                    <Route path='/settings' component={YourSettings}/>
-                    <Route path='/friends' render={() => <MyFriends state={props.store.getState().sidebar.friends}/>}/>
+                <Route path='/dialogs' render={() => <Dialogs
+                    store={props.store}
+                    /*  dispatch={props.store.dispatch.bind(props.store)}*/
+                    /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
+                />
+                }/>
+                <Route path='/profile' render={() => <Profile
+                    /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
+                    state={props.store.getState().profilePage}
+                    messageForNewPosts={props.store.getState().profilePage.messageForNewPosts}
+                    /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
+                    dispatch={props.store.dispatch.bind(props.store)}/>
+                }
+                />
+                <Route path='/news' component={ActualNews}/>
+                <Route path='/music' component={Track}/>
+                <Route path='/settings' component={YourSettings}/>
+                <Route path='/friends' render={() => <MyFriends store={props.store}
+                />}/>
 
-
-                </div>
 
             </div>
+
+        </div>
 
 
     )

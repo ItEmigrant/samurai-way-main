@@ -6,7 +6,6 @@ import {sendMessageActionCreator, updateMessageActionCreator} from "../../Redux/
 import {ReduxStoreType} from "../../Redux/reduxStore";
 
 
-
 type DialogsPropsType = {
     store: ReduxStoreType
     /*addNewMessagePost:(messageDialogs:string)=>void*/
@@ -20,8 +19,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElements = state.messages.map(m =>
         <MessageItem key={m.id}
                      message={m.message}
-                     newMessagePostText={state.newMessagePostText}
-                     dispatch={props.store.dispatch}
+
         />)
 
     let dialogElements = state.dialogs.map(el =>
@@ -34,7 +32,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     }
 
     const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      props.store.dispatch(updateMessageActionCreator(e.currentTarget.value))
+        props.store.dispatch(updateMessageActionCreator(e.currentTarget.value))
     }
 
     return (

@@ -1,46 +1,54 @@
 import React from 'react';
-import {friendsType, sidebarType,} from "./store";
+import {friendsType, sidebarType} from "./store";
 
 
 let initialSidebarState = {
-newFriend: "Bogdan",
-    friends: [
 
+    friends: [
         {id: 1, friend: "Andre"},
         {id: 2, friend: "Oleg"},
         {id: 3, friend: "Alex"}
-
-    ]
+    ],
+    newFriend: "",
 }
 
 
-export const SidebarReducer = (state: sidebarType = initialSidebarState, action:SidebarActionType) => {
+export const SidebarReducer = (state: sidebarType = initialSidebarState, action: SidebarActionType) => {
     switch (action.type) {
         case "ADD-FRIENDS":
             const newFriends: friendsType = {
-                id:new Date().getTime(),
-                friend: "Bogdan"
+                id: new Date().getTime(),
+                friend: state.newFriend
             };
             state.friends.push(newFriends);
+            state.newFriend = "";
 
-          return   state
+            return state
+
+        case "UPDATE-FRIENDS":
+            state.newFriend = action.FriendWithInput;
+            return state
 
         default:
-          return  state
+            return state
     }
-
-
 
 
 };
 
 
-export type SidebarActionType = ReturnType<typeof updateFriendsActionCreator>
+export type SidebarActionType =
+    ReturnType<typeof addFriendsActionCreator>
+    | ReturnType<typeof updateFriendsActionCreator>
 
-export const updateFriendsActionCreator = (newFriend:string) => ({
+export const addFriendsActionCreator = (newFriend: string) => ({
     type: "ADD-FRIENDS",
-    friend: newFriend
+    newAddFriend: newFriend
+}) as const
 
+export const updateFriendsActionCreator = (FriendWithInput: string) => ({
+    type: "UPDATE-FRIENDS",
+    FriendWithInput: FriendWithInput
 }) as const
 
 

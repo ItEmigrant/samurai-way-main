@@ -1,11 +1,11 @@
 import React from 'react';
-import {ActionsTypes} from "../../../Redux/store";
+
 
 
 type PropsMessageItemType = {
-    dispatch: (action: ActionsTypes) =>void
+
     message: string
-    newMessagePostText: string
+
    /* addNewMessagePost: (messageDialogs: string) => void
     updateNewPostMessageText: (messageDialogs: string) => void*/
 }
