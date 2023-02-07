@@ -3,7 +3,6 @@ import {friendsType, sidebarType} from "./store";
 
 
 let initialSidebarState = {
-
     friends: [
         {id: 1, friend: "Andre"},
         {id: 2, friend: "Oleg"},
@@ -26,7 +25,7 @@ export const SidebarReducer = (state: sidebarType = initialSidebarState, action:
             return state
 
         case "UPDATE-FRIENDS":
-            state.newFriend = action.FriendWithInput;
+            state.newFriend = action.friendWithInput;
             return state
 
         default:
@@ -46,9 +45,9 @@ export const addFriendsActionCreator = (newFriend: string) => ({
     newAddFriend: newFriend
 }) as const
 
-export const updateFriendsActionCreator = (FriendWithInput: string) => ({
+export const updateFriendsActionCreator = (friendWithInput: string) => ({
     type: "UPDATE-FRIENDS",
-    FriendWithInput: FriendWithInput
+    friendWithInput: friendWithInput
 }) as const
 
 

@@ -34,10 +34,9 @@ const App: React.FC<AppTypeProps> = (props) => {
                 }/>
                 <Route path='/profile' render={() => <Profile
                     /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
-                    state={props.store.getState().profilePage}
-                    messageForNewPosts={props.store.getState().profilePage.messageForNewPosts}
+                    store={props.store}
                     /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
-                    dispatch={props.store.dispatch.bind(props.store)}/>
+                />
                 }
                 />
                 <Route path='/news' component={ActualNews}/>
