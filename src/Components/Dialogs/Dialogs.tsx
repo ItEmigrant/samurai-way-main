@@ -2,37 +2,38 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
-import {sendMessageActionCreator, updateMessageActionCreator} from "../../Redux/DialogsReducer";
-import {ReduxStoreType} from "../../Redux/reduxStore";
+import {dialogPageType} from "../../Redux/store";
 
 
 type DialogsPropsType = {
-    store: ReduxStoreType
+    updateMessage: (body: string) => void
+    sendMessage: () => void
+    state: dialogPageType
+    /*store: ReduxStoreType*/
     /*addNewMessagePost:(messageDialogs:string)=>void*/
     /*updateNewPostMessageText:(messageDialogs:string)=>void*/
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let state = props.store.getState().dialogPage
 
-    let messagesElements = state.messages.map(m =>
+    let messagesElements = props.state.messages.map(m =>
         <MessageItem key={m.id}
                      message={m.message}
 
         />)
 
-    let dialogElements = state.dialogs.map(el =>
+    let dialogElements = props.state.dialogs.map(el =>
         <DialogItem name={el.name} id={el.id}/>)
     /*addNewMessagePost={props.addNewMessagePost}*/
     /* updateNewPostMessageText={props.updateNewPostMessageText}*/
 
     const sendMessage = () => {
-        props.store.dispatch(sendMessageActionCreator(state.newMessagePostText))
+        props.sendMessage();
     }
 
     const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.store.dispatch(updateMessageActionCreator(e.currentTarget.value))
+        props.updateMessage(e.currentTarget.value)
     }
 
     return (
@@ -45,7 +46,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div>{messagesElements}</div>
                 <div>
                     <div><textarea placeholder={"Enter your message"} onChange={messagePostChange}
-                                   value={state.newMessagePostText}></textarea></div>
+                                   value={props.state.newMessagePostText}></textarea></div>
                     <div>
                         <button onClick={sendMessage}>Send</button>
                     </div>

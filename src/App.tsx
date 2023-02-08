@@ -3,13 +3,13 @@ import './App.css';
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Nawbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
 import {ReduxStoreType} from "./Redux/reduxStore";
-import {MyFriends} from "./Components/Friends/myFriends";
+import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
 
 
 type AppTypeProps = {
@@ -26,7 +26,7 @@ const App: React.FC<AppTypeProps> = (props) => {
 
             <div className='app-wrapper-content'>
 
-                <Route path='/dialogs' render={() => <Dialogs
+                <Route path='/dialogs' render={() => <DialogsContainer
                     store={props.store}
                     /*  dispatch={props.store.dispatch.bind(props.store)}*/
                     /* updateNewPostMessageText={props.store.dispatch.bind(props.store)}*/
@@ -42,7 +42,7 @@ const App: React.FC<AppTypeProps> = (props) => {
                 <Route path='/news' component={ActualNews}/>
                 <Route path='/music' component={Track}/>
                 <Route path='/settings' component={YourSettings}/>
-                <Route path='/friends' render={() => <MyFriends store={props.store}
+                <Route path='/friends' render={() => <MyFriendsContainer store={props.store}
                 />}/>
 
 
