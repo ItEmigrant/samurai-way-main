@@ -1,6 +1,16 @@
 import React from 'react';
-import {ActionsTypes, dialogPageType, messagesType,} from "./store";
+import {ActionsTypes, dialogsType} from "./store";
 
+export type messagesType = {
+    id: number
+    message: string
+}
+
+export type  dialogPageType = {
+    newMessagePostText: string
+    dialogs: Array<dialogsType>
+    messages: Array<messagesType>
+}
 
 let initialDialogState = {
     dialogs: [
@@ -9,35 +19,38 @@ let initialDialogState = {
         {id: 3, name: "Artur"},
         {id: 4, name: "Artem"},
         {id: 5, name: "Alisa"}
-    ],
+    ] as Array<dialogsType>,
     messages: [
         {id: 1, message: "Hi!"},
         {id: 2, message: "Hello Bro!"},
         {id: 3, message: "Have a nice day!"},
         {id: 4, message: "Yo!"},
         {id: 5, message: ":-)!"}
-    ],
-    newMessagePostText: "",
+    ] as Array<messagesType>,
+    newMessagePostText: "r",
 }
-const DialogsReducer = (state: dialogPageType = initialDialogState, action: ActionsTypes) => {
+
+export type InitialDialogStateType = typeof initialDialogState
+
+const DialogsReducer = (state = initialDialogState, action: ActionsTypes):InitialDialogStateType   => {
 
     switch (action.type) {
         case "SEND-MESSAGE":
             const newSendMessage: messagesType = {
                 id: new Date().getTime(),
-                message: state.newMessagePostText
+                message: initialDialogState.newMessagePostText
             };
-            state.messages.push(newSendMessage)
-            state.newMessagePostText = "";
+            initialDialogState.messages.push(newSendMessage)
+            initialDialogState.newMessagePostText = "";
 
-            return state
+            return initialDialogState
 
         case "UPDATE-NEW-POST-MESSAGE-TEXT":
-            state.newMessagePostText = action.messageDialogs;
-            return state
+            initialDialogState.newMessagePostText = action.messageDialogs;
+            return initialDialogState
 
         default:
-            return state
+            return initialDialogState
 
 
     }
@@ -46,7 +59,9 @@ const DialogsReducer = (state: dialogPageType = initialDialogState, action: Acti
 };
 export default DialogsReducer;
 
-export type DialogActionType = ReturnType<typeof sendMessageActionCreator> |  ReturnType<typeof updateMessageActionCreator>
+export type DialogActionType =
+    ReturnType<typeof sendMessageActionCreator>
+    | ReturnType<typeof updateMessageActionCreator>
 
 export const sendMessageActionCreator = (newSendMessage: string) => ({
     type: "SEND-MESSAGE",

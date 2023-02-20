@@ -14,7 +14,7 @@ export type dialogsType = {
     id: number
     name: string
 }
-export type messagesType = {
+type messagesType = {
     id: number
     message: string
 }
@@ -27,7 +27,7 @@ export type  profilePageType = {
     messageForNewPosts: string
     posts: Array<postsType>
 }
-export type  dialogPageType = {
+type  dialogPageType = {
     newMessagePostText: string
     dialogs: Array<dialogsType>
     messages: Array<messagesType>

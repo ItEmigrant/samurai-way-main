@@ -2,34 +2,45 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
-import {dialogPageType} from "../../Redux/store";
+import {CommonType} from "./DialogsContainer";
 
 
+
+/*
 type DialogsPropsType = {
     updateMessage: (body: string) => void
     sendMessage: () => void
     state: dialogPageType
-    /*store: ReduxStoreType*/
-    /*addNewMessagePost:(messageDialogs:string)=>void*/
-    /*updateNewPostMessageText:(messageDialogs:string)=>void*/
+    /!*store: ReduxStoreType*!/
+    /!*addNewMessagePost:(messageDialogs:string)=>void*!/
+    /!*updateNewPostMessageText:(messageDialogs:string)=>void*!/
 }
+*/
+/*
+type DialogsPropsType = {
+    stateDialogPage: dialogPageType
+    updateMessage: (body:string)=>void
+    sendMessage: (newMessage: string)=> void
+}
+*/
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+
+export const Dialogs = (props: CommonType) => {
 
 
-    let messagesElements = props.state.messages.map(m =>
+    let messagesElements = props.stateDialogPage.messages.map(m =>
         <MessageItem key={m.id}
                      message={m.message}
 
         />)
 
-    let dialogElements = props.state.dialogs.map(el =>
+    let dialogElements = props.stateDialogPage.dialogs.map(el =>
         <DialogItem name={el.name} id={el.id}/>)
     /*addNewMessagePost={props.addNewMessagePost}*/
     /* updateNewPostMessageText={props.updateNewPostMessageText}*/
 
     const sendMessage = () => {
-        props.sendMessage();
+        props.sendMessage(props.stateDialogPage.newMessagePostText);
     }
 
     const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,7 +57,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div>{messagesElements}</div>
                 <div>
                     <div><textarea placeholder={"Enter your message"} onChange={messagePostChange}
-                                   value={props.state.newMessagePostText}></textarea></div>
+                                   value={props.stateDialogPage.newMessagePostText}></textarea></div>
                     <div>
                         <button onClick={sendMessage}>Send</button>
                     </div>

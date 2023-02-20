@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from 'react';
-
 import s from "./myFriends.module.css"
 import {sidebarType} from "../../Redux/store";
 
