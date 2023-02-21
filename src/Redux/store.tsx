@@ -1,7 +1,7 @@
 import ProfileReducer, {ProfileActionsType} from "./ProfileReducer";
 import DialogsReducer, {DialogActionType} from "./DialogsReducer";
 
-export type postsType = {
+type postsType = {
     id: number
     message: string
     likeCount: number
@@ -23,7 +23,7 @@ export type stateType = {
     dialogsPage: dialogPageType
     sidebar: sidebarType
 }
-export type  profilePageType = {
+type  profilePageType = {
     messageForNewPosts: string
     posts: Array<postsType>
 }

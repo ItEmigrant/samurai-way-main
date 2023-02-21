@@ -28,7 +28,7 @@ const App = () => {
 
                 <Route path='/profile' render={() => <Profile
                     /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
-                    store={store}
+                  /*  store={store}*/
                     /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
                 />
                 }

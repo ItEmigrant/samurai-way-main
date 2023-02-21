@@ -1,20 +1,18 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
-import {postsType} from "../../../Redux/store";
+import {ProfileCommonType} from "./MyPostsContainer";
 
 
-type MyPostsPropsType = {
+
+/*type MyPostsPropsType = {
     posts: Array<postsType>
     updatePosts: (text: string) => void
     addPosts: () => void
     messageForNewPost:string
+}*/
 
-
-
-}
-
-const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+const MyPosts = (props:ProfileCommonType) => {
 
     const addPost = () => {
         props.addPosts();

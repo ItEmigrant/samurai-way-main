@@ -27,7 +27,7 @@ let initialDialogState = {
         {id: 4, message: "Yo!"},
         {id: 5, message: ":-)!"}
     ] as Array<messagesType>,
-    newMessagePostText: "r",
+    newMessagePostText: "",
 }
 
 export type InitialDialogStateType = typeof initialDialogState

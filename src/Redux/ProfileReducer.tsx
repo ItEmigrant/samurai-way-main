@@ -1,5 +1,16 @@
 import React from 'react';
-import {ActionsTypes, postsType, profilePageType} from "./store";
+import {ActionsTypes} from "./store";
+
+export type postsType = {
+    id: number
+    message: string
+    likeCount: number
+}
+export type  profilePageType = {
+    messageForNewPosts: string
+    posts: Array<postsType>
+}
+
 
 let initialReducerState = {
     messageForNewPosts: "",

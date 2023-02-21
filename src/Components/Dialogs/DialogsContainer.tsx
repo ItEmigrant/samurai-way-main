@@ -20,7 +20,7 @@ type MapStateToPropsType = {
 
 type MapDispatchToPropsType = {
     updateMessage: (body: string) => void
-    sendMessage: (newMessage:string) => void
+    sendMessage: (newMessage: string) => void
 
 }
 
@@ -49,7 +49,6 @@ export type CommonType = MapStateToPropsType & MapDispatchToPropsType
 
 
 const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
-    debugger
     return {
         stateDialogPage: state.dialogPage
     }
