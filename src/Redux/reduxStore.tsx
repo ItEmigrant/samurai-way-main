@@ -4,6 +4,10 @@ import DialogsReducer from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 
 
+
+export type ReduxStoreType = typeof store;
+export type ReduxStateType = ReturnType<typeof rootReducer> ;
+
 let rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogPage: DialogsReducer,
@@ -15,8 +19,6 @@ let rootReducer = combineReducers({
 
 export const store = createStore(rootReducer);
 
-/*export type RootStateType = ReturnType<typeof reducers>*/
-export type ReduxStoreType = typeof store;
-export type ReduxStateType = ReturnType<typeof rootReducer> ;
+
 
 

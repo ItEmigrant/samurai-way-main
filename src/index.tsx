@@ -7,7 +7,6 @@ import {store} from "./Redux/reduxStore";
 import {Provider} from "react-redux";
 
 
-const rerenderEntireTree = () => {
 
     ReactDOM.render(
         <BrowserRouter>
@@ -17,10 +16,10 @@ const rerenderEntireTree = () => {
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
-store.subscribe(rerenderEntireTree);
 
-rerenderEntireTree();
+
+
+
 
 
 

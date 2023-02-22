@@ -44,7 +44,7 @@ type MapDispatchToProfilePropsType = {
 
 export type ProfileCommonType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
 
-const mapStateToProfileProps = (state: ReduxStateType): MapStateToProfilePropsType => {
+const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
 
     return {
         messageForNewPost: state.profilePage.messageForNewPosts,
@@ -53,7 +53,7 @@ const mapStateToProfileProps = (state: ReduxStateType): MapStateToProfilePropsTy
     }
 }
 
-const mapDispatchToProfileProps = (dispatch: Dispatch): MapDispatchToProfilePropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType => {
     return {
 
         addPosts: () => {
@@ -66,4 +66,4 @@ const mapDispatchToProfileProps = (dispatch: Dispatch): MapDispatchToProfileProp
     }
 }
 
-export const MyPostsContainer = connect(mapStateToProfileProps, mapDispatchToProfileProps)(MyPosts);
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
