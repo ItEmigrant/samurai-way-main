@@ -20,7 +20,7 @@ type MapStateToPropsType = {
 
 type MapDispatchToPropsType = {
     updateMessage: (body: string) => void
-    sendMessage: (newMessage: string) => void
+    sendMessage: () => void
 
 }
 
@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
             dispatch(updateMessageActionCreator(body))
         },
         sendMessage: () => {
-            dispatch(sendMessageActionCreator(''))
+            dispatch(sendMessageActionCreator())
         }
 
     }

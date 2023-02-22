@@ -32,27 +32,31 @@ let initialDialogState = {
 
 export type InitialDialogStateType = typeof initialDialogState
 
-const DialogsReducer = (state = initialDialogState, action: ActionsTypes):InitialDialogStateType   => {
+const DialogsReducer = (state = initialDialogState, action: ActionsTypes): InitialDialogStateType => {
 
     switch (action.type) {
-        case "SEND-MESSAGE":
+        case "SEND-MESSAGE": {
             const newSendMessage: messagesType = {
                 id: new Date().getTime(),
-                message: initialDialogState.newMessagePostText
+                message: state.newMessagePostText
             };
-            initialDialogState.messages.push(newSendMessage)
-            initialDialogState.newMessagePostText = "";
+            let copyState = {...state};
+            copyState.messages = [...state.messages]
 
-            return initialDialogState
+            copyState.messages.push(newSendMessage)
+            copyState.newMessagePostText = "";
 
-        case "UPDATE-NEW-POST-MESSAGE-TEXT":
-            initialDialogState.newMessagePostText = action.messageDialogs;
-            return initialDialogState
+            return copyState
+        }
+
+        case "UPDATE-NEW-POST-MESSAGE-TEXT": {
+            let copyState = {...state}
+            copyState.newMessagePostText = action.messageDialogs;
+            return copyState
+        }
 
         default:
-            return initialDialogState
-
-
+            return state
     }
 
 
@@ -63,9 +67,9 @@ export type DialogActionType =
     ReturnType<typeof sendMessageActionCreator>
     | ReturnType<typeof updateMessageActionCreator>
 
-export const sendMessageActionCreator = (newSendMessage: string) => ({
-    type: "SEND-MESSAGE",
-    newSendMessage: newSendMessage
+export const sendMessageActionCreator = () => ({
+    type: "SEND-MESSAGE"
+
 }) as const
 
 export const updateMessageActionCreator = (messageDialogs: string) => ({

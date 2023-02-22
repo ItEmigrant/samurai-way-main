@@ -40,7 +40,7 @@ export const Dialogs = (props: CommonType) => {
     /* updateNewPostMessageText={props.updateNewPostMessageText}*/
 
     const sendMessage = () => {
-        props.sendMessage(props.stateDialogPage.newMessagePostText);
+        props.sendMessage();
     }
 
     const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
