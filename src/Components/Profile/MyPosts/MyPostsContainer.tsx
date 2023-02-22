@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType =
     return {
 
         addPosts: () => {
-            dispatch(addPostActionCreator(''))
+            dispatch(addPostActionCreator())
         },
 
         updatePosts: (text: string) => {

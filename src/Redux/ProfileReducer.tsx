@@ -60,9 +60,8 @@ export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostActionCreator>
 
-export const addPostActionCreator = (messageForNewPosts: string) => ({
-    type: "ADD-STATE-POST-MESSAGE",
-    messageForNewPosts: messageForNewPosts
+export const addPostActionCreator = () => ({
+    type: "ADD-STATE-POST-MESSAGE"
 }) as const
 
 export const updateNewPostActionCreator = (postMessage: string) => ({

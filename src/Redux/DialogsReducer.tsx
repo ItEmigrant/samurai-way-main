@@ -20,14 +20,15 @@ let initialDialogState = {
         {id: 4, name: "Artem"},
         {id: 5, name: "Alisa"}
     ] as Array<dialogsType>,
+    newMessagePostText: "",
     messages: [
         {id: 1, message: "Hi!"},
         {id: 2, message: "Hello Bro!"},
         {id: 3, message: "Have a nice day!"},
         {id: 4, message: "Yo!"},
         {id: 5, message: ":-)!"}
-    ] as Array<messagesType>,
-    newMessagePostText: "",
+    ] as Array<messagesType>
+
 }
 
 export type InitialDialogStateType = typeof initialDialogState
@@ -46,7 +47,7 @@ const DialogsReducer = (state = initialDialogState, action: ActionsTypes): Initi
             copyState.messages.push(newSendMessage)
             copyState.newMessagePostText = "";
 
-            return copyState
+            return copyState;
         }
 
         case "UPDATE-NEW-POST-MESSAGE-TEXT": {
