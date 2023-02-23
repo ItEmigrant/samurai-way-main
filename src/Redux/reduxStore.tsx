@@ -5,7 +5,7 @@ import {SidebarReducer} from "./SidebarReducer";
 
 
 
-export type ReduxStoreType = typeof store;
+/*export type ReduxStoreType = typeof store;*/
 export type ReduxStateType = ReturnType<typeof rootReducer> ;
 
 let rootReducer = combineReducers({

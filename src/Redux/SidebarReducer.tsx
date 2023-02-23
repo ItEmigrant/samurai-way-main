@@ -1,18 +1,19 @@
 import React from 'react';
-import {friendsType, sidebarType} from "./store";
+import {friendsType} from "./store";
 
 
 let initialSidebarState = {
+    newFriend: "",
     friends: [
         {id: 1, friend: "Andre"},
         {id: 2, friend: "Oleg"},
         {id: 3, friend: "Alex"}
-    ],
-    newFriend: "",
+    ] as Array<friendsType>
+
 }
 
 
-export const SidebarReducer = (state: sidebarType = initialSidebarState, action: SidebarActionType) => {
+export const SidebarReducer = (state = initialSidebarState, action: SidebarActionType) => {
     switch (action.type) {
         case "ADD-FRIENDS": {
             const newFriends: friendsType = {
@@ -36,7 +37,6 @@ export const SidebarReducer = (state: sidebarType = initialSidebarState, action:
         default:
             return state
     }
-
 
 };
 
