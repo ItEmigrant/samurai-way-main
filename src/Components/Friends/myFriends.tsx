@@ -1,17 +1,18 @@
 import React, {ChangeEvent} from 'react';
 import s from "./myFriends.module.css"
-import {sidebarType} from "../../Redux/store";
+import {CommonSidebarType} from "./myFriendsContainer";
 
 
-type  MyFriendsPropsType = {
+
+/*type  MyFriendsPropsType = {
     state: sidebarType
     updateFriend: (name: string) => void
     addFriend: () => void
-}
+}*/
 
-export const MyFriends: React.FC<MyFriendsPropsType> = (props) => {
+export const MyFriends: React.FC<CommonSidebarType> = (props) => {
 
-    let friendsElements = props.state.friends.map(el => ` - ${el.friend} - `);
+    let friendsElements = props.sidebar.friends.map(el => ` - ${el.friend} - `);
 
     const addNewFriend = () => {
         props.addFriend();
@@ -26,7 +27,7 @@ export const MyFriends: React.FC<MyFriendsPropsType> = (props) => {
         <div className={s.friends}>
             {friendsElements}
             <div><textarea placeholder={"Enter your name"} onChange={newName}
-                           value={props.state.newFriend}> </textarea></div>
+                           value={props.sidebar.newFriend}> </textarea></div>
             <div>
                 <button onClick={addNewFriend}> Add Friend</button>
             </div>
