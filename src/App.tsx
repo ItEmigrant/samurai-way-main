@@ -9,10 +9,8 @@ import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
 
 import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
-import {store} from "./Redux/reduxStore";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-
-
+import {Users} from "./Components/Users/Users";
 
 
 const App = () => {
@@ -23,21 +21,21 @@ const App = () => {
             <Navbar/>
 
             <div className='app-wrapper-content'>
-
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
 
-                <Route path='/profile' render={() => <Profile
-                    /*addStatePostMessage={props.store.addStatePostMessage.bind(store)}*/
-                  /*  store={store}*/
-                    /* updateNewPostText={props.store.updateNewPostText.bind(store)}*/
-                />
-                }
-                />
+                <Route path='/profile' render={() => <Profile/>}/>
+
+                <Route path='/friends' render={() =>
+                    <MyFriendsContainer/>}/>
+
+                <Route path='/users' render={() =>
+                    <Users/>}/>
+
                 <Route path='/news' component={ActualNews}/>
+
                 <Route path='/music' component={Track}/>
+
                 <Route path='/settings' component={YourSettings}/>
-                <Route path='/friends' render={() => <MyFriendsContainer store={store}
-                />}/>
 
 
             </div>
