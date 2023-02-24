@@ -15,24 +15,23 @@ let initialSidebarState = {
 
 export const SidebarReducer = (state = initialSidebarState, action: SidebarActionType) => {
     switch (action.type) {
-        case "ADD-FRIENDS": {
+        case "ADD-FRIENDS":
             const newFriends: friendsType = {
                 id: new Date().getTime(),
                 friend: state.newFriend
             };
-            let StateCopy = {...state};
-            StateCopy.friends = [...state.friends]
-            StateCopy.friends.push(newFriends);
-            StateCopy.newFriend = "";
+            return {
+                ...state,
+                friends: [...state.friends, newFriends],
+                newFriend: ''
+            };
 
-            return StateCopy;
-        }
+        case "UPDATE-FRIENDS":
+            return {
+                ...state,
+                newFriend: action.friendWithInput
+            };
 
-        case "UPDATE-FRIENDS": {
-            let StateCopy = {...state};
-            StateCopy.newFriend = action.friendWithInput;
-            return StateCopy;
-        }
 
         default:
             return state
