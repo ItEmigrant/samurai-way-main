@@ -6,7 +6,7 @@ type postsType = {
     message: string
     likeCount: number
 }
-export type friendsType = {
+type friendsType = {
     id: number
     friend: string
 }

@@ -10,7 +10,7 @@ import {YourSettings} from "./Components/YourSettings/YourSettings";
 
 import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import {Users} from "./Components/Users/Users";
+import {UserContainer} from "./Components/Users/UserContainer";
 
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
                     <MyFriendsContainer/>}/>
 
                 <Route path='/users' render={() =>
-                    <Users/>}/>
+                    <UserContainer/>}/>
 
                 <Route path='/news' component={ActualNews}/>
 

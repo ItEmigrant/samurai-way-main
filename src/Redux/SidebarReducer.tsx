@@ -1,7 +1,10 @@
 import React from 'react';
-import {friendsType} from "./store";
 
 
+export type friendsType = {
+    id: number
+    friend: string
+}
 let initialSidebarState = {
     newFriend: "",
     friends: [
