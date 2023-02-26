@@ -13,42 +13,42 @@ export type  UserPageType = {
 }
 
 
-let initialReducerState: UserPageType = {
+let initialUsersState: UserPageType = {
     users: [
-       /* {
-            id: 1,
-            followed: true,
-            fullName: "Bogus Sol",
-            status: "I am a boss",
-            location: {country: "Poland", city: "Krakow"}
-        },
-        {
-            id: 2,
-            followed: false,
-            fullName: "Alisa Kas",
-            status: "I am a manager",
-            location: {country: "Poland", city: "Warshaw"}
-        },
-        {
-            id: 3,
-            followed: true,
-            fullName: "Artur Mar",
-            status: "I am a developer",
-            location: {country: "Ukraine", city: "Kiev"}
-        },
-        {
-            id: 4,
-            followed: false,
-            fullName: "Tom Tai",
-            status: "I am a driver",
-            location: {country: "USA", city: "New York"}
-        },
-*/
-    ]
+        /* {
+             id: 1,
+             followed: true,
+             fullName: "Bogus Sol",
+             status: "I am a boss",
+             location: {country: "Poland", city: "Krakow"}
+         },
+         {
+             id: 2,
+             followed: false,
+             fullName: "Alisa Kas",
+             status: "I am a manager",
+             location: {country: "Poland", city: "Warshaw"}
+         },
+         {
+             id: 3,
+             followed: true,
+             fullName: "Artur Mar",
+             status: "I am a developer",
+             location: {country: "Ukraine", city: "Kiev"}
+         },
+         {
+             id: 4,
+             followed: false,
+             fullName: "Tom Tai",
+             status: "I am a driver",
+             location: {country: "USA", city: "New York"}
+         },
+ */
+    ] as Array<usersType>
 }
 
-
-const UserReducer = (state: UserPageType = initialReducerState, action: UsersActionType) => {
+export type initialReducerUsersStateType = typeof initialUsersState
+const UserReducer = (state: UserPageType = initialUsersState, action: UsersActionType): initialReducerUsersStateType => {
 
     switch (action.type) {
         case "FOLLOW-USER":
@@ -61,7 +61,7 @@ const UserReducer = (state: UserPageType = initialReducerState, action: UsersAct
         case "UNFOLLOW-USER":
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userID ? u.followed = false : u)
+                users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)
             };
 
         case "SET-USERS":

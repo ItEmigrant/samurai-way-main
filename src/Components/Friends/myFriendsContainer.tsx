@@ -1,10 +1,10 @@
 import React from 'react';
 import {ReduxStateType} from "../../Redux/reduxStore";
-import {addFriendsActionCreator, updateFriendsActionCreator} from "../../Redux/SidebarReducer";
+import {addFriendsActionCreator, sidebarType, updateFriendsActionCreator} from "../../Redux/SidebarReducer";
 import {MyFriends} from "./myFriends";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {sidebarType} from "../../Redux/store";
+
 
 
 /*type  MyFriendsPropsType = {

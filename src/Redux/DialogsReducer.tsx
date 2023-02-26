@@ -12,7 +12,7 @@ export type  dialogPageType = {
     messages: Array<messagesType>
 }
 
-let initialDialogState = {
+let initialDialogState:dialogPageType = {
     dialogs: [
         {id: 1, name: "Bogdan"},
         {id: 2, name: "Adrian"},
@@ -20,6 +20,7 @@ let initialDialogState = {
         {id: 4, name: "Artem"},
         {id: 5, name: "Alisa"}
     ] as Array<dialogsType>,
+
     newMessagePostText: "",
     messages: [
         {id: 1, message: "Hi!"},

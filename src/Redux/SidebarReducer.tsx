@@ -1,11 +1,17 @@
 import React from 'react';
 
-
 export type friendsType = {
     id: number
     friend: string
 }
-let initialSidebarState = {
+
+export type sidebarType = {
+    friends: Array<friendsType>
+    newFriend: string
+}
+
+
+let initialSidebarState: sidebarType = {
     newFriend: "",
     friends: [
         {id: 1, friend: "Andre"},

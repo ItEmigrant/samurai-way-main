@@ -32,7 +32,7 @@ type  dialogPageType = {
     dialogs: Array<dialogsType>
     messages: Array<messagesType>
 }
-export type sidebarType = {
+type sidebarType = {
     friends: Array<friendsType>
     newFriend: string
 }
