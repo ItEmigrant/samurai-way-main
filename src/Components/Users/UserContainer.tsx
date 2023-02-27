@@ -2,8 +2,12 @@ import {connect} from "react-redux";
 import {Users} from "./Users";
 import {ReduxStateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
-import {usersType} from "../../Redux/UsersReducer";
-import {updateMessageActionCreator} from "../../Redux/DialogsReducer";
+import  {
+    followUserActionCreator,
+    setUsersActionCreator,
+    unFollowUserActionCreator,
+    usersType
+} from "../../Redux/UsersReducer";
 
 
 
@@ -12,23 +16,33 @@ type MapStateToProfilePropsType = {
 }
 
 type MapDispatchToProfilePropsType = {
-
-
+    follow: (idValue: number) => void
+    unFollow: (idValue: number) => void
+    setUsers: (newUsers: Array<usersType>) => void
 }
 
+export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
 
-const mapStateToProps = (state: ReduxStateType):MapStateToProfilePropsType => {
+
+const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     return {
         stateUsersPages: state.usersPage.users
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch):MapDispatchToProfilePropsType  => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType => {
     return {
-        updateMessage: (body: string) => {
-            dispatch(updateMessageActionCreator(body))
+        follow: (idValue: number) => {
+            dispatch(followUserActionCreator(idValue))
         },
-    } // modification
+        unFollow: (idValue: number) => {
+            dispatch(unFollowUserActionCreator(idValue))
+        },
+        setUsers: (newUsers: Array<usersType>) => {
+            dispatch(setUsersActionCreator(newUsers))
+        }
+
+    }
 
 }
 

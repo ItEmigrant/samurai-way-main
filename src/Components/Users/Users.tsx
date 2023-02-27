@@ -1,10 +1,13 @@
 import React from 'react';
+import {CommonUserType} from "./UserContainer";
 
-export const Users = () => {
-    return (
-        <div>
-            users
+
+
+export const Users = (props: CommonUserType) => {
+    return  <div>
+            {
+                props.stateUsersPages.map(u=><div key={u.id}> </div>)
+            }
         </div>
-    );
 };
 
