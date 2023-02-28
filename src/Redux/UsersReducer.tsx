@@ -1,10 +1,11 @@
 import React from 'react';
 
 export type usersType = {
-    id: number,
-    fullName: string,
-    status: string,
-    followed: boolean,
+    id: number
+    photoUrl: string
+    fullName: string
+    status: string
+    followed: boolean
     location: { country: string, city: string }
 }
 
@@ -17,6 +18,7 @@ let initialUsersState: UserPageType = {
     users: [
         /* {
              id: 1,
+             photoUrl:'https://th.bing.com/th/id/OIP.HNAX5qOC3Vuv5_ygwm3hTgHaEK?w=285&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',
              followed: true,
              fullName: "Bogus Sol",
              status: "I am a boss",
@@ -24,6 +26,7 @@ let initialUsersState: UserPageType = {
          },
          {
              id: 2,
+             photoUrl:'https://th.bing.com/th/id/OIP.HNAX5qOC3Vuv5_ygwm3hTgHaEK?w=285&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',
              followed: false,
              fullName: "Alisa Kas",
              status: "I am a manager",
@@ -31,6 +34,7 @@ let initialUsersState: UserPageType = {
          },
          {
              id: 3,
+             photoUrl:'https://th.bing.com/th/id/OIP.HNAX5qOC3Vuv5_ygwm3hTgHaEK?w=285&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',
              followed: true,
              fullName: "Artur Mar",
              status: "I am a developer",
@@ -38,12 +42,12 @@ let initialUsersState: UserPageType = {
          },
          {
              id: 4,
+             photoUrl:'https://th.bing.com/th/id/OIP.HNAX5qOC3Vuv5_ygwm3hTgHaEK?w=285&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',
              followed: false,
              fullName: "Tom Tai",
              status: "I am a driver",
              location: {country: "USA", city: "New York"}
-         },
- */
+         },*/
     ] as Array<usersType>
 }
 
