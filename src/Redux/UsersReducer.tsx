@@ -2,8 +2,8 @@ import React from 'react';
 
 export type usersType = {
     id: number
-    photoUrl: string
-    fullName: string
+    photos: { small: string, large:string},
+    name: string
     status: string
     followed: boolean
     location: { country: string, city: string }
