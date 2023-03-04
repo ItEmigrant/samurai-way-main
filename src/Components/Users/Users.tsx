@@ -7,8 +7,10 @@ import {CommonUserType} from "./UserContainer";
 
 export class Users extends React.Component<CommonUserType, any> {
 
-    getUsers = () => {
-        if (this.props.stateUsersPages.length === 0) {
+    constructor(props:CommonUserType) {
+        super(props);
+
+
 
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
 
@@ -16,7 +18,6 @@ export class Users extends React.Component<CommonUserType, any> {
                     response.data.items as Array<usersType>)
             })
         }
-    }
 
 
     UnFollowHandler = (valueID: number) => {
@@ -30,7 +31,6 @@ export class Users extends React.Component<CommonUserType, any> {
 
     render() {
         return <div>
-            <button onClick={this.getUsers}> GET USERS</button>
             {
                 this.props.stateUsersPages.map(u => <div key={u.id}>
                 <span>
