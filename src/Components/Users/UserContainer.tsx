@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {Users} from "./Users";
+/*import {Users} from "./Users";*/
 import {ReduxStateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
 import  {
@@ -8,6 +8,7 @@ import  {
     unFollowUserActionCreator,
     usersType
 } from "../../Redux/UsersReducer";
+import {Users} from "./Users";
 
 
 
