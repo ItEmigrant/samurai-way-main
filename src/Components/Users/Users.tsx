@@ -8,11 +8,12 @@ import UserPhoto from '../../assets/images/userSN.jpeg'
 
 export const Users = (props: CommonUserType) => {
 
-    if (props.stateUsersPages.length === 0) {
+    const getUsers = () => {
+        if (props.stateUsersPages.length === 0) {
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
 
-            props.setUsers(/*[
+                props.setUsers(/*[
                 {
                     id: 1,
                     photoUrl: 'https://th.bing.com/th/id/OIP.HNAX5qOC3Vuv5_ygwm3hTgHaEK?w=285&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',
@@ -46,9 +47,11 @@ export const Users = (props: CommonUserType) => {
                     location: {country: "USA", city: "New York"}
                 }
             ]*/
-                response.data.items as Array<usersType>)
-        })
+                    response.data.items as Array<usersType>)
+            })
 
+
+        }
 
     }
 
@@ -62,11 +65,13 @@ export const Users = (props: CommonUserType) => {
     }
 
     return <div>
+        <button onClick={getUsers }> GET USERS</button>
         {
             props.stateUsersPages.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photos.small !== null ? u.photos.small : UserPhoto} className={s.img} alt={'samuraiUser'}/>
+                        <img src={u.photos.small !== null ? u.photos.small : UserPhoto} className={s.img}
+                             alt={'samuraiUser'}/>
                     </div>
                         <div>
                     {u.followed ? <button onClick={() => {
