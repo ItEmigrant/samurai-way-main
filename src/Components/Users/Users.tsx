@@ -7,23 +7,17 @@ import {CommonUserType} from "./UserContainer";
 
 export class Users extends React.Component<CommonUserType, any> {
 
-    constructor(props:CommonUserType) {
-        super(props);
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
 
-
-
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-
-                this.props.setUsers(
-                    response.data.items as Array<usersType>)
-            })
-        }
-
+            this.props.setUsers(
+                response.data.items as Array<usersType>)
+        })
+    }
 
     UnFollowHandler = (valueID: number) => {
         this.props.unFollow(valueID)
     }
-
 
     FollowHandler = (valueID: number) => {
         this.props.follow(valueID)
