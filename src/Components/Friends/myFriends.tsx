@@ -3,7 +3,6 @@ import s from "./myFriends.module.css"
 import {CommonSidebarType} from "./myFriendsContainer";
 
 
-
 /*type  MyFriendsPropsType = {
     state: sidebarType
     updateFriend: (name: string) => void
