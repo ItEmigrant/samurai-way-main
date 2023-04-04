@@ -8,7 +8,7 @@ import {CommonUserType} from "./UserContainer";
 export class Users extends React.Component<CommonUserType, any> {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
 
             this.props.setUsers(
                 response.data.items as Array<usersType>)
@@ -24,13 +24,19 @@ export class Users extends React.Component<CommonUserType, any> {
     }
 
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return <div>
             <div>
-                <span> 1</span>
-                <span className={s.selectedPage}> 2</span>
-                <span> 3</span>
-                <span> 4</span>
-                <span> 5</span>
+                {
+                    pages.map(p => {
+                        return <span className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</span>
+                    })
+                }
 
             </div>
             {

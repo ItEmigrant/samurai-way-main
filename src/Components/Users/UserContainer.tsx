@@ -13,6 +13,10 @@ import {Users} from "./Users";
 
 type MapStateToProfilePropsType = {
     stateUsersPages: Array<usersType>
+    pageSize: number
+    totalUsersCount:number
+    currentPage: number
+
 }
 
 type MapDispatchToProfilePropsType = {
@@ -26,7 +30,11 @@ export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePr
 
 const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     return {
-        stateUsersPages: state.usersPage.users
+        stateUsersPages: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
+
     }
 }
 

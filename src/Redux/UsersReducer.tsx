@@ -11,12 +11,14 @@ export type usersType = {
 
 export type  UserPageType = {
     users: Array<usersType>
+    pageSize: number
+    totalUsersCount:number
+    currentPage: number
 }
 
 
 let initialUsersState: UserPageType = {
-    users: [
-        /* {
+    /* {
              id: 1,
              photoUrl:'https://th.bing.com/th/id/OIP.HNAX5qOC3Vuv5_ygwm3hTgHaEK?w=285&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',
              followed: true,
@@ -48,7 +50,11 @@ let initialUsersState: UserPageType = {
              status: "I am a driver",
              location: {country: "USA", city: "New York"}
          },*/
-    ] as Array<usersType>
+    users: [ ] as Array<usersType>,
+    pageSize: 5 as number,
+    totalUsersCount: 21 as number,
+    currentPage: 5 as number
+
 }
 
 export type initialReducerUsersStateType = typeof initialUsersState
