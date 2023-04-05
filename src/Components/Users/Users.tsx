@@ -11,7 +11,18 @@ export class Users extends React.Component<CommonUserType, any> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
 
             this.props.setUsers(
-                response.data.items as Array<usersType>)
+                response.data.items as Array<usersType>);
+            this.props.setTotalUsersCount(
+                response.data.totalCount as number);
+        })
+    }
+
+    onPageChange = (pageNumber:number) => {
+        this.props.setPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+
+            this.props.setUsers(
+                response.data.items as Array<usersType>);
         })
     }
 
@@ -23,26 +34,15 @@ export class Users extends React.Component<CommonUserType, any> {
         this.props.follow(valueID)
     }
 
-    onPageChange = (pageNumber:number) => {
-      this.props.setPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
 
-            this.props.setUsers(
-                response.data.items as Array<usersType>);
-            this.props.setTotalUsersCount(
-                response.data.totalUsersCount as number);
-
-        })
-    }
 
     render() {
+
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
-
-
         return <div>
             <div>
                 {
