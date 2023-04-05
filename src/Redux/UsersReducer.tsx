@@ -2,7 +2,7 @@ import React from 'react';
 
 export type usersType = {
     id: number
-    photos: { small: string, large:string},
+    photos: { small: string, large: string },
     name: string
     status: string
     followed: boolean
@@ -12,7 +12,7 @@ export type usersType = {
 export type  UserPageType = {
     users: Array<usersType>
     pageSize: number
-    totalUsersCount:number
+    totalUsersCount: number
     currentPage: number
 }
 
@@ -50,9 +50,9 @@ let initialUsersState: UserPageType = {
              status: "I am a driver",
              location: {country: "USA", city: "New York"}
          },*/
-    users: [ ] as Array<usersType>,
+    users: [] as Array<usersType>,
     pageSize: 5 as number,
-    totalUsersCount: 21 as number,
+    totalUsersCount: 0 as number,
     currentPage: 5 as number
 
 }
@@ -61,6 +61,10 @@ export type initialReducerUsersStateType = typeof initialUsersState
 const UserReducer = (state: UserPageType = initialUsersState, action: UsersActionType): initialReducerUsersStateType => {
 
     switch (action.type) {
+
+        case 'SET-CURRENT-PAGE':
+            return {...state, currentPage: action.currentPage}
+
         case "FOLLOW-USER":
             return {
                 ...state,
@@ -76,7 +80,7 @@ const UserReducer = (state: UserPageType = initialUsersState, action: UsersActio
 
         case "SET-USERS":
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
             };
 
         default:
@@ -91,7 +95,9 @@ export default UserReducer;
 
 export type UsersActionType =
     ReturnType<typeof followUserActionCreator>
-    | ReturnType<typeof unFollowUserActionCreator> | ReturnType<typeof setUsersActionCreator>
+    | ReturnType<typeof unFollowUserActionCreator>
+    | ReturnType<typeof setUsersActionCreator>
+    | ReturnType<typeof setCurrentPageAC>
 
 
 export const followUserActionCreator = (userID: number) => ({
@@ -107,4 +113,13 @@ export const unFollowUserActionCreator = (userID: number) => ({
 export const setUsersActionCreator = (users: Array<usersType>) => ({
     type: "SET-USERS", users
 }) as const
+
+export const setCurrentPageAC = (currentPage: number) => ({
+    type: "SET-CURRENT-PAGE", currentPage
+}) as const
+
+export const setTotalUsersCountAC  = (totalCount: number) => ({
+    type: "SET-TOTAL-COUNT-USERS", totalCount
+}) as const
+
 

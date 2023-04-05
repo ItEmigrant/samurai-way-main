@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
-import  {
-    followUserActionCreator,
+import {
+    followUserActionCreator, setCurrentPageAC, setTotalUsersCountAC,
     setUsersActionCreator,
     unFollowUserActionCreator,
     usersType
@@ -10,11 +10,10 @@ import  {
 import {Users} from "./Users";
 
 
-
 type MapStateToProfilePropsType = {
     stateUsersPages: Array<usersType>
     pageSize: number
-    totalUsersCount:number
+    totalUsersCount: number
     currentPage: number
 
 }
@@ -23,6 +22,8 @@ type MapDispatchToProfilePropsType = {
     follow: (idValue: number) => void
     unFollow: (idValue: number) => void
     setUsers: (newUsers: Array<usersType>) => void
+    setPage: (newCurrentPage: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
@@ -48,8 +49,13 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType =
         },
         setUsers: (newUsers: Array<usersType>) => {
             dispatch(setUsersActionCreator(newUsers))
+        },
+        setPage: (newCurrentPage: number) => {
+            dispatch(setCurrentPageAC(newCurrentPage))
+        },
+        setTotalUsersCount: (totalCount: number) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         }
-
     }
 
 }
