@@ -7,7 +7,53 @@ import {
     unFollowUserActionCreator,
     usersType
 } from "../../Redux/UsersReducer";
+import React from "react";
+import axios from "axios";
 import {Users} from "./Users";
+
+export class UsersApiContainer extends React.Component<CommonUserType, any> {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+
+            this.props.setUsers(
+                response.data.items as Array<usersType>);
+            this.props.setTotalUsersCount(
+                response.data.totalCount as number);
+        })
+    }
+
+    onPageChange = (pageNumber: number) => {
+        this.props.setPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+
+            this.props.setUsers(
+                response.data.items as Array<usersType>);
+        })
+    }
+
+    UnFollowHandler = (valueID: number) => {
+        this.props.unFollow(valueID)
+    }
+
+    FollowHandler = (valueID: number) => {
+        this.props.follow(valueID)
+    }
+
+
+    render() {
+        return <Users
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            stateUsersPages={this.props.stateUsersPages}
+            onPageChange={this.onPageChange}
+            UnFollowHandler={this.UnFollowHandler}
+            FollowHandler={this.FollowHandler}
+        />
+    }
+
+}
 
 
 type MapStateToProfilePropsType = {
@@ -60,7 +106,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType =
 
 }
 
-export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiContainer)
 
 
 

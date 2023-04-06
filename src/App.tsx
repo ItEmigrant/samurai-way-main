@@ -13,6 +13,9 @@ import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {UserContainer} from "./Components/Users/UserContainer";
 
 
+
+
+
 const App = () => {
     return (
 
@@ -29,6 +32,8 @@ const App = () => {
                     <MyFriendsContainer/>}/>
 
                 <Route path='/users' render={() =>
+
+
                     <UserContainer/>}/>
 
                 <Route path='/news' component={ActualNews}/>
