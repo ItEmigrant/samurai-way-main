@@ -2,9 +2,12 @@
     height: 70px;
     width: 70px;
     border-radius: 35px;
-
 }
 
+.preloader {
+height: 80px;
+
+}
 
 .selectedPage {
     font-weight:bold;

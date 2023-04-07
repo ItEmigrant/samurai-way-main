@@ -14,6 +14,7 @@ export type  UserPageType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 
@@ -53,7 +54,8 @@ let initialUsersState: UserPageType = {
     users: [] as Array<usersType>,
     pageSize: 20 as number,
     totalUsersCount: 0 as number,
-    currentPage: 1 as number
+    currentPage: 1 as number,
+    isFetching: false as boolean
 
 }
 
@@ -62,9 +64,11 @@ const UserReducer = (state: UserPageType = initialUsersState, action: UsersActio
 
     switch (action.type) {
 
+        case 'TOGGLE-IS-FETCHING':
+            return {...state, isFetching: action.isFetching};
 
         case 'SET-CURRENT-PAGE':
-            return {...state, currentPage: action.currentPage}
+            return {...state, currentPage: action.currentPage};
 
         case "FOLLOW-USER":
             return {
@@ -103,6 +107,7 @@ export type UsersActionType =
     | ReturnType<typeof setUsersActionCreator>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof ToggleIsFetchingAC>
 
 
 export const followUserActionCreator = (userID: number) => ({
@@ -125,6 +130,10 @@ export const setCurrentPageAC = (currentPage: number) => ({
 
 export const setTotalUsersCountAC = (totalCount: number) => ({
     type: "SET-TOTAL-USERS-COUNT", totalCount
+}) as const
+
+export const ToggleIsFetchingAC = (isFetching: boolean) => ({
+    type: "TOGGLE-IS-FETCHING", isFetching
 }) as const
 
 
