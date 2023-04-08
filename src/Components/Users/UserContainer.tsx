@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/reduxStore";
-import {Dispatch} from "redux";
+
 import {
-    followUserActionCreator, setCurrentPageAC, setTotalUsersCountAC,
-    setUsersActionCreator, ToggleIsFetchingAC,
-    unFollowUserActionCreator,
+    followUser, setCurrentPage, setTotalUsersCount,
+    setUsers, ToggleIsFetching,
+    unFollowUser,
     usersType
 } from "../../Redux/UsersReducer";
 import React from "react";
@@ -26,7 +26,7 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
     }
 
     onPageChange = (pageNumber: number) => {
-        this.props.setPage(pageNumber)
+        this.props.setCurrentPage(pageNumber)
         this.props.ToggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
             this.props.ToggleIsFetching(false)
@@ -36,11 +36,11 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
     }
 
     UnFollowHandler = (valueID: number) => {
-        this.props.unFollow(valueID)
+        this.props.unFollowUser(valueID)
     }
 
     FollowHandler = (valueID: number) => {
-        this.props.follow(valueID)
+        this.props.followUser(valueID)
     }
 
 
@@ -58,9 +58,7 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
             />
         </>
     }
-
 }
-
 
 type MapStateToProfilePropsType = {
     stateUsersPages: Array<usersType>
@@ -70,18 +68,16 @@ type MapStateToProfilePropsType = {
     isFetching: boolean
 
 }
-
 type MapDispatchToProfilePropsType = {
-    follow: (idValue: number) => void
-    unFollow: (idValue: number) => void
+    followUser: (idValue: number) => void
+    unFollowUser: (idValue: number) => void
     setUsers: (newUsers: Array<usersType>) => void
-    setPage: (newCurrentPage: number) => void
+    setCurrentPage: (newCurrentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     ToggleIsFetching: (isFetching: boolean) => void
 }
 
 export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
-
 
 const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     return {
@@ -94,7 +90,7 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType => {
+/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType => {
     return {
         follow: (idValue: number) => {
             dispatch(followUserActionCreator(idValue))
@@ -116,9 +112,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType =
         }
     }
 
-}
+}*/
 
-export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiContainer)
+export const UserContainer = connect(mapStateToProps, {
+    followUser, unFollowUser, setUsers, setCurrentPage, setTotalUsersCount, ToggleIsFetching
+})
+(UsersApiContainer);
 
 
 
