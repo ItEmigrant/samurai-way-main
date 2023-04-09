@@ -1,4 +1,4 @@
-import ProfileReducer, {ProfileActionsType} from "./ProfileReducer";
+import {ProfileActionsType} from "./ProfileReducer";
 import DialogsReducer, {DialogActionType} from "./DialogsReducer";
 
 type postsType = {
@@ -18,7 +18,7 @@ type messagesType = {
     id: number
     message: string
 }
-export type stateType = {
+type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogPageType
     sidebar: sidebarType
@@ -38,7 +38,7 @@ type sidebarType = {
 }
 
 
-export type storeType = {
+type storeType = {
     _state: stateType
     _onChange: () => void
     subscribe: (observer: () => void) => void
@@ -121,7 +121,7 @@ export const store: storeType = {
     },
 
     dispatch(action) {
-        this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+       /* this._state.profilePage = ProfileReducer(this._state.profilePage, action);*/
         this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action);
 
         this._onChange();
