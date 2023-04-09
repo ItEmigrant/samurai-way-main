@@ -10,7 +10,8 @@ import {YourSettings} from "./Components/YourSettings/YourSettings";
 import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {UserContainer} from "./Components/Users/UserContainer";
-import {ProfileContainer} from "./Components/Profile/ProfileContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
+
 
 
 
