@@ -8,7 +8,7 @@ import {ProfileType} from "../../Redux/ProfileReducer";
   store:  ReduxStoreType;
 }*/
 type ProfilePropsType = {
-    profile:ProfileType
+    profile:ProfileType | null
 }
 
 const Profile = (props:ProfilePropsType) => {
