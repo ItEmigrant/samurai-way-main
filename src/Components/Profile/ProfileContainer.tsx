@@ -11,6 +11,13 @@ type PathParamsType = {
     userId:string
 }
 
+/*export function withRouter(ProfileContainer:any){
+    return(props:any)=>{
+
+        const match  = {params: useParams()};
+        return <ProfileContainer {...props}  match = {match}/>
+    }
+}*/
 class ProfileContainer extends React.Component<PropsParamsType, any> {
 
     componentDidMount() {
@@ -20,9 +27,10 @@ class ProfileContainer extends React.Component<PropsParamsType, any> {
         }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`+ userId).then(response => {
             this.props.setUserProfile(
-                response.data as ProfileType);
+                response.data as ProfileType );
         });
     }
+
 
     render() {
         return (
@@ -41,9 +49,10 @@ type mapDispatchToPropsType = {
 }
 export type CommonProfileType = mapStateToPropsType & mapDispatchToPropsType;
 
-type PropsParamsType = RouteComponentProps<PathParamsType> & CommonProfileType
+type PropsParamsType = RouteComponentProps<PathParamsType> & CommonProfileType;
 
-const WithRouterDataContainerComponent = withRouter(ProfileContainer);
+
+let WithRouterDataContainerComponent = withRouter(ProfileContainer);
 
 let mapStateToProps = (state: ReduxStateType): mapStateToPropsType => {
     return {

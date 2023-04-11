@@ -13,10 +13,6 @@ import {UserContainer} from "./Components/Users/UserContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 
 
-
-
-
-
 const App = () => {
     return (
 
@@ -27,7 +23,9 @@ const App = () => {
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
 
+
                 <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+
 
                 <Route path='/friends' render={() =>
                     <MyFriendsContainer/>}/>
