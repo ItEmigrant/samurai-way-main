@@ -8,16 +8,9 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 
 
 type PathParamsType = {
-    userId:string
+    userId: string
 }
 
-/*export function withRouter(ProfileContainer:any){
-    return(props:any)=>{
-
-        const match  = {params: useParams()};
-        return <ProfileContainer {...props}  match = {match}/>
-    }
-}*/
 class ProfileContainer extends React.Component<PropsParamsType, any> {
 
     componentDidMount() {
@@ -25,9 +18,9 @@ class ProfileContainer extends React.Component<PropsParamsType, any> {
         if (!userId) {
             userId = '2'
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`+ userId).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
             this.props.setUserProfile(
-                response.data as ProfileType );
+                response.data as ProfileType);
         });
     }
 
@@ -38,7 +31,6 @@ class ProfileContainer extends React.Component<PropsParamsType, any> {
         )
     }
 }
-
 
 type mapStateToPropsType = {
     profile: ProfileType | null
