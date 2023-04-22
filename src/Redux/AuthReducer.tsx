@@ -4,13 +4,15 @@ export type AuthStatePropsType = {
     userId: number | null,
     email: string | null,
     login: string | null,
+    isAuth: boolean
 
 }
 
 let initialAuthState: AuthStatePropsType = {
     userId: null as number | null,
     email: null as string | null,
-    login: null as string | null
+    login: null as string | null,
+    isAuth: false
 
 }
 
@@ -23,39 +25,27 @@ const AuthReducer = (state: AuthStatePropsType = initialAuthState, action: AuthA
         case "SET-USER-DATA":
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
 
             };
-
-        case "UNFOLLOW-USER":
-            return {
-                ...state,
-
-            };
-
 
         default:
             return state;
-
-
     }
 }
 
 export default AuthReducer;
 
 export type AuthActionType =
-    ReturnType<typeof setUserData>
-    | ReturnType<typeof unFollowUser>
+    ReturnType<typeof setAuthUserData>
 
 
-export const setUserData = (data: AuthStatePropsType) => ({
-    type: "SET-USER-DATA", data
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => ({
+    type: "SET-USER-DATA", data: {userId, email, login}
 }) as const
 
-export const unFollowUser = () => ({
-    type: "UNFOLLOW-USER"
 
-}) as const
 
 
 
