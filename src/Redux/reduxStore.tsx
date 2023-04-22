@@ -19,7 +19,7 @@ let rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(rootReducer);
-
+(window as any).store = store
 
 
 

@@ -9,9 +9,9 @@ export type AuthStatePropsType = {
 }
 
 let initialAuthState: AuthStatePropsType = {
-    userId: null as number | null,
-    email: null as string | null,
-    login: null as string | null,
+    userId: null,
+    email: null,
+    login: null,
     isAuth: false
 
 }
@@ -41,8 +41,8 @@ export type AuthActionType =
     ReturnType<typeof setAuthUserData>
 
 
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => ({
-    type: "SET-USER-DATA", data: {userId, email, login}
+export const setAuthUserData = (data:Omit<AuthStatePropsType, 'isAuth'> ) => ({
+    type: "SET-USER-DATA", data
 }) as const
 
 
