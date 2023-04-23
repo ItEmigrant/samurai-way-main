@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/userSN.jpeg";
 import {usersType} from "../../Redux/UsersReducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {userApi} from "../../API/ApiTS";
 
 type UsersPropsType = {
     stateUsersPages: Array<usersType>
@@ -49,30 +49,18 @@ export const Users = (props: UsersPropsType) => {
                         <div>
                     {u.followed
                         ? <button onClick={() => {
-
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': 'bee85189-718e-4866-92ef-307d2adf5563'
-                                }
-                            })
-                                .then(response => {
-                                    if (response.data.resultCode === 0) {
+                            userApi.unFollowUsers(u.id)
+                                .then(data => {
+                                    if (data.resultCode === 0) {
                                         props.UnFollowHandler(u.id);
                                     }
                                 })
                         }}>UnFollow</button>
 
                         : <button onClick={() => {
-
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': 'bee85189-718e-4866-92ef-307d2adf5563'
-                                }
-                            })
-                                .then(response => {
-                                    if (response.data.resultCode === 0) {
+                            userApi.FollowUsers(u.id)
+                                .then(data => {
+                                    if (data.resultCode === 0) {
                                         props.FollowHandler(u.id);
                                     }
                                 })
