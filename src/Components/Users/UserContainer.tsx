@@ -11,20 +11,24 @@ import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
+import {GetUsers} from "../../API/ApiTS";
 
 export class UsersApiContainer extends React.Component<CommonUserType, any> {
 
     componentDidMount() {
-        this.props.ToggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+        this.props.ToggleIsFetching(true);
+
+        GetUsers(this.props.currentPage, this.props.pageSize)
+            .then(response => {
+                this.props.ToggleIsFetching(false)
+                this.props.setUsers(
+                    response.data.items as Array<usersType>);
+                this.props.setTotalUsersCount(
+                    response.data.totalCount as number);
+            });
+        /*axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
             withCredentials: true
-        }).then(response => {
-            this.props.ToggleIsFetching(false)
-            this.props.setUsers(
-                response.data.items as Array<usersType>);
-            this.props.setTotalUsersCount(
-                response.data.totalCount as number);
-        })
+        })*/
     }
 
     onPageChange = (pageNumber: number) => {
@@ -75,8 +79,8 @@ type MapStateToProfilePropsType = {
 
 }
 type MapDispatchToProfilePropsType = {
-    followUser: (idValue: number ) => void
-    unFollowUser: (idValue: number ) => void
+    followUser: (idValue: number) => void
+    unFollowUser: (idValue: number) => void
     setUsers: (newUsers: Array<usersType>) => void
     setCurrentPage: (newCurrentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
