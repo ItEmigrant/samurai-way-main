@@ -16,7 +16,9 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
 
     componentDidMount() {
         this.props.ToggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             this.props.ToggleIsFetching(false)
             this.props.setUsers(
                 response.data.items as Array<usersType>);
@@ -28,7 +30,9 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
     onPageChange = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.ToggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             this.props.ToggleIsFetching(false)
             this.props.setUsers(
                 response.data.items as Array<usersType>);
@@ -55,6 +59,7 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
                 onPageChange={this.onPageChange}
                 UnFollowHandler={this.UnFollowHandler}
                 FollowHandler={this.FollowHandler}
+
             />
         </>
     }
@@ -67,10 +72,11 @@ type MapStateToProfilePropsType = {
     currentPage: number
     isFetching: boolean
 
+
 }
 type MapDispatchToProfilePropsType = {
-    followUser: (idValue: number) => void
-    unFollowUser: (idValue: number) => void
+    followUser: (idValue: number ) => void
+    unFollowUser: (idValue: number ) => void
     setUsers: (newUsers: Array<usersType>) => void
     setCurrentPage: (newCurrentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
