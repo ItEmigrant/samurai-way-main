@@ -3,7 +3,7 @@ import {ReduxStateType} from "../../Redux/reduxStore";
 
 import {
     followUser, setCurrentPage, setTotalUsersCount,
-    setUsers, ToggleIsFetching,
+    setUsers, ToggleFollowingProgress, ToggleIsFetching,
     unFollowUser,
     usersType
 } from "../../Redux/UsersReducer";
@@ -14,7 +14,7 @@ import {userApi} from "../../API/ApiTS";
 
 
 
-export class UsersApiContainer extends React.Component<CommonUserType, any> {
+class UsersApiContainer extends React.Component<CommonUserType> {
 
     componentDidMount() {
         this.props.ToggleIsFetching(true);
@@ -60,6 +60,9 @@ export class UsersApiContainer extends React.Component<CommonUserType, any> {
                 onPageChange={this.onPageChange}
                 UnFollowHandler={this.UnFollowHandler}
                 FollowHandler={this.FollowHandler}
+                followingInProgress={this.props.followingInProgress}
+                ToggleFollowingProgress={this.props.ToggleFollowingProgress}
+
 
             />
         </>
@@ -72,6 +75,7 @@ type MapStateToProfilePropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 
 
 }
@@ -82,6 +86,7 @@ type MapDispatchToProfilePropsType = {
     setCurrentPage: (newCurrentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     ToggleIsFetching: (isFetching: boolean) => void
+    ToggleFollowingProgress: (id: number, isFetching: boolean) => void
 }
 
 export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
@@ -92,7 +97,8 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
 
     }
 }
@@ -121,8 +127,8 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
 
 }*/
 
-export const UserContainer = connect(mapStateToProps, {
-    followUser, unFollowUser, setUsers, setCurrentPage, setTotalUsersCount, ToggleIsFetching
+export default connect(mapStateToProps, {
+    followUser, unFollowUser, setUsers, setCurrentPage, setTotalUsersCount, ToggleIsFetching, ToggleFollowingProgress
 })
 (UsersApiContainer);
 

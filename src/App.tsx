@@ -8,9 +8,10 @@ import {YourSettings} from "./Components/YourSettings/YourSettings";
 
 import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import {UserContainer} from "./Components/Users/UserContainer";
+
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import UserContainer from "./Components/Users/UserApiContainer";
 
 
 const App = () => {
