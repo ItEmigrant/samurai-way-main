@@ -1,4 +1,6 @@
 import React from 'react';
+import {userApi} from "../API/ApiTS";
+import {Dispatch} from "redux";
 
 export type usersType = {
     id: number
@@ -125,12 +127,10 @@ export type UsersActionType =
 
 export const followUser = (userID: number) => ({
     type: "FOLLOW-USER", userID
-
 }) as const
 
 export const unFollowUser = (userID: number) => ({
     type: "UNFOLLOW-USER", userID
-
 }) as const
 
 export const setUsers = (users: Array<usersType>) => ({
@@ -154,3 +154,15 @@ export const ToggleFollowingProgress = (id: number, isFetching: boolean) => ({
 }) as const
 
 
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(ToggleIsFetching(true));
+
+        userApi.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(ToggleIsFetching(false))
+                dispatch(setUsers(data.items as Array<usersType>))
+                dispatch(setTotalUsersCount(data.totalCount as number))
+            });
+    }
+}

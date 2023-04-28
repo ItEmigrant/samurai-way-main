@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/reduxStore";
 
 import {
-    followUser, setCurrentPage, setTotalUsersCount,
+    followUser, getUsersThunkCreator, setCurrentPage, setTotalUsersCount,
     setUsers, ToggleFollowingProgress, ToggleIsFetching,
     unFollowUser,
     usersType
@@ -17,16 +17,15 @@ import {userApi} from "../../API/ApiTS";
 class UsersApiContainer extends React.Component<CommonUserType> {
 
     componentDidMount() {
-        this.props.ToggleIsFetching(true);
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+       /* this.props.ToggleIsFetching(true);
 
         userApi.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 this.props.ToggleIsFetching(false)
-                this.props.setUsers(
-                    data.items as Array<usersType>);
-                this.props.setTotalUsersCount(
-                    data.totalCount as number);
-            });
+                this.props.setUsers(data.items as Array<usersType>);
+                this.props.setTotalUsersCount(data.totalCount as number);
+            });*/
     }
 
     onPageChange = (pageNumber: number) => {
@@ -79,7 +78,7 @@ type MapStateToProfilePropsType = {
 
 
 }
-type MapDispatchToProfilePropsType = {
+export type MapDispatchToProfilePropsType = {
     followUser: (idValue: number) => void
     unFollowUser: (idValue: number) => void
     setUsers: (newUsers: Array<usersType>) => void
@@ -87,6 +86,7 @@ type MapDispatchToProfilePropsType = {
     setTotalUsersCount: (totalCount: number) => void
     ToggleIsFetching: (isFetching: boolean) => void
     ToggleFollowingProgress: (id: number, isFetching: boolean) => void
+    getUsersThunkCreator: (currentPage: number, pageSize: number)=>void
 }
 
 export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
@@ -128,7 +128,14 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
 }*/
 
 export default connect(mapStateToProps, {
-    followUser, unFollowUser, setUsers, setCurrentPage, setTotalUsersCount, ToggleIsFetching, ToggleFollowingProgress
+    followUser,
+    unFollowUser,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    ToggleIsFetching,
+    ToggleFollowingProgress,
+    getUsersThunkCreator
 })
 (UsersApiContainer);
 
