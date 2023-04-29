@@ -1,4 +1,7 @@
 import React from 'react';
+import {Dispatch} from "redux";
+import {userApi} from "../API/ApiTS";
+
 
 export type AuthStatePropsType = {
     userId: number | null,
@@ -44,6 +47,18 @@ export type AuthActionType =
 export const setAuthUserData = (data:Omit<AuthStatePropsType, 'isAuth'> ) => ({
     type: "SET-USER-DATA", data
 }) as const
+
+export const myLoginThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+        userApi.myLogin()
+            .then(data=> {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data;
+                    dispatch(setAuthUserData({userId: id, login, email}))
+                }
+            });
+    }
+}
 
 
 

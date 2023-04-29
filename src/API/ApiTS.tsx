@@ -24,9 +24,8 @@ export const userApi = {
     },
 
     myLogin() {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me `).then(response => response.data)
-
-    }
+        return instance.get(`auth/me `).then(response => response.data)
+    },
 
 
 }
