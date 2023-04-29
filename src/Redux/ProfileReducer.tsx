@@ -1,5 +1,8 @@
 import React from 'react';
 import {ActionsTypes} from "./store";
+import {Dispatch} from "redux";
+import {userApi} from "../API/ApiTS";
+
 
 export type postsType = {
     id: number
@@ -126,3 +129,12 @@ return state;
 
 };*/
 
+export const getUsersForProfile = (userId: string) => {
+    return (dispatch: Dispatch) => {
+
+        if (!userId) {
+            userId = '2'
+        }
+        userApi.getUsersForProfile(userId).then(data =>dispatch(setUserProfile(data)))
+    }
+}

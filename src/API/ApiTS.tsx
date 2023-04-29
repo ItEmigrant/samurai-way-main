@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from "axios";
 
-
 const instance = axios.create({
     withCredentials: true,
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -20,13 +19,15 @@ export const userApi = {
     },
     FollowUsers(id: number) {
         return instance.post(`follow/${id}`).then(response => response.data)
-
     },
 
     myLogin() {
         return instance.get(`auth/me `).then(response => response.data)
     },
 
+    getUsersForProfile(id: string) {
+        return instance.get(`profile/` + id).then(response => response.data)
+    }
 
 }
 
