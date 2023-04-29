@@ -1,9 +1,9 @@
 import React from 'react';
 import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/userSN.jpeg";
-import {usersType} from "../../Redux/UsersReducer";
+import { usersType} from "../../Redux/UsersReducer";
 import {NavLink} from "react-router-dom";
-import {userApi} from "../../API/ApiTS";
+
 
 type UsersPropsType = {
     stateUsersPages: Array<usersType>
@@ -12,9 +12,8 @@ type UsersPropsType = {
     currentPage: number
     followingInProgress: number[]
     onPageChange: (pageNumber: number) => void
-    UnFollowHandler: (valueID: number) => void
-    FollowHandler: (valueID: number) => void
-    ToggleFollowingProgress: (id: number, isFetching: boolean) => void
+    FollowThunkCreator:(id:number)=>void
+    UnFollowThunkCreator:(id:number)=>void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -48,26 +47,11 @@ export const Users = (props: UsersPropsType) => {
                         <div>
                     {u.followed
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.ToggleFollowingProgress(u.id, true)
-                            userApi.unFollowUsers(u.id)
-                                .then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.UnFollowHandler(u.id);
-                                    }
-                                    props.ToggleFollowingProgress(u.id, false)
-                                })
+                           props.UnFollowThunkCreator(u.id)
+
                         }}>UnFollow</button>
-
                         : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.ToggleFollowingProgress(u.id, true)
-                            userApi.FollowUsers(u.id)
-                                .then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.FollowHandler(u.id);
-                                    }
-                                    props.ToggleFollowingProgress(u.id, false)
-                                })
-
+                            props.FollowThunkCreator(u.id)
                         }}>Follow</button>}
 
                         </div>

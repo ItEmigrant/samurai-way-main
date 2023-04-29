@@ -2,49 +2,42 @@ import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/reduxStore";
 
 import {
-    followUser, getUsersThunkCreator, setCurrentPage, setTotalUsersCount,
-    setUsers, ToggleFollowingProgress, ToggleIsFetching,
-    unFollowUser,
+    FollowThunkCreator,
+    getUsers, setCurrentPage,
+    UnFollowThunkCreator,
+
     usersType
 } from "../../Redux/UsersReducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
-import {userApi} from "../../API/ApiTS";
-
 
 
 class UsersApiContainer extends React.Component<CommonUserType> {
 
     componentDidMount() {
-        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
-       /* this.props.ToggleIsFetching(true);
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        /* this.props.ToggleIsFetching(true);
 
-        userApi.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.ToggleIsFetching(false)
-                this.props.setUsers(data.items as Array<usersType>);
-                this.props.setTotalUsersCount(data.totalCount as number);
-            });*/
+         userApi.getUsers(this.props.currentPage, this.props.pageSize)
+             .then(data => {
+                 this.props.ToggleIsFetching(false)
+                 this.props.setUsers(data.items as Array<usersType>);
+                 this.props.setTotalUsersCount(data.totalCount as number);
+             });*/
     }
 
     onPageChange = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
+        this.props.getUsers(pageNumber, this.props.pageSize)
+
+        /*this.props.setCurrentPage(pageNumber)
         this.props.ToggleIsFetching(true);
 
         userApi.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.ToggleIsFetching(false)
             this.props.setUsers(
                 data.items as Array<usersType>);
-        })
-    }
-
-    UnFollowHandler = (valueID: number) => {
-        this.props.unFollowUser(valueID)
-    }
-
-    FollowHandler = (valueID: number) => {
-        this.props.followUser(valueID)
+        })*/
     }
 
 
@@ -57,11 +50,9 @@ class UsersApiContainer extends React.Component<CommonUserType> {
                 currentPage={this.props.currentPage}
                 stateUsersPages={this.props.stateUsersPages}
                 onPageChange={this.onPageChange}
-                UnFollowHandler={this.UnFollowHandler}
-                FollowHandler={this.FollowHandler}
                 followingInProgress={this.props.followingInProgress}
-                ToggleFollowingProgress={this.props.ToggleFollowingProgress}
-
+                FollowThunkCreator={this.props.FollowThunkCreator}
+                UnFollowThunkCreator={this.props.UnFollowThunkCreator}
 
             />
         </>
@@ -79,14 +70,10 @@ type MapStateToProfilePropsType = {
 
 }
 export type MapDispatchToProfilePropsType = {
-    followUser: (idValue: number) => void
-    unFollowUser: (idValue: number) => void
-    setUsers: (newUsers: Array<usersType>) => void
     setCurrentPage: (newCurrentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    ToggleIsFetching: (isFetching: boolean) => void
-    ToggleFollowingProgress: (id: number, isFetching: boolean) => void
-    getUsersThunkCreator: (currentPage: number, pageSize: number)=>void
+    getUsers: (currentPage: number, pageSize: number) => void
+    FollowThunkCreator: (id: number) => void
+    UnFollowThunkCreator: (id: number) => void
 }
 
 export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
@@ -128,14 +115,10 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
 }*/
 
 export default connect(mapStateToProps, {
-    followUser,
-    unFollowUser,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    ToggleIsFetching,
-    ToggleFollowingProgress,
-    getUsersThunkCreator
+    getUsers,
+    UnFollowThunkCreator,
+    FollowThunkCreator
 })
 (UsersApiContainer);
 
