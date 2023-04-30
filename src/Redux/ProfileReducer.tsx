@@ -16,14 +16,13 @@ export type  profilePageType = {
 }
 
 export type ProfileType = {
-    aboutMe:string
+    aboutMe: string
     contacts: profileContactsType
-    lookingForAJob:boolean
-    lookingForAJobDescription:string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
     fullName: string
     userId: number
     photos: profilePhotosType
-
 
 
 }
@@ -32,7 +31,7 @@ export type profilePhotosType = {
     large: string
 }
 export type profileContactsType = {
-    skype:string
+    skype: string
     vk: string,
     facebook: string,
     icq: string,
@@ -44,7 +43,7 @@ export type profileContactsType = {
 }
 
 
-let initialReducerState: profilePageType  = {
+let initialReducerState: profilePageType = {
     messageForNewPosts: "",
     posts: [
         {id: 1, message: "Hi, how are you?", likeCount: 1},
@@ -131,10 +130,9 @@ return state;
 
 export const getUsersForProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
-
         if (!userId) {
             userId = '2'
         }
-        userApi.getUsersForProfile(userId).then(data =>dispatch(setUserProfile(data)))
+        userApi.getUsersForProfile(userId).then(data => dispatch(setUserProfile(data)))
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/userSN.jpeg";
-import { usersType} from "../../Redux/UsersReducer";
+import {usersType} from "../../Redux/UsersReducer";
 import {NavLink} from "react-router-dom";
 
 
@@ -12,11 +12,12 @@ type UsersPropsType = {
     currentPage: number
     followingInProgress: number[]
     onPageChange: (pageNumber: number) => void
-    FollowThunkCreator:(id:number)=>void
-    UnFollowThunkCreator:(id:number)=>void
+    FollowThunkCreator: (id: number) => void
+    UnFollowThunkCreator: (id: number) => void
 }
 
 export const Users = (props: UsersPropsType) => {
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -47,7 +48,7 @@ export const Users = (props: UsersPropsType) => {
                         <div>
                     {u.followed
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                           props.UnFollowThunkCreator(u.id)
+                            props.UnFollowThunkCreator(u.id)
 
                         }}>UnFollow</button>
                         : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {

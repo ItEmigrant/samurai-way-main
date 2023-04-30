@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dispatch} from "redux";
-import {userApi} from "../API/ApiTS";
+import {authApi} from "../API/ApiTS";
 
 
 export type AuthStatePropsType = {
@@ -50,7 +50,7 @@ export const setAuthUserData = (data:Omit<AuthStatePropsType, 'isAuth'> ) => ({
 
 export const myLoginThunkCreator = () => {
     return (dispatch: Dispatch) => {
-        userApi.myLogin()
+        authApi.myLogin()
             .then(data=> {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;

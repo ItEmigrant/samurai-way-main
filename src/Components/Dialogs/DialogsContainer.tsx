@@ -16,6 +16,7 @@ import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
     stateDialogPage: dialogPageType
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -50,7 +51,8 @@ export type CommonType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
     return {
-        stateDialogPage: state.dialogPage
+        stateDialogPage: state.dialogPage,
+        isAuth: state.auth.isAuth
     }
 }
 

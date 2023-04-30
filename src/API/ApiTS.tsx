@@ -21,14 +21,13 @@ export const userApi = {
         return instance.post(`follow/${id}`).then(response => response.data)
     },
 
-    myLogin() {
-        return instance.get(`auth/me `).then(response => response.data)
-    },
-
     getUsersForProfile(id: string) {
         return instance.get(`profile/` + id).then(response => response.data)
     }
-
 }
 
-
+export const authApi = {
+    myLogin() {
+        return instance.get(`auth/me`).then(response => response.data)
+    },
+}

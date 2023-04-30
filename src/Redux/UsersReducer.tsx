@@ -163,6 +163,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
                 dispatch(ToggleIsFetching(false))
                 dispatch(setUsers(data.items as Array<usersType>))
                 dispatch(setTotalUsersCount(data.totalCount as number))
+                dispatch(setCurrentPage(currentPage))
             });
     }
 }

@@ -10,7 +10,6 @@ class HeaderContainer extends React.Component<MapStateToHeaderPropsType & MapDis
         this.props.myLoginThunkCreator()
     }
 
-
     render() {
         return <Header isAuth={this.props.isAuth} login={this.props.login} email={this.props.email}/>
     }
