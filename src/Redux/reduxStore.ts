@@ -4,7 +4,7 @@ import DialogsReducer from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 import UsersReducer from "./UsersReducer";
 import AuthReducer from "./AuthReducer";
-import thunkMiddleware  from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 
 
 /*export type ReduxStoreType = typeof store;*/
@@ -15,7 +15,8 @@ let rootReducer = combineReducers({
     dialogPage: DialogsReducer,
     sidebar: SidebarReducer,
     usersPage: UsersReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
+
 
 })
 
