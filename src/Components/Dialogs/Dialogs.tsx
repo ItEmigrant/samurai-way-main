@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {CommonType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
+
 
 
 /*
@@ -24,8 +24,10 @@ type DialogsPropsType = {
 }
 */
 
+type DialogsPropsType = CommonType & JSX.IntrinsicAttributes;
 
-export const Dialogs = (props: CommonType) => {
+
+export const Dialogs = (props: DialogsPropsType) => {
 
 
     let messagesElements = props.stateDialogPage.messages.map(m =>
@@ -45,8 +47,6 @@ export const Dialogs = (props: CommonType) => {
     const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateMessage(e.currentTarget.value)
     }
-
-    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>
