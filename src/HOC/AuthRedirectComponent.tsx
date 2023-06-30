@@ -23,6 +23,5 @@ export function AuthRedirectComponent<T extends JSX.IntrinsicAttributes>(Compone
         return <Component {...restProps as T}/>
 
     }
-
     return connect(mapStateToProps)(RedirectComponent)
 }

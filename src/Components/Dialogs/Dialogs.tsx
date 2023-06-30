@@ -26,7 +26,6 @@ type DialogsPropsType = {
 
 type DialogsPropsType = CommonType & JSX.IntrinsicAttributes;
 
-
 export const Dialogs = (props: DialogsPropsType) => {
 
 
