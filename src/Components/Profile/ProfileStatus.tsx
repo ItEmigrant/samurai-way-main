@@ -16,14 +16,12 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
     }
 
     activateEditeMode = () => {
-       debugger
-        console.log('this:', this )
         this.setState({
             editMode: true
         })
     }
 
-    deActivateEditeMode = () =>{
+    deActivateEditeMode = () => {
         this.setState({
             editMode: false
         })
