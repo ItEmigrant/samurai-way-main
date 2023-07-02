@@ -7,7 +7,6 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {AuthRedirectComponent} from "../../HOC/AuthRedirectComponent";
 import {compose} from "redux";
 
-
 type PathParamsType = {
     userId: string
 }
@@ -16,6 +15,7 @@ class ProfileContainer extends React.Component<PropsParamsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         this.props.getUsersForProfile(userId)
+        this.props.getUsersStatus(userId)
     }
 
     render() {
@@ -31,10 +31,12 @@ class ProfileContainer extends React.Component<PropsParamsType> {
 
 type mapStateToPropsType = {
     profile: ProfileType | null
+    status: string
 }
 
 type mapDispatchToPropsType = {
     getUsersForProfile: (userId: string) => void
+    getUsersStatus: (userId: string) => void
 }
 export type CommonProfileType = mapStateToPropsType & mapDispatchToPropsType;
 
@@ -44,7 +46,7 @@ type PropsParamsType = RouteComponentProps<PathParamsType> & CommonProfileType;
 let mapStateToProps = (state: ReduxStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-
+        status: state.profilePage.status
     }
 }
 

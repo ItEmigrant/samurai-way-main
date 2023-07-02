@@ -1,7 +1,7 @@
 import React from 'react';
 import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
-import {userApi} from "../API/ApiTS";
+import {profileApi, userApi} from "../API/ApiTS";
 
 
 export type postsType = {
@@ -13,6 +13,7 @@ export type  profilePageType = {
     messageForNewPosts: string
     posts: Array<postsType>
     profile: ProfileType | null
+    status: string
 }
 
 export type ProfileType = {
@@ -51,7 +52,8 @@ let initialReducerState: profilePageType = {
         {id: 3, message: "Post!", likeCount: 5},
         {id: 4, message: "yo!", likeCount: 20}
     ],
-    profile: null
+    profile: null,
+    status: ''
 }
 
 const ProfileReducer = (state: profilePageType = initialReducerState, action: ActionsTypes) => {
@@ -81,6 +83,12 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
                 ...state, profile: action.profile
             }
         }
+
+        case "SET-STATUS": {
+            return {
+                ...state, status: action.status
+            }
+        }
         default:
             return state;
     }
@@ -91,7 +99,8 @@ export default ProfileReducer;
 export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostActionCreator> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setStatus>
 
 export const addPostActionCreator = () => ({
     type: "ADD-STATE-POST-MESSAGE"
@@ -134,5 +143,24 @@ export const getUsersForProfile = (userId: string) => {
             userId = '2'
         }
         userApi.getUsersForProfile(userId).then(data => dispatch(setUserProfile(data)))
+    }
+}
+
+export const setStatus = (status: string) => ({
+    type: "SET-STATUS",
+    status
+}) as const
+
+export const getStatus = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileApi.getStatus(userId)
+            .then(data => dispatch(setStatus(data.data)))
+    }
+}
+
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileApi.updateStatus(status)
+            .then(data => dispatch(setStatus(data.data)))
     }
 }
