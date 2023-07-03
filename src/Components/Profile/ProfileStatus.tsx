@@ -2,16 +2,21 @@ import React from 'react';
 
 type ProfileStatusPropsType = {
     status: string
+    updateStatus: (status: string) => void
 }
 
 type stateProfileStatusType = {
     editMode: boolean
+    Status: string
+
 }
 
 export class ProfileStatus extends React.Component <ProfileStatusPropsType, stateProfileStatusType> {
 
+
     state: stateProfileStatusType = {
-        editMode: false
+        editMode: false,
+        Status: this.props.status
 
     }
 
@@ -25,6 +30,11 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
         this.setState({
             editMode: false
         })
+        this.props.updateStatus(this.state.Status)
+    }
+
+    onStatusChange = () => {
+
     }
 
     render() {
@@ -36,7 +46,8 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
                 </div>}
 
                 {this.state.editMode && <div>
-                    <input autoFocus onBlur={this.deActivateEditeMode} value={this.props.status}/>
+                    <input onChange={this.onStatusChange} autoFocus onBlur={this.deActivateEditeMode}
+                           value={this.state.Status}/>
                 </div>}
 
             </div>
