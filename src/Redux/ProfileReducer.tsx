@@ -160,7 +160,12 @@ export const getStatus = (userId: string) => {
 
 export const updateStatus = (status: string) => {
     return (dispatch: Dispatch) => {
+
         profileApi.updateStatus(status)
-            .then(data => dispatch(setStatus(data.data)))
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
+            })
     }
 }
