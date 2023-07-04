@@ -1,9 +1,10 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
 
-export const LoginForm = () => {
+export const LoginForm = (props:any) => {
+
     return (
-        <form>
+        <form onSubmit={props.handleSubmit}>
             <div>
                 <Field placeholder={'Login'} name={'login'} component={'input'}/>
             </div>
