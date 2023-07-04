@@ -5,6 +5,7 @@ import {SidebarReducer} from "./SidebarReducer";
 import UsersReducer from "./UsersReducer";
 import AuthReducer from "./AuthReducer";
 import thunkMiddleware from 'redux-thunk';
+import {reducer as formReducer} from "redux-form";
 
 
 /*export type ReduxStoreType = typeof store;*/
@@ -16,8 +17,7 @@ let rootReducer = combineReducers({
     sidebar: SidebarReducer,
     usersPage: UsersReducer,
     auth: AuthReducer,
-
-
+    form: formReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware));
