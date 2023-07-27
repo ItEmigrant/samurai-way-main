@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css'
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
@@ -25,6 +25,9 @@ type DialogsPropsType = {
 */
 
 type DialogsPropsType = CommonType & JSX.IntrinsicAttributes;
+type ValuesType = {
+    newMessageBody: string;
+}
 
 export const Dialogs = (props: DialogsPropsType) => {
 
@@ -39,13 +42,19 @@ export const Dialogs = (props: DialogsPropsType) => {
     /*addNewMessagePost={props.addNewMessagePost}*/
     /* updateNewPostMessageText={props.updateNewPostMessageText}*/
 
-    const sendMessages = () => {
+    /*const sendMessages = () => {
         props.sendMessage();
+    }*/
+
+
+
+    const addNewMessage = (values:ValuesType) => {
+        props.sendMessage(values.newMessageBody)
     }
 
-    const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+   /* const messagePostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateMessage(e.currentTarget.value)
-    }
+    }*/
 
     return (
         <div className={s.dialogs}>
@@ -55,9 +64,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-
             </div>
-            <ReduxMessageForm/>
+            <ReduxMessageForm onSubmit={addNewMessage}/>
         </div>
     );
 };
@@ -88,13 +96,14 @@ export const AddMessageForm = (props: AddMessageFormPropsType & InjectedFormProp
 export const ReduxMessageForm =reduxForm({form: 'textarea'})(AddMessageForm)*/
 
 export type FormDataMessageType = {
-    newMessage:string
+    newMessageBody: string;
 }
+
 export const AddMessageForm = (props: InjectedFormProps<FormDataMessageType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component='textarea' name='new message body' placeholder={"Enter your message"}/>
+                <Field component='textarea' name='newMessageBody' placeholder={"Enter your message"}/>
             </div>
             <div>
                 <button>Send</button>

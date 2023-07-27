@@ -1,4 +1,3 @@
-import React from 'react';
 import {ActionsTypes, dialogsType} from "./store";
 
 export type messagesType = {
@@ -12,7 +11,7 @@ export type  dialogPageType = {
     messages: Array<messagesType>
 }
 
-let initialDialogState:dialogPageType = {
+let initialDialogState: dialogPageType = {
     dialogs: [
         {id: 1, name: "Bogdan"},
         {id: 2, name: "Adrian"},
@@ -40,19 +39,18 @@ const DialogsReducer = (state = initialDialogState, action: ActionsTypes): Initi
         case "SEND-MESSAGE":
             const newSendMessage: messagesType = {
                 id: new Date().getTime(),
-                message: state.newMessagePostText
+                message: action.values
             };
             return {
                 ...state,
-                messages: [...state.messages, newSendMessage],
-                newMessagePostText: ""
+                messages: [...state.messages, newSendMessage]
             };
 
 
         case "UPDATE-NEW-POST-MESSAGE-TEXT":
             return {
                 ...state,
-                newMessagePostText: action.messageDialogs
+                newMessagePostText: action.newMessageBody
             }
 
 
@@ -68,14 +66,14 @@ export type DialogActionType =
     ReturnType<typeof sendMessageActionCreator>
     | ReturnType<typeof updateMessageActionCreator>
 
-export const sendMessageActionCreator = () => ({
-    type: "SEND-MESSAGE"
-
+export const sendMessageActionCreator = (values: string) => ({
+    type: "SEND-MESSAGE",
+    values
 }) as const
 
-export const updateMessageActionCreator = (messageDialogs: string) => ({
+export const updateMessageActionCreator = (newMessageBody: string) => ({
     type: "UPDATE-NEW-POST-MESSAGE-TEXT",
-    messageDialogs: messageDialogs
+    newMessageBody
 }) as const
 
 
