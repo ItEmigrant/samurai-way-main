@@ -39,21 +39,12 @@ const DialogsReducer = (state = initialDialogState, action: ActionsTypes): Initi
         case "SEND-MESSAGE":
             const newSendMessage: messagesType = {
                 id: new Date().getTime(),
-                message: action.values
+                message: action.newMessageBody
             };
             return {
                 ...state,
                 messages: [...state.messages, newSendMessage]
-            };
-
-
-        case "UPDATE-NEW-POST-MESSAGE-TEXT":
-            return {
-                ...state,
-                newMessagePostText: action.newMessageBody
             }
-
-
         default:
             return state
     }
@@ -64,15 +55,9 @@ export default DialogsReducer;
 
 export type DialogActionType =
     ReturnType<typeof sendMessageActionCreator>
-    | ReturnType<typeof updateMessageActionCreator>
 
-export const sendMessageActionCreator = (values: string) => ({
+export const sendMessageActionCreator = (newMessageBody: string) => ({
     type: "SEND-MESSAGE",
-    values
-}) as const
-
-export const updateMessageActionCreator = (newMessageBody: string) => ({
-    type: "UPDATE-NEW-POST-MESSAGE-TEXT",
     newMessageBody
 }) as const
 

@@ -1,8 +1,6 @@
-import React from 'react';
 import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
 import {profileApi, userApi} from "../API/ApiTS";
-
 
 export type postsType = {
     id: number
@@ -62,21 +60,13 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
         case "ADD-STATE-POST-MESSAGE":
             const newPost: postsType = {
                 id: new Date().getTime(),
-                message: state.messageForNewPosts,
+                message: action.NewPostBody,
                 likeCount: 1
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                messageForNewPosts: ""
             };
-
-        case "UPDATE-NEW-POST-TEXT": {
-            return {
-                ...state,
-                messageForNewPosts: action.postMessage
-            };
-        }
 
         case "SET-USER-PROFILE": {
             return {
@@ -95,20 +85,14 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
 }
 
 export default ProfileReducer;
-
 export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatus>
 
-export const addPostActionCreator = () => ({
-    type: "ADD-STATE-POST-MESSAGE"
-}) as const
-
-export const updateNewPostActionCreator = (postMessage: string) => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    postMessage
+export const addPostActionCreator = (NewPostBody: string) => ({
+    type: "ADD-STATE-POST-MESSAGE",
+    NewPostBody
 }) as const
 
 export const setUserProfile = (profile: ProfileType) => ({
@@ -116,26 +100,6 @@ export const setUserProfile = (profile: ProfileType) => ({
     profile
 }) as const
 
-
-/*if (action.type === "ADD-STATE-POST-MESSAGE") {
-            const newPost: postsType = {
-        id: new Date().getTime(),
-        message: state.messageForNewPosts,
-        likeCount: 1
-    };
-    state.posts.push(newPost);
-    state.messageForNewPosts = "";
-
-
-
-} else if (action.type === "UPDATE-NEW-POST-TEXT") {
-    state.messageForNewPosts = action.postMessage;
-
-}
-
-return state;
-
-};*/
 
 export const getUsersForProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
