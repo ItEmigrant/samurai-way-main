@@ -1,5 +1,3 @@
-import React from 'react';
-
 export type friendsType = {
     id: number
     friend: string
@@ -7,12 +5,11 @@ export type friendsType = {
 
 export type sidebarType = {
     friends: Array<friendsType>
-    newFriend: string
+
 }
 
 
 let initialSidebarState: sidebarType = {
-    newFriend: "",
     friends: [
         {id: 1, friend: "Andre"},
         {id: 2, friend: "Oleg"},
@@ -27,41 +24,24 @@ export const SidebarReducer = (state = initialSidebarState, action: SidebarActio
         case "ADD-FRIENDS":
             const newFriends: friendsType = {
                 id: new Date().getTime(),
-                friend: state.newFriend
+                friend: action.addNewFriend
             };
             return {
                 ...state,
-                friends: [...state.friends, newFriends],
-                newFriend: ''
+                friends: [...state.friends, newFriends]
             };
-
-        case "UPDATE-FRIENDS":
-            return {
-                ...state,
-                newFriend: action.friendWithInput
-            };
-
-
         default:
             return state
     }
-
 };
 
+export type SidebarActionType = ReturnType<typeof addFriendsActionCreator>
 
-export type SidebarActionType =
-    ReturnType<typeof addFriendsActionCreator>
-    | ReturnType<typeof updateFriendsActionCreator>
-
-export const addFriendsActionCreator = () => ({
+export const addFriendsActionCreator = (addNewFriend: string) => ({
     type: "ADD-FRIENDS",
-
+    addNewFriend
 }) as const
 
-export const updateFriendsActionCreator = (friendWithInput: string) => ({
-    type: "UPDATE-FRIENDS",
-    friendWithInput: friendWithInput
-}) as const
 
 
 
