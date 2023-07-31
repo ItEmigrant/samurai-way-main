@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from "axios";
 
 const instance = axios.create({
@@ -43,5 +42,8 @@ export const profileApi = {
 export const authApi = {
     myLogin() {
         return instance.get(`auth/me`).then(response => response.data)
+    },
+    singIn(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`auth/login/`, {email, password, rememberMe}).then(response => response.data)
     },
 }
