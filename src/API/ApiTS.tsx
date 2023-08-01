@@ -46,4 +46,10 @@ export const authApi = {
     singIn(email: string, password: string, rememberMe: boolean = false) {
         return instance.post(`auth/login/`, {email, password, rememberMe}).then(response => response.data)
     },
+    singUp() {
+        return instance.post(`auth/login/`);
+    },
+
 }
+
+

@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {authApi} from "../API/ApiTS";
-
+import {AppActionType, AppThunk} from "./reduxStore";
 
 export type AuthStatePropsType = {
     userId: number | null,
@@ -38,7 +38,7 @@ export const setAuthUserData = (data: Omit<AuthStatePropsType, 'isAuth'>) => ({
 }) as const
 
 export const myLoginThunkCreator = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<AppActionType>) => {
         authApi.myLogin()
             .then(data => {
                 if (data.resultCode === 0) {
@@ -49,17 +49,16 @@ export const myLoginThunkCreator = () => {
     }
 }
 
-export const loginSingIn = (email: string, password: string, rememberMe:boolean) => {
-    return (dispatch: Dispatch) => {
-        authApi.myLogin()
+export const loginSingIn = (email: string, password: string, rememberMe: boolean): AppThunk =>
+    (dispatch) => {
+        authApi.singIn(email, password, rememberMe)
             .then(data => {
                 if (data.resultCode === 0) {
-                    let {id, email, login} = data.data;
-                    dispatch(setAuthUserData({userId: id, login, email}))
+                    dispatch(myLoginThunkCreator())
                 }
-            });
-    }
-}
+            })
+    };
+
 
 
 
