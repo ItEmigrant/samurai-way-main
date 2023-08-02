@@ -5,21 +5,21 @@ import {maxLengthCreator, required} from "../Utils/validators/validators";
 
 
 export type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
 
-const maxLength12 = maxLengthCreator(12);
+const maxLength12 = maxLengthCreator(20);
 export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={Input}  validate={[required, maxLength12]}/>
+                <Field placeholder={'Login'} name={'email'} component={Input}  validate={[required, maxLength12]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={Input}  validate={[required, maxLength12]}/>
+                <Field placeholder={'Password'} name={'password'}  type={'password'} component={Input}  validate={[required, maxLength12]}/>
             </div>
             <div>
                 <Field name={'rememberMe'} component={'input'} type={"checkbox"} /> remember me

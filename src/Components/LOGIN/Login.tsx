@@ -1,10 +1,12 @@
 import React from 'react';
 import {FormDataType, ReduxLoginForm} from "./LoginForm";
+import {connect} from "react-redux";
+import {loginSingIn} from "../../Redux/AuthReducer";
 
-export const Login = () => {
+const Login = (props: any) => {
 
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.loginSingIn(formData.email, formData.password, formData.rememberMe)
     }
     return (
         <div>
@@ -13,4 +15,6 @@ export const Login = () => {
         </div>
     );
 };
+
+export default connect(null, {loginSingIn})(Login);
 

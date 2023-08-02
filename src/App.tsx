@@ -12,7 +12,8 @@ import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import UserContainer from "./Components/Users/UserApiContainer";
-import {Login} from "./Components/LOGIN/Login";
+import Login from "./Components/LOGIN/Login";
+
 
 
 

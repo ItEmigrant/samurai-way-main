@@ -33,7 +33,7 @@ export default AuthReducer;
 export type AuthActionType =
     ReturnType<typeof setAuthUserData>
 
-export const setAuthUserData = (data: Omit<AuthStatePropsType, 'isAuth'>) => ({
+export const setAuthUserData = (data:AuthStatePropsType) => ({
     type: "SET-USER-DATA", data
 }) as const
 
@@ -43,7 +43,7 @@ export const myLoginThunkCreator = () => {
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
-                    dispatch(setAuthUserData({userId: id, login, email}))
+                    dispatch(setAuthUserData({userId: id, login, email, isAuth:true}))
                 }
             });
     }
@@ -55,6 +55,16 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(myLoginThunkCreator())
+                }
+            })
+    };
+
+export const loginSingUp = (): AppThunk =>
+    (dispatch) => {
+        authApi.singUp()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData({userId: null, login:null, email:null, isAuth:false}))
                 }
             })
     };
