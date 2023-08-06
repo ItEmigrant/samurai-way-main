@@ -34,7 +34,7 @@ export const profileApi = {
         return instance.get(`profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status`, {status: status})
+        return instance.put<ResponseUpdateApiType>(`profile/status`, {status: status})
     }
 }
 
@@ -48,8 +48,11 @@ export const authApi = {
     },
     singUp() {
         return instance.delete(`auth/login/`).then(response => response.data);
-    },
-
+    }
 }
 
-
+export type ResponseUpdateApiType = {
+    resultCode: number,
+    messages: string[],
+    data: {}
+}

@@ -5,7 +5,7 @@ import {FormDataAddFriendType, ReduxAddFriendForm} from "./AddFriendsForm";
 
 export const MyFriends: React.FC<CommonSidebarType> = (props) => {
 
-    let friendsElements = props.sidebar.friends.map(el => ` - ${el.friend} - `);
+    let friendsElements = props.sidebar.friends.map( el => <span key={el.id}>- {el.friend} - </span>);
 
     const addNewFriend = (values: FormDataAddFriendType) => {
         props.addFriend(values.addNewFriend);
