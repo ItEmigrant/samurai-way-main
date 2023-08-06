@@ -14,6 +14,9 @@ type PathParamsType = {
 class ProfileContainer extends React.Component<PropsParamsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = String(this.props.myUserId)
+        }
         this.props.getUsersForProfile(userId)
         this.props.getStatus(userId)
     }
@@ -24,8 +27,6 @@ class ProfileContainer extends React.Component<PropsParamsType> {
                      profile={this.props.profile}
                      status={this.props.status}
                      updateStatus={this.props.updateStatus}
-
-
             />
         )
     }
@@ -35,12 +36,14 @@ class ProfileContainer extends React.Component<PropsParamsType> {
 type mapStateToPropsType = {
     profile: ProfileType | null
     status: string
+    myUserId: number | null
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
     getUsersForProfile: (userId: string) => void
     getStatus: (userId: string) => void
-    updateStatus:(status:string)=>void
+    updateStatus: (status: string) => void
 }
 export type CommonProfileType = mapStateToPropsType & mapDispatchToPropsType;
 
@@ -50,14 +53,12 @@ type PropsParamsType = RouteComponentProps<PathParamsType> & CommonProfileType;
 let mapStateToProps = (state: ReduxStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        myUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
+
     }
 }
-
-
-/*let WithRouterDataContainerComponent = withRouter(ProfileContainer);
-
-export const AuthRedirectComponent(connect(mapStateToProps, {getUsersForProfile})(WithRouterDataContainerComponent))*/
 
 
 export default compose<React.ComponentType>(

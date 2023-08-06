@@ -3,6 +3,7 @@ import {authApi} from "../API/ApiTS";
 import {AppActionType, AppThunk} from "./reduxStore";
 import {stopSubmit} from "redux-form";
 
+
 export type AuthStatePropsType = {
     userId: number | null,
     email: string | null,
@@ -60,7 +61,8 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
                 if (data.resultCode === 0) {
                     dispatch(myLoginThunkCreator())
                 } else {
-                    dispatch(stopSubmit('login', {_error: 'Something wrong!!!'}))
+                    let message = data.messages.length > 0 ? data.messages[0] : 'Some Error!'
+                    dispatch(stopSubmit('login', {_error: message}))
                 }
             })
     };
