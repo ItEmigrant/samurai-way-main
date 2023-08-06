@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {authApi} from "../API/ApiTS";
 import {AppActionType, AppThunk} from "./reduxStore";
+import {stopSubmit} from "redux-form";
 
 export type AuthStatePropsType = {
     userId: number | null,
@@ -16,6 +17,7 @@ let initialAuthState: AuthStatePropsType = {
     login: null,
     isAuth: false
 }
+
 
 export type initialReducerAuthStateType = typeof initialAuthState
 
@@ -36,9 +38,10 @@ export type AuthActionType =
 
 export const setAuthUserData = (data: AuthStatePropsType) => ({
     type: "SET-USER-DATA", data
-}) as const
+} as const)
 
 export const myLoginThunkCreator = () => {
+
     return (dispatch: Dispatch<AppActionType>) => {
         authApi.myLogin()
             .then(data => {
@@ -56,6 +59,8 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(myLoginThunkCreator())
+                } else {
+                    dispatch(stopSubmit('login', {_error: 'Something wrong!!!'}))
                 }
             })
     };
