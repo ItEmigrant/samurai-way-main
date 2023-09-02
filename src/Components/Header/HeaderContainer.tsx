@@ -6,9 +6,9 @@ import {loginSingUp, myLoginThunkCreator} from "../../Redux/AuthReducer";
 
 
 class HeaderContainer extends React.Component<MapStateToHeaderPropsType & MapDispatchToPropsType> {
-    componentDidMount() {
+   /* componentDidMount() {
         this.props.myLoginThunkCreator()
-    }
+    }*/
 
     render() {
         return <Header isAuth={this.props.isAuth}

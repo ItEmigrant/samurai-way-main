@@ -13,49 +13,51 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import UserContainer from "./Components/Users/UserApiContainer";
 import Login from "./Components/LOGIN/Login";
+import {myLoginThunkCreator} from "./Redux/AuthReducer";
 
 
+class App extends React.Component {
+    componentDidMount() {
+       myLoginThunkCreator();//zapytac czy tak mozna ???
+    }
+
+    render() {
+        return (
+
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+
+                <div className='app-wrapper-content'>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
 
 
-const App = () => {
-    return (
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
 
-        <div className='app-wrapper'>
-            <HeaderContainer/>
-            <Navbar/>
-
-            <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
 
 
-                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/friends' render={() =>
+                        <MyFriendsContainer/>}/>
 
-                <Route path='/login' render={()=><Login/>}/>
+                    <Route path='/users' render={() =>
 
+                        <UserContainer/>}/>
 
+                    <Route path='/news' component={ActualNews}/>
 
-                <Route path='/friends' render={() =>
-                    <MyFriendsContainer/>}/>
+                    <Route path='/music' component={Track}/>
 
-                <Route path='/users' render={() =>
-
-                    <UserContainer/>}/>
-
-                <Route path='/news' component={ActualNews}/>
-
-                <Route path='/music' component={Track}/>
-
-                <Route path='/settings' component={YourSettings}/>
+                    <Route path='/settings' component={YourSettings}/>
 
 
-
+                </div>
 
             </div>
 
-        </div>
 
-
-    )
+        )
+    }
 }
 
 export default App;
