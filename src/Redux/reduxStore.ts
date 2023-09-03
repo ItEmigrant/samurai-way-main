@@ -6,12 +6,12 @@ import UsersReducer from "./UsersReducer";
 import AuthReducer, {AuthActionType} from "./AuthReducer";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {FormAction, reducer as formReducer} from "redux-form";
-import AppReducer from "./AppReducer";
+import AppReducer, {AppActionsReducerType} from "./AppReducer";
 
 
 export type ReduxStateType = ReturnType<typeof rootReducer>;
 export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AppActionType>;
-export type AppActionType = AuthActionType | FormAction;
+export type AppActionType = AuthActionType | FormAction | AppActionsReducerType;
 
 let rootReducer = combineReducers({
     profilePage: ProfileReducer,

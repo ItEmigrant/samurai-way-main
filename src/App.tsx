@@ -12,47 +12,54 @@ import HeaderContainer from "./Components/Header/HeaderContainer";
 import UserContainer from "./Components/Users/UserApiContainer";
 import Login from "./Components/LOGIN/Login";
 import {connect} from "react-redux";
-import {myLoginThunkCreator} from "./Redux/AuthReducer";
 import {compose} from "redux";
+import {InitializedAppTC} from "./Redux/AppReducer";
+import {ReduxStateType} from "./Redux/reduxStore";
+import {Preloader} from "./Components/Preloader/Preloader";
 
 
-type AppPropsType = {
-    myLoginThunkCreator: () => void
+type MapStateToPropsType = {
+    initialized: boolean
 }
-class App extends React.Component<AppPropsType> {
+
+type MapDispatchToPropsType = {
+    InitializedAppTC: () => void;
+}
+
+export type CommonAppType = MapStateToPropsType & MapDispatchToPropsType
+
+
+const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
+    return {
+        initialized: state.App.initialized
+    }
+}
+
+class App extends React.Component<CommonAppType> {
     componentDidMount() {
-     this.props.myLoginThunkCreator();
+        this.props.InitializedAppTC()
     }
 
     render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
         return (
-
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navbar/>
 
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-
-
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-
                     <Route path='/login' render={() => <Login/>}/>
-
-
                     <Route path='/friends' render={() =>
                         <MyFriendsContainer/>}/>
-
                     <Route path='/users' render={() =>
-
                         <UserContainer/>}/>
-
                     <Route path='/news' component={ActualNews}/>
-
                     <Route path='/music' component={Track}/>
-
                     <Route path='/settings' component={YourSettings}/>
-
 
                 </div>
 
@@ -65,4 +72,4 @@ class App extends React.Component<AppPropsType> {
 
 export default compose<React.ComponentType>(
     withRouter,
-    connect(null, {myLoginThunkCreator}))(App);
+    connect(mapStateToProps, {InitializedAppTC}))(App);

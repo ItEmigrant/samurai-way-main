@@ -42,9 +42,8 @@ export const setAuthUserData = (data: AuthStatePropsType) => ({
 } as const)
 
 export const myLoginThunkCreator = () => {
-
     return (dispatch: Dispatch<AppActionType>) => {
-        authApi.myLogin()
+        return authApi.myLogin()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
@@ -52,20 +51,23 @@ export const myLoginThunkCreator = () => {
                 }
             });
     }
+
 }
 
-export const loginSingIn = (email: string, password: string, rememberMe: boolean): AppThunk =>
-    (dispatch) => {
+
+export const loginSingIn = (email: string, password: string, rememberMe: boolean): AppThunk => {
+    return (dispatch) => {
         authApi.singIn(email, password, rememberMe)
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(myLoginThunkCreator())
+                    dispatch(myLoginThunkCreator()) //?????????????????
                 } else {
                     let message = data.messages.length > 0 ? data.messages[0] : 'Some Error!'
                     dispatch(stopSubmit('login', {_error: message}))
                 }
             })
     };
+};
 
 export const loginSingUp = (): AppThunk =>
     (dispatch) => {
