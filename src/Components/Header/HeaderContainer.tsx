@@ -2,13 +2,11 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../Redux/reduxStore";
-import {loginSingUp, myLoginThunkCreator} from "../../Redux/AuthReducer";
+import {loginSingUp} from "../../Redux/AuthReducer";
 
 
 class HeaderContainer extends React.Component<MapStateToHeaderPropsType & MapDispatchToPropsType> {
-   /* componentDidMount() {
-        this.props.myLoginThunkCreator()
-    }*/
+
 
     render() {
         return <Header isAuth={this.props.isAuth}
@@ -26,8 +24,7 @@ type MapStateToHeaderPropsType = {
 
 }
 type MapDispatchToPropsType = {
-    myLoginThunkCreator: () => void
-    loginSingUp:()=>void
+    loginSingUp: () => void
 
 }
 
@@ -41,4 +38,4 @@ const mapStateToProps = (state: ReduxStateType): MapStateToHeaderPropsType => {
 }
 
 
-export default connect(mapStateToProps, {myLoginThunkCreator, loginSingUp})(HeaderContainer);
+export default connect(mapStateToProps, {loginSingUp})(HeaderContainer);

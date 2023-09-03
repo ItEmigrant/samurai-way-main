@@ -6,9 +6,9 @@ import UsersReducer from "./UsersReducer";
 import AuthReducer, {AuthActionType} from "./AuthReducer";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {FormAction, reducer as formReducer} from "redux-form";
+import AppReducer from "./AppReducer";
 
 
-/*export type ReduxStoreType = typeof store;*/
 export type ReduxStateType = ReturnType<typeof rootReducer>;
 export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AppActionType>;
 export type AppActionType = AuthActionType | FormAction;
@@ -19,7 +19,8 @@ let rootReducer = combineReducers({
     sidebar: SidebarReducer,
     usersPage: UsersReducer,
     auth: AuthReducer,
-    form: formReducer
+    form: formReducer,
+    App: AppReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware));

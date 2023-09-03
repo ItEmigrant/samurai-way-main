@@ -1,24 +1,27 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Nawbar/Navbar";
-import {Route} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
-
 import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import UserContainer from "./Components/Users/UserApiContainer";
 import Login from "./Components/LOGIN/Login";
+import {connect} from "react-redux";
 import {myLoginThunkCreator} from "./Redux/AuthReducer";
+import {compose} from "redux";
 
 
-class App extends React.Component {
+type AppPropsType = {
+    myLoginThunkCreator: () => void
+}
+class App extends React.Component<AppPropsType> {
     componentDidMount() {
-       myLoginThunkCreator();//zapytac czy tak mozna ???
+     this.props.myLoginThunkCreator();
     }
 
     render() {
@@ -60,4 +63,6 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default compose<React.ComponentType>(
+    withRouter,
+    connect(null, {myLoginThunkCreator}))(App);
