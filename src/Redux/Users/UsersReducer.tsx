@@ -1,5 +1,4 @@
-import React from 'react';
-import {userApi} from "../API/ApiTS";
+import {userApi} from "../../API/ApiTS";
 import {Dispatch} from "redux";
 
 export type usersType = {

@@ -37,6 +37,5 @@ export const InitializedAppTC = (): AppThunk =>
 
     };
 
-
 //types
 export type AppActionsReducerType = ReturnType<typeof setInitializedSuccess>

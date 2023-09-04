@@ -7,10 +7,17 @@ import {
     UnFollowThunkCreator,
 
     usersType
-} from "../../Redux/UsersReducer";
+} from "../../Redux/Users/UsersReducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsersPages
+} from "../../Redux/Users/user-selectors";
 
 
 class UsersApiContainer extends React.Component<CommonUserType> {
@@ -69,7 +76,7 @@ export type MapDispatchToProfilePropsType = {
 
 export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
 
-const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
+/*const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     return {
         stateUsersPages: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -77,6 +84,17 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
+
+    }
+}*/
+const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
+    return {
+        stateUsersPages: getUsersPages(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
 
     }
 }
