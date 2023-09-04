@@ -28,16 +28,7 @@ class UsersApiContainer extends React.Component<CommonUserType> {
     }
 
     onPageChange = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
-
-        /*this.props.setCurrentPage(pageNumber)
-        this.props.ToggleIsFetching(true);
-
-        userApi.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.ToggleIsFetching(false)
-            this.props.setUsers(
-                data.items as Array<usersType>);
-        })*/
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
 

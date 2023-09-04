@@ -1,5 +1,6 @@
 import {AppThunk} from "./reduxStore";
-import {myLoginThunkCreator} from "./AuthReducer";
+import {authMeThunkCreator} from "./AuthReducer";
+
 
 export type AppInitialStateType = {
     initialized: boolean
@@ -28,7 +29,7 @@ export const setInitializedSuccess = () => ({
 
 export const InitializedAppTC = (): AppThunk =>
     (dispatch) => {
-        let promise = dispatch(myLoginThunkCreator());
+        let promise = dispatch(authMeThunkCreator());
         promise
             .then(() => {
                 dispatch(setInitializedSuccess());

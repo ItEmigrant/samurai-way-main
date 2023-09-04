@@ -41,33 +41,29 @@ export const setAuthUserData = (data: AuthStatePropsType) => ({
     type: "SET-USER-DATA", data
 } as const)
 
-export const myLoginThunkCreator = () => {
-    return (dispatch: Dispatch<AppActionType>) => {
-        return authApi.myLogin()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data;
-                    dispatch(setAuthUserData({userId: id, login, email, isAuth: true}))
-                }
-            });
-    }
 
+export const authMeThunkCreator = () => { //authMy
+    return async (dispatch: Dispatch<AppActionType>) => {
+        let data = await authApi.myLogin();
+        if (data.resultCode === 0) {
+            let {id, email, login} = data.data;
+            dispatch(setAuthUserData({userId: id, login, email, isAuth: true}))
+        }
+    }
 }
 
 
 export const loginSingIn = (email: string, password: string, rememberMe: boolean): AppThunk => {
-    return (dispatch) => {
-        authApi.singIn(email, password, rememberMe)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(myLoginThunkCreator()) //?????????????????
-                } else {
-                    let message = data.messages.length > 0 ? data.messages[0] : 'Some Error!'
-                    dispatch(stopSubmit('login', {_error: message}))
-                }
-            })
-    };
-};
+    return async (dispatch) => {
+        let res = await authApi.singIn(email, password, rememberMe)
+        if (res.data.resultCode === 0) {
+            await dispatch(authMeThunkCreator())
+        } else {
+            let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error!'
+            dispatch(stopSubmit('login', {_error: message}))
+        }
+    }
+}
 
 export const loginSingUp = (): AppThunk =>
     (dispatch) => {
