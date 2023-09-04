@@ -3,20 +3,21 @@ import {ReduxStateType} from "../../Redux/reduxStore";
 
 import {
     FollowThunkCreator,
-    getUsers, setCurrentPage,
+    getUsers,
+    setCurrentPage,
     UnFollowThunkCreator,
-
     usersType
 } from "../../Redux/Users/UsersReducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
 import {
-    getCurrentPage, getFollowingInProgress,
+    getCurrentPage,
+    getFollowingInProgress,
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsersPages
+    getUserSuperSelector
 } from "../../Redux/Users/user-selectors";
 
 
@@ -89,7 +90,8 @@ export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePr
 }*/
 const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     return {
-        stateUsersPages: getUsersPages(state),
+       /* stateUsersPages: getUsersPages(state),*/
+        stateUsersPages: getUserSuperSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
