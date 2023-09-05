@@ -1,30 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 type ProfileStatusPropsType = {
     status: string
     updateStatus: (status: string) => void
 }
 
-type stateProfileStatusType = {
-    editMode: boolean
-    Status: string
-}
-
 
 export const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
+    const [editMode, setEditMode] = useState<boolean>(false);
+
+    const activateEditeMode = () => {
+        setEditMode(true)
+    }
+
+    const deActivateEditeMode = () => {
+        setEditMode(false)
+    }
 
     return (
         <div>
-            {
+            {!editMode &&
                 <div>
-                    <span>{props.status || 'No status!!!'}</span>
+                    <span onDoubleClick={activateEditeMode}>{props.status || 'No status!!!'} </span>
                 </div>
             }
 
-            {false && <div>
-                <input autoFocus
-                />
-            </div>}
+            {editMode &&
+                <div>
+                    <input autoFocus={true} onBlur={deActivateEditeMode}/>
+                </div>}
 
         </div>
     );
