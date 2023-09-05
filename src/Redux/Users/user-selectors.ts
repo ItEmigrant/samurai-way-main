@@ -10,7 +10,6 @@ export const getUserSuperSelector = createSelector(getUsersPage, (users) => {
     return users.filter(u => u)
 })
 
-
 export const getPageSize = (state: ReduxStateType): number => {
     return state.usersPage.pageSize
 };
