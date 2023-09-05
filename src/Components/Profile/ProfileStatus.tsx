@@ -16,7 +16,6 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
     state: stateProfileStatusType = {
         editMode: false,
         Status: this.props.status
-
     }
 
     activateEditeMode = () => {
@@ -37,7 +36,6 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
                   Status: event.currentTarget.value
                })
     }
-
     componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<stateProfileStatusType>) {
         if (prevProps.status !== this.props.status) {
             this.setState({
