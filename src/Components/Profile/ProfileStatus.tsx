@@ -8,7 +8,6 @@ type ProfileStatusPropsType = {
 type stateProfileStatusType = {
     editMode: boolean
     Status: string
-
 }
 
 export class ProfileStatus extends React.Component <ProfileStatusPropsType, stateProfileStatusType> {
@@ -50,7 +49,6 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
     }
 
     render() {
-
         return (
             <div>
                 {!this.state.editMode && <div>
