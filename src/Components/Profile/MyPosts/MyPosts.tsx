@@ -7,21 +7,26 @@ import {ReduxAddPostForm} from "./AddPostsForm/AddPostsForm";
 type ValuesPostType = {
     addNewPostBody: string;
 }
-const MyPosts = (props: ProfileCommonType) => {
 
-    const addNewPost = (values: ValuesPostType) => {
-        props.addPosts(values.addNewPostBody);
+class MyPosts extends React.PureComponent<ProfileCommonType> {
+    /* shouldComponentUpdate(nextProps: Readonly<ProfileCommonType>, nextState: Readonly<{}>): boolean {
+       return nextProps !== this.props || nextState !== this.state
+   }*/
+
+    render() {
+        const addNewPost = (values: ValuesPostType) => {
+            this.props.addPosts(values.addNewPostBody);
+        }
+        return <div className={s.MyPostsBlock}>
+            <h3>My post</h3>
+            <div>
+                <ReduxAddPostForm onSubmit={addNewPost}/>
+            </div>
+            <div className={s.posts}>
+                {this.props.posts.map(el => (<Post key={el.id} message={el.message} likeCount={el.likeCount}/>))}
+            </div>
+        </div>
     }
-
-    return <div className={s.MyPostsBlock}>
-        <h3>My post</h3>
-        <div>
-            <ReduxAddPostForm onSubmit={addNewPost}/>
-        </div>
-        <div className={s.posts}>
-            {props.posts.map(el => (<Post key={el.id} message={el.message} likeCount={el.likeCount}/>))}
-        </div>
-    </div>
-};
+}
 
 export default MyPosts;
