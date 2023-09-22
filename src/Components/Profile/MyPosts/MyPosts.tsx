@@ -18,7 +18,9 @@ const MyPosts = React.memo((props: ProfileCommonType) => {
             <ReduxAddPostForm onSubmit={addNewPost}/>
         </div>
         <div className={s.posts}>
-            {props.posts.map(el => (<Post key={el.id} message={el.message} likeCount={el.likeCount}/>))}
+            {
+                [...props.posts].reverse().map(el => (<Post key={el.id} message={el.message} likeCount={el.likeCount}/>))
+            }
         </div>
     </div>
 })
