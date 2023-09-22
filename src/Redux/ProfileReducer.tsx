@@ -68,6 +68,12 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
                 posts: [...state.posts, newPost],
             };
 
+        case "DELETE-POST-MESSAGE":
+            return {
+                ...state,
+                posts: state.posts.filter(m=>m.id !==action.id)
+            }
+
         case "SET-USER-PROFILE": {
             return {
                 ...state, profile: action.profile
@@ -88,11 +94,18 @@ export default ProfileReducer;
 export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setStatus>
+    ReturnType<typeof setStatus> |
+    ReturnType<typeof deletePostActionCreator>
 
 export const addPostActionCreator = (NewPostBody: string) => ({
     type: "ADD-STATE-POST-MESSAGE",
     NewPostBody
+}) as const
+
+export const deletePostActionCreator = (id:number) => ({
+    type: "DELETE-POST-MESSAGE",
+    id
+
 }) as const
 
 export const setUserProfile = (profile: ProfileType) => ({
