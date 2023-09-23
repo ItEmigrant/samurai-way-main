@@ -58,10 +58,10 @@ export const authMeThunkCreator = () => { //authMy
 export const loginSingIn = (email: string, password: string, rememberMe: boolean): AppThunk => {
     return async (dispatch) => {
         let res = await authApi.singIn(email, password, rememberMe)
-        if (res.data.resultCode === 0) {
+        if (res.resultCode === 0) {
             await dispatch(authMeThunkCreator())
         } else {
-            let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error!'
+            let message: number = res.messages.length > 0 ? res.data.messages[0] : 'Some Error!'
             dispatch(stopSubmit('login', {_error: message}))
         }
     }
