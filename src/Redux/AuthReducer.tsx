@@ -4,6 +4,8 @@ import {AppActionType, AppThunk} from "./reduxStore";
 import {stopSubmit} from "redux-form";
 
 
+const SET_USER_DATA = "AuthReducer/SET-USER-DATA"
+
 export type AuthStatePropsType = {
     userId: number | null,
     email: string | null,
@@ -26,7 +28,7 @@ const AuthReducer = (state: AuthStatePropsType = initialAuthState, action: AuthA
     initialReducerAuthStateType => {
 
     switch (action.type) {
-        case "SET-USER-DATA":
+        case SET_USER_DATA:
             return {...state, ...action.data};
         default:
             return state;
@@ -38,7 +40,7 @@ export type AuthActionType =
     ReturnType<typeof setAuthUserData>
 
 export const setAuthUserData = (data: AuthStatePropsType) => ({
-    type: "SET-USER-DATA", data
+    type: SET_USER_DATA, data
 } as const)
 
 
@@ -65,15 +67,14 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
     }
 }
 
-export const loginSingUp = (): AppThunk =>
-    (dispatch) => {
-        authApi.singUp()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthUserData({userId: null, login: null, email: null, isAuth: false}))
-                }
-            })
-    };
+export const loginSingUp = (): AppThunk => {
+    return async (dispatch) => {
+        let data = await authApi.singUp();
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData({userId: null, login: null, email: null, isAuth: false}))
+        }
+    }
+};
 
 
 
