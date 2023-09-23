@@ -9,15 +9,18 @@ const instance = axios.create({
 });
 
 export const userApi = {
-    getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data);
+    async getUsers(currentPage: number, pageSize: number) {
+        let response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
+        return await response.data;
     },
-    unFollowUsers(id: number) {
-        return instance.delete(`follow/${id}`).then(response => response.data)
+    async unFollowUsers(id: number) {
+        let response = await instance.delete(`follow/${id}`);
+        return await response.data;
 
     },
-    FollowUsers(id: number) {
-        return instance.post(`follow/${id}`).then(response => response.data)
+    async FollowUsers(id: number) {
+        let response = await instance.post(`follow/${id}`);
+        return await response.data;
     },
 
     getUsersForProfile(id: string) {
@@ -27,8 +30,9 @@ export const userApi = {
 }
 
 export const profileApi = {
-    getUsersForProfile(id: string) {
-        return instance.get(`profile/` + id).then(response => response.data)
+    async getUsersForProfile(id: string) {
+        let response = await instance.get(`profile/` + id);
+        return await response.data;
     },
     getStatus(userId: string) {
         return instance.get(`profile/status/` + userId)
@@ -40,14 +44,17 @@ export const profileApi = {
 
 
 export const authApi = {
-    myLogin() {
-        return instance.get(`auth/me`).then(response => response.data)
+    async myLogin() {
+        let response = await instance.get(`auth/me`);
+        return await response.data;
     },
-    singIn(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login/`, {email, password, rememberMe}).then(response => response.data)
+    async singIn(email: string, password: string, rememberMe: boolean = false) {
+        const response = await instance.post(`auth/login/`, {email, password, rememberMe});
+        return response.data;
     },
-    singUp() {
-        return instance.delete(`auth/login/`).then(response => response.data);
+    async singUp() {
+        let response = await instance.delete(`auth/login/`);
+        return await response.data;
     }
 }
 

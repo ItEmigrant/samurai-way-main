@@ -8,7 +8,6 @@ import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {FormAction, reducer as formReducer} from "redux-form";
 import AppReducer, {AppActionsReducerType} from "./AppReducer";
 
-
 export type ReduxStateType = ReturnType<typeof rootReducer>;
 export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AppActionType>;
 export type AppActionType = AuthActionType | FormAction | AppActionsReducerType;
