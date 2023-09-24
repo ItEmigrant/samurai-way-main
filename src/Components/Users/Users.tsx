@@ -3,41 +3,14 @@ import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/userSN.jpeg";
 import {usersType} from "../../Redux/Users/UsersReducer";
 import {NavLink} from "react-router-dom";
+import Paginator from "../../Common/Paginator/Paginator";
 
-
-type UsersPropsType = {
-    stateUsersPages: Array<usersType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    followingInProgress: number[]
-    onPageChange: (pageNumber: number) => void
-    FollowThunkCreator: (id: number) => void
-    UnFollowThunkCreator: (id: number) => void
-}
-
-export const Users = (props: UsersPropsType) => {
-
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
+export const Users = ({currentPage, pageSize, onPageChange, stateUsersPages, totalUsersCount, UnFollowThunkCreator, FollowThunkCreator, followingInProgress}: UsersPropsType) => {
     return <>
-        <div>
-            <div>
-                {
-                    pages.map(p => {
-                        return <span className={props.currentPage === p ? s.selectedPage : ''} onClick={() => {
-                            props.onPageChange(p)
-                        }}>{p}</span>
-                    })
-                }
-
-            </div>
-            {
-                props.stateUsersPages.map(u => <div key={u.id}>
+        <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
+                   onPageChange={onPageChange}/>
+        {
+            stateUsersPages.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <NavLink to={'/profile/' + u.id}>
@@ -47,17 +20,16 @@ export const Users = (props: UsersPropsType) => {
                     </div>
                         <div>
                     {u.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.UnFollowThunkCreator(u.id)
+                        ? <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                            UnFollowThunkCreator(u.id)
 
                         }}>UnFollow</button>
-                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.FollowThunkCreator(u.id)
+                        : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                            FollowThunkCreator(u.id)
                         }}>Follow</button>}
-
                         </div>
                 </span>
-                    <span>
+                <span>
                     <span>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
@@ -67,8 +39,19 @@ export const Users = (props: UsersPropsType) => {
                         <div>{'location.city'}</div>
                     </span>
                 </span>
-                </div>)
-            }
-        </div>
+            </div>)
+        }
     </>
+}
+
+//types
+type UsersPropsType = {
+    stateUsersPages: Array<usersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    followingInProgress: number[]
+    onPageChange: (pageNumber: number) => void
+    FollowThunkCreator: (id: number) => void
+    UnFollowThunkCreator: (id: number) => void
 }

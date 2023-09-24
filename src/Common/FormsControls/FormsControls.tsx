@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import styles from './FormControls.module.css'
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
+import {FieldValidator} from "formik";
 
 interface MetaProps extends WrappedFieldMetaProps {
     error?: string;
@@ -23,14 +24,14 @@ interface FormControlProps {
     children: ReactNode;
 }
 
-export const FormControl = ({meta, children}: FormControlProps) => {
-    const hasError = meta.touched && meta.error;
+export const FormControl = ({meta: {touched, error}, children}: FormControlProps) => {
+    const hasError = touched && error;
     return (
         <div className={styles.formControl + " " + (hasError ? styles.error : '')}>
             <div>
                 {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 };
@@ -52,12 +53,15 @@ export const Input = (props: InputPropsType) => {
         </div>
     )
 }
-export const CreateField = (placeholder: string, name: string, validate: any, component: any) =>
-    <div>
-    <Field
-        placeholder={placeholder}
-        name={name}
-        component={component} v
-        validate={validate}/>
 
+//ask about type????????
+export const CreateField = (placeholder: string, name: string, validate: FieldValidator[], component: React.ComponentType<any> | 'input' | 'select' | 'textarea', props: any, text: string = '') =>
+    <div>
+        <Field
+            placeholder={placeholder}
+            name={name}
+            component={component}
+            validate={validate}
+            {...props}
+        /> {text}
     </div>

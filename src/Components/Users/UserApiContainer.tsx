@@ -10,7 +10,7 @@ import {
 } from "../../Redux/Users/UsersReducer";
 import React from "react";
 import {Users} from "./Users";
-import {Preloader} from "../Preloader/Preloader";
+import {Preloader} from "../../Common/Preloader/Preloader";
 import {
     getCurrentPage,
     getFollowingInProgress,

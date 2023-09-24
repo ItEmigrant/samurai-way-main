@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "../ProfileInfo/ProfileInfo.module.css";
-import {Preloader} from "../../Preloader/Preloader";
+import {Preloader} from "../../../Common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/ProfileReducer";
 import {ProfileStatus} from "../ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";

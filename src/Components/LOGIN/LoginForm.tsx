@@ -1,8 +1,8 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {CreateField, Input} from "../FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {CreateField, Input} from "../../Common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../Utils/validators/validators";
-import styles from '../FormsControls/FormControls.module.css';
+import styles from '../../Common/FormsControls/FormControls.module.css';
 
 
 const maxLength = maxLengthCreator(20);
@@ -10,15 +10,14 @@ export const LoginForm = ({handleSubmit, error}: InjectedFormProps<FormDataType>
 
     return (
         <form onSubmit={handleSubmit}>
-            {CreateField('Login', 'email', [required, maxLength], Input)}
+            {CreateField('Login', 'email', [required, maxLength], Input,{})}
             {/* <Field placeholder={'Login'} name={'email'} component={Input} validate={[required, maxLength]}/>*/}
-            {CreateField('Password', 'password', [required, maxLength], Input)}
+            {CreateField('Password', 'password', [required, maxLength], Input, {type:"password"})}
            {/* <Field placeholder={'Password'} name={'password'} type={'password'} component={Input}
                        validate={[required, maxLength]}/>*/}
+            {CreateField('','rememberMe',[], Input, {type:'checkbox'}, 'Remember me')}
+              {/*  <Field name={'rememberMe'} component={'input'} type={"checkbox"}/> remember me*/}
 
-            <div>
-                <Field name={'rememberMe'} component={'input'} type={"checkbox"}/> remember me
-            </div>
             {error && <div className={styles.formSummeryError}>
                 {error}
             </div>}

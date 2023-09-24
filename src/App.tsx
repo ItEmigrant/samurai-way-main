@@ -15,7 +15,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {InitializedAppTC} from "./Redux/AppReducer";
 import {ReduxStateType} from "./Redux/reduxStore";
-import {Preloader} from "./Components/Preloader/Preloader";
+import {Preloader} from "./Common/Preloader/Preloader";
 
 type MapStateToPropsType = {
     initialized: boolean

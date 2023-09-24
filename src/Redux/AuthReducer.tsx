@@ -61,7 +61,7 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
         if (res.resultCode === 0) {
             await dispatch(authMeThunkCreator())
         } else {
-            let message: number = res.messages.length > 0 ? res.data.messages[0] : 'Some Error!'
+            let message: string = res.messages.length > 0 ? res.messages[0] : 'Some Error!'
             dispatch(stopSubmit('login', {_error: message}))
         }
     }
