@@ -6,7 +6,6 @@ import {ReduxStateType} from "../../Redux/reduxStore";
 import {Redirect} from "react-router-dom";
 
 const Login = (props: LoginProps) => {
-
     const onSubmit = (formData: FormDataType) => {
         props.loginSingIn(formData.email, formData.password, formData.rememberMe)
     }
@@ -19,7 +18,7 @@ const Login = (props: LoginProps) => {
             <h1>Login</h1>
             <ReduxLoginForm onSubmit={onSubmit}/>
         </div>
-    );
+    )
 }
 
 
