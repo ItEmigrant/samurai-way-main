@@ -1,23 +1,28 @@
 import React, {ReactNode} from 'react';
 import styles from './FormControls.module.css'
-import {WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
+import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 
 interface MetaProps extends WrappedFieldMetaProps {
     error?: string;
     touched: boolean;
 }
+
 interface TextareaProps {
     meta: MetaProps;
+
     [key: string]: any;
 }
+
 type InputPropsType = {
     input: WrappedFieldProps['input'];
     meta: WrappedFieldProps['meta'];
 } & React.InputHTMLAttributes<HTMLInputElement>;
+
 interface FormControlProps {
     meta: WrappedFieldProps['meta'];
     children: ReactNode;
 }
+
 export const FormControl = ({meta, children}: FormControlProps) => {
     const hasError = meta.touched && meta.error;
     return (
@@ -46,4 +51,13 @@ export const Input = (props: InputPropsType) => {
             <FormControl {...props}><input {...input} {...restProps}/></FormControl>
         </div>
     )
-};
+}
+export const CreateField = (placeholder: string, name: string, validate: any, component: any) =>
+    <div>
+    <Field
+        placeholder={placeholder}
+        name={name}
+        component={component} v
+        validate={validate}/>
+
+    </div>

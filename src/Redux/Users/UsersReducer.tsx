@@ -1,5 +1,6 @@
 import {userApi} from "../../API/ApiTS";
 import {Dispatch} from "redux";
+import {updateObjectInArray} from "../../Components/Utils/object-helpers";
 
 export type usersType = {
     id: number
@@ -84,14 +85,14 @@ const UserReducer = (state: UserPageType = initialUsersState, action: UsersActio
         case "FOLLOW-USER":
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)
-
+                users: updateObjectInArray(state.users, action.userID, 'id', {followed: true})
+                /*state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)*/
             };
 
         case "UNFOLLOW-USER":
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)
+                users: updateObjectInArray(state.users, action.userID, 'id', {followed: false})
             };
 
         case "SET-USERS":

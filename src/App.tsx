@@ -17,7 +17,6 @@ import {InitializedAppTC} from "./Redux/AppReducer";
 import {ReduxStateType} from "./Redux/reduxStore";
 import {Preloader} from "./Components/Preloader/Preloader";
 
-
 type MapStateToPropsType = {
     initialized: boolean
 }
@@ -27,7 +26,6 @@ type MapDispatchToPropsType = {
 }
 
 export type CommonAppType = MapStateToPropsType & MapDispatchToPropsType
-
 
 const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
     return {
@@ -48,7 +46,6 @@ class App extends React.Component<CommonAppType> {
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navbar/>
-
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
@@ -60,11 +57,8 @@ class App extends React.Component<CommonAppType> {
                     <Route path='/news' component={ActualNews}/>
                     <Route path='/music' component={Track}/>
                     <Route path='/settings' component={YourSettings}/>
-
                 </div>
-
             </div>
-
 
         )
     }

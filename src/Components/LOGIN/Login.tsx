@@ -10,9 +10,7 @@ const Login = (props: LoginProps) => {
     const onSubmit = (formData: FormDataType) => {
         props.loginSingIn(formData.email, formData.password, formData.rememberMe)
     }
-
     if (props.isAuth) {
-
         return <Redirect to={'/profile'}/>
     }
 
@@ -22,14 +20,17 @@ const Login = (props: LoginProps) => {
             <ReduxLoginForm onSubmit={onSubmit}/>
         </div>
     );
-};
-
-type LoginProps = {
-    isAuth: boolean;
-    loginSingIn: (email: string, password: string, rememberMe: boolean) => void;
 }
+
+
 const mapStateToProps = (state: ReduxStateType) => ({
     isAuth: state.auth.isAuth
 })
 export default connect(mapStateToProps, {loginSingIn})(Login);
 
+
+//types
+type LoginProps = {
+    isAuth: boolean;
+    loginSingIn: (email: string, password: string, rememberMe: boolean) => void;
+}
