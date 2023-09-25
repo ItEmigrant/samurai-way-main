@@ -22,21 +22,15 @@ import {
 
 
 class UsersApiContainer extends React.Component<CommonUserType> {
-
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
-        /* this.props.ToggleIsFetching(true);
+        let {currentPage, pageSize} = this.props;
+        this.props.getUsers(currentPage, pageSize)
 
-         userApi.getUsers(this.props.currentPage, this.props.pageSize)
-             .then(data => {
-                 this.props.ToggleIsFetching(false)
-                 this.props.setUsers(data.items as Array<usersType>);
-                 this.props.setTotalUsersCount(data.totalCount as number);
-             });*/
     }
 
     onPageChange = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        let {pageSize}=this.props;
+        this.props.getUsers(pageNumber, pageSize);
     }
 
 
@@ -75,22 +69,10 @@ export type MapDispatchToProfilePropsType = {
     UnFollowThunkCreator: (id: number) => void
 }
 
-export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType
+export type CommonUserType = MapStateToProfilePropsType & MapDispatchToProfilePropsType;
 
-/*const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
-    return {
-        stateUsersPages: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-
-    }
-}*/
 const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
     return {
-       /* stateUsersPages: getUsersPages(state),*/
         stateUsersPages: getUserSuperSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
@@ -100,30 +82,6 @@ const mapStateToProps = (state: ReduxStateType): MapStateToProfilePropsType => {
 
     }
 }
-
-/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType => {
-    return {
-        follow: (idValue: number) => {
-            dispatch(followUserActionCreator(idValue))
-        },
-        unFollow: (idValue: number) => {
-            dispatch(unFollowUserActionCreator(idValue))
-        },
-        setUsers: (newUsers: Array<usersType>) => {
-            dispatch(setUsersActionCreator(newUsers))
-        },
-        setPage: (newCurrentPage: number) => {
-            dispatch(setCurrentPageAC(newCurrentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        ToggleIsFetching: (isFetching: boolean) => {
-            dispatch(ToggleIsFetchingAC(isFetching))
-        }
-    }
-
-}*/
 
 export default connect(mapStateToProps, {
     setCurrentPage,

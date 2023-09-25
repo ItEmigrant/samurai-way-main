@@ -5,11 +5,11 @@ import {loginSingIn} from "../../Redux/AuthReducer";
 import {ReduxStateType} from "../../Redux/reduxStore";
 import {Redirect} from "react-router-dom";
 
-const Login = (props: LoginProps) => {
+const Login = ({loginSingIn, isAuth}: LoginProps) => {
     const onSubmit = (formData: FormDataType) => {
-        props.loginSingIn(formData.email, formData.password, formData.rememberMe)
+        loginSingIn(formData.email, formData.password, formData.rememberMe)
     }
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={'/profile'}/>
     }
 
