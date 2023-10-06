@@ -11,15 +11,17 @@ type ValuesPostType = {
 const MyPosts = React.memo((props: ProfileCommonType) => {
     const addNewPost = (values: ValuesPostType) => {
         props.addPosts(values.addNewPostBody);
+        values.addNewPostBody = '';
     }
     return <div className={s.MyPostsBlock}>
         <h3>My post</h3>
         <div>
-            <ReduxAddPostForm onSubmit={addNewPost}/>
+            <ReduxAddPostForm onSubmit={addNewPost} />
         </div>
         <div className={s.posts}>
             {
-                [...props.posts].reverse().map(el => (<Post key={el.id} message={el.message} likeCount={el.likeCount}/>))
+                [...props.posts].reverse().map(el => (
+                    <Post key={el.id} message={el.message} likeCount={el.likeCount}/>))
             }
         </div>
     </div>

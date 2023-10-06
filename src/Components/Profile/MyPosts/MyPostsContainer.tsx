@@ -30,6 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProfilePropsType =
     return {
         addPosts: (NewPostBody: string) => {
             dispatch(addPostActionCreator(NewPostBody))
+
         }
     }
 }

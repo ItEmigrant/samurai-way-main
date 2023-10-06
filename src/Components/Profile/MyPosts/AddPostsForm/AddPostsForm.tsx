@@ -7,6 +7,7 @@ import {Textarea} from "../../../../Common/FormsControls/FormsControls";
 export type FormDataPostType = {
     addNewPostBody: string;
 }
+
 const maxLength10 = maxLengthCreator(10);
 
 export const AddPostsForm = (props: InjectedFormProps<FormDataPostType>) => {
