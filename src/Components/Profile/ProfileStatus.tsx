@@ -12,7 +12,6 @@ type stateProfileStatusType = {
 
 export class ProfileStatus extends React.Component <ProfileStatusPropsType, stateProfileStatusType> {
 
-
     state: stateProfileStatusType = {
         editMode: false,
         Status: this.props.status
@@ -32,25 +31,24 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
     }
 
     onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
-               this.setState({
-                  Status: event.currentTarget.value
-               })
+        this.setState({
+            Status: event.currentTarget.value
+        })
     }
+
     componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<stateProfileStatusType>) {
         if (prevProps.status !== this.props.status) {
             this.setState({
                 Status: this.props.status
             })
-
         }
-
     }
 
     render() {
         return (
             <div>
                 {!this.state.editMode && <div>
-                    <span onDoubleClick={this.activateEditeMode}>{this.props.status || 'No status!!!' }</span>
+                    <span onDoubleClick={this.activateEditeMode}>{this.props.status || 'No status!!!'}</span>
                 </div>}
 
                 {this.state.editMode && <div>
