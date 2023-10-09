@@ -48,7 +48,8 @@ export class ProfileStatus extends React.Component <ProfileStatusPropsType, stat
         return (
             <div>
                 {!this.state.editMode && <div>
-                    <span onDoubleClick={this.activateEditeMode}>{this.props.status || 'No status!!!'}</span>
+                    <span role={'status'}
+                          onDoubleClick={this.activateEditeMode}>{this.props.status || 'No status!!!'}</span>
                 </div>}
 
                 {this.state.editMode && <div>

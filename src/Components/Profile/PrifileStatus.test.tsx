@@ -1,6 +1,8 @@
 import React from 'react';
 import {create} from 'react-test-renderer'
 import {ProfileStatus} from "./ProfileStatus";
+import {render, fireEvent} from '@testing-library/react';
+
 
 describe('ProfileStatusComponent', () => {
     test('status from props should be in the state', () => {
@@ -32,6 +34,24 @@ describe('ProfileStatusComponent', () => {
             root.findByType('input');
         }).toThrow()
     })
+
+    test('input should be displayed in edite mode instead of span', () => {
+        const component = create(<  ProfileStatus status={'Bogdan the beast'} updateStatus={() => ''}/>);
+        const root = component.root;
+        let span = root.findByType('span')
+        span.props.onDoubleClick();
+        let input = root.findByType('input')
+        expect(input.type).toBe('input')
+        expect(input.props.value).toBe('Bogdan the beast')
+    })
+
+
+    test('callback should be called', () => {
+        const mockCallback = jest.fn();
+        const {getByRole} = render(<ProfileStatus status={'Bogdan the beast'} updateStatus={mockCallback}/>);
+        fireEvent.doubleClick(getByRole('status'));
+        fireEvent.blur(getByRole('textbox'));
+        expect(mockCallback.mock.calls.length).toBe(1);
+    });
+
 })
-
-
