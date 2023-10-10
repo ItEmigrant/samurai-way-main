@@ -5,7 +5,7 @@ import OneUser from "./oneUser";
 
 export const Users = ({currentPage, pageSize, onPageChange, stateUsersPages, totalUsersCount, UnFollowThunkCreator, FollowThunkCreator, followingInProgress}: UsersPropsType) => {
     return <>
-        <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
+        <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
                    onPageChange={onPageChange}/>
         {
             stateUsersPages.map(u => <div key={u.id}>

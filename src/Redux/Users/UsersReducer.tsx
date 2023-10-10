@@ -56,7 +56,7 @@ let initialUsersState: UserPageType = {
              location: {country: "USA", city: "New York"}
          },*/
     users: [],
-    pageSize: 20,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
