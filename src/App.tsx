@@ -6,8 +6,6 @@ import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
 import {MyFriendsContainer} from "./Components/Friends/myFriendsContainer";
-import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import UserContainer from "./Components/Users/UserApiContainer";
 import Login from "./Components/LOGIN/Login";
@@ -16,6 +14,9 @@ import {compose} from "redux";
 import {InitializedAppTC} from "./Redux/AppReducer";
 import {ReduxStateType, store} from "./Redux/reduxStore";
 import {Preloader} from "./Common/Preloader/Preloader";
+
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
 
 
 type MapStateToPropsType = {
