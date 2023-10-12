@@ -70,7 +70,7 @@ let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {InitializedAppTC}))(App);
 
 const SamuraiJSApp = () => {
-    return <BrowserRouter>
+    return <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
