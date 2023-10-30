@@ -12,16 +12,26 @@ type PathParamsType = {
 }
 
 class ProfileContainer extends React.Component<PropsParamsType> {
-    componentDidMount() {
+
+    refreshProfile() {
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = String(this.props.myUserId);
-            if(!userId) {
+            if (!userId) {
                 this.props.history.push('/login');
             } // another option redirect
         }
         this.props.getUsersForProfile(userId)
         this.props.getStatus(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsParamsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userId)
+        this.refreshProfile()
     }
 
     render() {

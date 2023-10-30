@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Nawbar/Navbar";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
@@ -53,8 +53,8 @@ class App extends React.Component<CommonAppType> {
                     <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                     <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                     <Route path='/login' render={() => <Login/>}/>
-                    <Route path='/friends' render={() =><MyFriendsContainer/>}/>
-                    <Route path='/users' render={() =><UserContainer/>}/>
+                    <Route path='/friends' render={() => <MyFriendsContainer/>}/>
+                    <Route path='/users' render={() => <UserContainer/>}/>
                     <Route path='/news' component={ActualNews}/>
                     <Route path='/music' component={Track}/>
                     <Route path='/settings' component={YourSettings}/>
@@ -70,11 +70,11 @@ let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {InitializedAppTC}))(App);
 
 const SamuraiJSApp = () => {
-    return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default SamuraiJSApp;
 

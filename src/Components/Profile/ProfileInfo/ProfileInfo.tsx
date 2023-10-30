@@ -3,6 +3,7 @@ import s from "../ProfileInfo/ProfileInfo.module.css";
 import {Preloader} from "../../../Common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/ProfileReducer";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
+import UserPhoto from "../../../assets/images/userSN.jpeg";
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -22,7 +23,7 @@ export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsTyp
             </div>
             <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             <div className={s.item}>
-                <img src={profile.photos.large} alt={"avatar"}/>
+                <img src={profile.photos.large || UserPhoto}  className={s.mainPhoto} alt={"avatar"}/>
                 <div>{profile.fullName}</div>
                 <div>{profile.aboutMe}</div>
                 <div>{profile.contacts.instagram}</div>
