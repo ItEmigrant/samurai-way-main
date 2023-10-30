@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "../ProfileInfo/ProfileInfo.module.css";
 import {Preloader} from "../../../Common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/ProfileReducer";
@@ -6,14 +6,21 @@ import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import UserPhoto from "../../../assets/images/userSN.jpeg";
 
 type ProfileInfoPropsType = {
+    isOwner: boolean
     profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
 
 }
-export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner}: ProfileInfoPropsType) => {
     if (!profile) {
         return <Preloader/>
+    }
+
+    const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
+
+        }
     }
     return (
         <div>
@@ -23,7 +30,8 @@ export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsTyp
             </div>
             <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             <div className={s.item}>
-                <img src={profile.photos.large || UserPhoto}  className={s.mainPhoto} alt={"avatar"}/>
+                <img src={profile.photos.large || UserPhoto} className={s.mainPhoto} alt={"avatar"}/>
+                {isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                 <div>{profile.fullName}</div>
                 <div>{profile.aboutMe}</div>
                 <div>{profile.contacts.instagram}</div>
