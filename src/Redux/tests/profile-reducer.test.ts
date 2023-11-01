@@ -8,7 +8,7 @@ let State: profilePageType = {
         {id: 3, message: "Post!", likeCount: 5},
         {id: 4, message: "yo!", likeCount: 20}
     ],
-    profile: null,
+    profile: null as any,
     status: ''
 }
 test('length array in Profile State', () => {

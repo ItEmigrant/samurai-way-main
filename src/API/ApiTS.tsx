@@ -1,4 +1,6 @@
 import axios from "axios";
+import {usersType} from "../Redux/Users/UsersReducer";
+
 
 const instance = axios.create({
     withCredentials: true,
@@ -10,17 +12,18 @@ const instance = axios.create({
 
 export const userApi = {
     async getUsers(currentPage: number, pageSize: number) {
-        let response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
-        return await response.data;
+        let response = await instance.get<getUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`);
+        return response.data
+
     },
     async unFollowUsers(id: number) {
-        let response = await instance.delete(`follow/${id}`);
-        return await response.data;
+        let response = await instance.delete<ResponseApiType<{}>>(`follow/${id}`);
+        return response.data;
 
     },
     async FollowUsers(id: number) {
-        let response = await instance.post(`follow/${id}`);
-        return await response.data;
+        let response = await instance.post<ResponseApiType<{}>>(`follow/${id}`);
+        return response.data;
     },
 
     getUsersForProfile(id: string) {
@@ -35,11 +38,21 @@ export const profileApi = {
         return await response.data;
     },
     getStatus(userId: string) {
-        return instance.get(`profile/status/` + userId)
+        return instance.get<string>(`profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put<ResponseUpdateApiType>(`profile/status`, {status: status})
-    }
+        return instance.put<ResponseApiType<{}>>(`profile/status`, {status: status})
+    },
+    async savePhoto(file: File) {
+        const formData = new FormData();
+        formData.append('image', file);
+        let res = await instance.put<ResponseApiType<savePhotoType>>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return res.data;
+    },
 }
 
 
@@ -57,9 +70,22 @@ export const authApi = {
         return await response.data;
     }
 }
-
-export type ResponseUpdateApiType = {
+//types
+type ResponseApiType<T> = {
     resultCode: number,
     messages: string[],
-    data: {}
+    data: T
 }
+
+type savePhotoType = {
+    photos: { small: string, large: string }
+}
+
+type getUsersResponseType = {
+    error: number,
+    items: usersType[],
+    totalCount: number
+}
+
+
+

@@ -10,15 +10,16 @@ export type postsType = {
 export type  profilePageType = {
     messageForNewPosts: string
     posts: Array<postsType>
-    profile: ProfileType | null
+    profile: ProfileType
     status: string
+
 }
 
 export type ProfileType = {
     aboutMe: string
     contacts: profileContactsType
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
     fullName: string
     userId: number
     photos: profilePhotosType
@@ -50,11 +51,11 @@ let initialReducerState: profilePageType = {
         {id: 3, message: "Post!", likeCount: 5},
         {id: 4, message: "yo!", likeCount: 20}
     ],
-    profile: null,
+    profile: null as any,
     status: ''
 }
 
-const ProfileReducer = (state: profilePageType = initialReducerState, action: ActionsTypes) => {
+const ProfileReducer = (state: profilePageType = initialReducerState, action: ActionsTypes): profilePageType => {
 
     switch (action.type) {
         case "ADD-STATE-POST-MESSAGE":
@@ -82,6 +83,12 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
                 ...state, status: action.status
             }
         }
+        case "SAVE-PHOTO-SUCCESS": {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
+        }
         default:
             return state;
     }
@@ -92,7 +99,8 @@ export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatus> |
-    ReturnType<typeof deletePostActionCreator>
+    ReturnType<typeof deletePostActionCreator> |
+    ReturnType<typeof savePhotoSuccess>
 
 export const addPostActionCreator = (NewPostBody: string) => ({
     type: "ADD-STATE-POST-MESSAGE",
@@ -123,6 +131,11 @@ export const setStatus = (status: string) => ({
     status
 }) as const
 
+export const savePhotoSuccess = (photos: profilePhotosType) => ({
+    type: "SAVE-PHOTO-SUCCESS",
+    photos
+}) as const
+
 export const getStatus = (userId: string) => {
     return async (dispatch: Dispatch) => {
         let data = await profileApi.getStatus(userId);
@@ -130,6 +143,14 @@ export const getStatus = (userId: string) => {
     }
 }
 
+export const savePhoto = (file: File) => {
+    return async (dispatch: Dispatch) => {
+        let res = await profileApi.savePhoto(file);
+        if (res.resultCode === 0) {
+            dispatch(savePhotoSuccess(res.data.photos))
+        }
+    }
+}
 export const updateStatus = (status: string) => {
     return async (dispatch: Dispatch) => {
         let res = await profileApi.updateStatus(status);

@@ -10,15 +10,17 @@ type ProfileInfoPropsType = {
     profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
+    savePhoto:(file:File)=>void
 
 }
-export const ProfileInfo = ({profile, status, updateStatus, isOwner}: ProfileInfoPropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: ProfileInfoPropsType) => {
     if (!profile) {
         return <Preloader/>
     }
 
     const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
+            savePhoto(e.target.files[0])
 
         }
     }
