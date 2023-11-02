@@ -1,11 +1,10 @@
-
 .image {
     height: 400px;
     width: 300px;
 }
 
 .item {
-    color: red;
+    color: black;
     padding: 10px;
 }
 
@@ -15,5 +14,6 @@
 }
 
 .contacts {
-    padding-left:  10px;
+    padding-left: 10px;
+    color: #5d5151;
 }
