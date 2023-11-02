@@ -31,6 +31,7 @@ export type profilePhotosType = {
     large: string
 }
 export type profileContactsType = {
+    [key: string]: string;
     skype: string
     vk: string,
     facebook: string,
