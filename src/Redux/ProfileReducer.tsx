@@ -90,6 +90,13 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
                 profile: {...state.profile, photos: action.photos}
             }
         }
+        case "SAVE-PROFILE-SUCCESS": {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
+
         default:
             return state;
     }
@@ -101,7 +108,8 @@ export type ProfileActionsType =
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatus> |
     ReturnType<typeof deletePostActionCreator> |
-    ReturnType<typeof savePhotoSuccess>
+    ReturnType<typeof savePhotoSuccess> |
+    ReturnType<typeof saveProfileSuccess>
 
 export const addPostActionCreator = (NewPostBody: string) => ({
     type: "ADD-STATE-POST-MESSAGE",
@@ -137,6 +145,11 @@ export const savePhotoSuccess = (photos: profilePhotosType) => ({
     photos
 }) as const
 
+export const saveProfileSuccess = (profile: ProfileType) => ({
+    type: "SAVE-PROFILE-SUCCESS",
+    profile
+}) as const
+
 export const getStatus = (userId: string) => {
     return async (dispatch: Dispatch) => {
         let data = await profileApi.getStatus(userId);
@@ -149,6 +162,17 @@ export const savePhoto = (file: File) => {
         let res = await profileApi.savePhoto(file);
         if (res.resultCode === 0) {
             dispatch(savePhotoSuccess(res.data.photos))
+        }
+    }
+}
+
+export const saveProfile = (profile: ProfileType) => {
+    return async (dispatch: Dispatch) => {
+        console.log(profile)
+        let res = await profileApi.saveProfile(profile);
+
+        if (res.resultCode === 0) {
+           // dispatch(saveProfileSuccess(res.data))
         }
     }
 }

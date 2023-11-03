@@ -12,8 +12,9 @@ type ProfileInfoPropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => void
 }
-export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: ProfileInfoPropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoPropsType) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
     if (!profile) {
@@ -24,8 +25,9 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}:
             savePhoto(e.target.files[0])
         }
     }
-    const onSubmit = (formData:ProfileDataFormType) => {
-        console.log(formData)
+    const onSubmit = (formData: ProfileDataFormType) => {
+        const copyProfile = {...profile, ...formData}
+        saveProfile(copyProfile)
     }
     return (
         <>
@@ -43,7 +45,9 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}:
                         updateStatus={updateStatus}
                         status={status}
                         isOwner={isOwner}
-                        activeEditMode={()=>{setEditMode(true)}}/>}
+                        activeEditMode={() => {
+                            setEditMode(true)
+                        }}/>}
             </div>
         </>
     )

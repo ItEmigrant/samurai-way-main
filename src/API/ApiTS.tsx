@@ -1,5 +1,6 @@
 import axios from "axios";
 import {usersType} from "../Redux/Users/UsersReducer";
+import {ProfileType} from "../Redux/ProfileReducer";
 
 
 const instance = axios.create({
@@ -53,6 +54,11 @@ export const profileApi = {
         });
         return res.data;
     },
+    async saveProfile(profile: ProfileType) {
+        let res = await instance.put<any>(`profile`, profile)
+        console.log(res.data)
+        return res.data
+    }
 }
 
 
@@ -68,6 +74,7 @@ export const authApi = {
     async singUp() {
         let response = await instance.delete(`auth/login/`);
         return await response.data;
+
     }
 }
 //types
