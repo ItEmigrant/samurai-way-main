@@ -3,7 +3,8 @@ import s from "../ProfileInfo/ProfileInfo.module.css";
 import {Preloader} from "../../../Common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/ProfileReducer";
 import UserPhoto from "../../../assets/images/userSN.jpeg";
-import ProfileData, {ProfileDataForm} from "./ProfileData";
+import ProfileData from "./ProfileData";
+import ProfileDataFormRedux, {ProfileDataFormType} from "./ProfileDataForm";
 
 type ProfileInfoPropsType = {
     isOwner: boolean
@@ -11,7 +12,6 @@ type ProfileInfoPropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-
 }
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: ProfileInfoPropsType) => {
 
@@ -24,6 +24,9 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}:
             savePhoto(e.target.files[0])
         }
     }
+    const onSubmit = (formData:ProfileDataFormType) => {
+        console.log(formData)
+    }
     return (
         <>
             {/*<div><img className={s.image}
@@ -34,7 +37,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}:
                 <img src={profile.photos.large || UserPhoto} className={s.mainPhoto} alt={"avatar"}/>
                 {isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                 {editMode
-                    ? <ProfileDataForm/>
+                    ? <ProfileDataFormRedux onSubmit={onSubmit}/>
                     : <ProfileData
                         profile={profile}
                         updateStatus={updateStatus}
