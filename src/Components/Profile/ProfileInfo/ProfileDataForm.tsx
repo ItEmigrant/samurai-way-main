@@ -1,7 +1,7 @@
 import {CreateField, Input, Textarea} from "../../../Common/FormsControls/FormsControls";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {ProfileType} from "../../../Redux/ProfileReducer";
-import ContactsInfo from "./ContactsInfo";
+import s from "./ProfileInfo.module.css";
 
 
 const ProfileDataForm = (props: ProfileDataFormProps) => {
@@ -16,8 +16,9 @@ const ProfileDataForm = (props: ProfileDataFormProps) => {
                 <div><b>About me:</b> {CreateField('About me', 'aboutMe', [], Textarea, {type: 'textarea'}, '')}</div>
 
                 <div><b>Contacts:</b>{Object.keys(profile.contacts).map(key => {
-
-                    return <ContactsInfo key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                    return <div className={s.contacts}>
+                        <b>{key}:{CreateField(key, 'contacts.'+key, [], Input, '')}</b>
+                    </div>
                 })}</div>
 
                 <div><b>Looking for a job:</b> {CreateField('', 'lookingForAJob', [], Input, {type: 'checkbox'}, '')}
