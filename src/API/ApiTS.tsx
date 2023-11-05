@@ -56,7 +56,6 @@ export const profileApi = {
     },
     async saveProfile(profile: ProfileType) {
         let res = await instance.put<any>(`profile`, profile)
-        console.log(res.data)
         return res.data
     }
 }

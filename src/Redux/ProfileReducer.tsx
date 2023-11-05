@@ -1,6 +1,8 @@
 import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
 import {profileApi, userApi} from "../API/ApiTS";
+import {AppActionType, AppThunk} from "./reduxStore";
+import {stopSubmit} from "redux-form";
 
 export type postsType = {
     id: number
@@ -128,8 +130,8 @@ export const setUserProfile = (profile: ProfileType) => ({
 }) as const
 
 
-export const getUsersForProfile = (userId: string) => {
-    return async (dispatch: Dispatch) => {
+export const getUsersForProfile = (userId: string): AppThunk => {
+    return async (dispatch: Dispatch<AppActionType>) => {
         let data = await userApi.getUsersForProfile(userId);
         dispatch(setUserProfile(data))
     }
@@ -166,16 +168,19 @@ export const savePhoto = (file: File) => {
     }
 }
 
-export const saveProfile = (profile: ProfileType) => {
-    return async (dispatch: Dispatch) => {
-        console.log(profile)
-        let res = await profileApi.saveProfile(profile);
-
+export const saveProfile = (profile: ProfileType): AppThunk => {
+    return async (dispatch, getState) => {
+        const userID = getState().auth.userId
+        const res = await profileApi.saveProfile(profile);
         if (res.resultCode === 0) {
-           // dispatch(saveProfileSuccess(res.data))
+         dispatch(getUsersForProfile(String(userID)))
+        }else {
+            let message: string = res.messages.length > 0 ? res.messages[0] : 'Some Error!'
+            dispatch(stopSubmit('Name', {_error: message}))
         }
     }
 }
+
 export const updateStatus = (status: string) => {
     return async (dispatch: Dispatch) => {
         let res = await profileApi.updateStatus(status);

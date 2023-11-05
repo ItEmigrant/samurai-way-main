@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
-import ProfileReducer from "./ProfileReducer";
+import ProfileReducer, {ProfileActionsType} from "./ProfileReducer";
 import DialogsReducer from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 import UsersReducer from "./Users/UsersReducer";
@@ -11,7 +11,7 @@ import AppReducer, {AppActionsReducerType} from "./AppReducer";
 
 export type ReduxStateType = ReturnType<typeof rootReducer>;
 export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AppActionType>;
-export type AppActionType = AuthActionType | FormAction | AppActionsReducerType;
+export type AppActionType = AuthActionType | FormAction | AppActionsReducerType | ProfileActionsType;
 
 let rootReducer = combineReducers({
     profilePage: ProfileReducer,
