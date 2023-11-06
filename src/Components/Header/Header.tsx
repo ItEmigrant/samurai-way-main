@@ -13,7 +13,7 @@ export type HeaderPropsType = {
 
 const Header = (props: HeaderPropsType) => {
     let logData = [props.email, ' ', props.login, ' ',
-    <button onClick={props.loginSingUp}>Log out</button>]
+    <button key="logoutButton" onClick={props.loginSingUp}>Log out</button>]
 
     return (
         <header className={s.header}><img

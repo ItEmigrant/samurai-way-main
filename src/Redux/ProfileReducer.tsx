@@ -173,10 +173,11 @@ export const saveProfile = (profile: ProfileType): AppThunk => {
         const userID = getState().auth.userId
         const res = await profileApi.saveProfile(profile);
         if (res.resultCode === 0) {
-         dispatch(getUsersForProfile(String(userID)))
-        }else {
+            dispatch(getUsersForProfile(String(userID)))
+        } else {
             let message: string = res.messages.length > 0 ? res.messages[0] : 'Some Error!'
-            dispatch(stopSubmit('Name', {_error: message}))
+            dispatch(stopSubmit('edit-profile', {_error: message}))
+
         }
     }
 }

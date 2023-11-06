@@ -28,7 +28,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
     const onSubmit = (formData: ProfileType) => {
         //const copyProfile = {...profile, ...formData}
         saveProfile(formData)
-        setEditMode(false)
+       //setEditMode(false)
 
     }
     return (

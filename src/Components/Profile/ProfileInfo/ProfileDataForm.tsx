@@ -2,10 +2,12 @@ import {CreateField, Input, Textarea} from "../../../Common/FormsControls/FormsC
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {ProfileType} from "../../../Redux/ProfileReducer";
 import s from "./ProfileInfo.module.css";
+import style from "../../../Common/FormsControls/FormControls.module.css";
 
 
 const ProfileDataForm = (props: ProfileDataFormProps) => {
-    const {handleSubmit, profile} = props;
+    const {handleSubmit, error, profile}
+        = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -16,8 +18,8 @@ const ProfileDataForm = (props: ProfileDataFormProps) => {
                 <div><b>About me:</b> {CreateField('About me', 'aboutMe', [], Textarea, {type: 'textarea'}, '')}</div>
 
                 <div><b>Contacts:</b>{Object.keys(profile.contacts).map(key => {
-                    return <div className={s.contacts}>
-                        <b>{key}:{CreateField(key, 'contacts.'+key, [], Input, '')}</b>
+                    return <div key={key} className={s.contacts}>
+                        <b>{key}:{CreateField(key, 'contacts.' + key, [], Input, '')}</b>
                     </div>
                 })}</div>
 
@@ -29,7 +31,12 @@ const ProfileDataForm = (props: ProfileDataFormProps) => {
                         skills:</b> {CreateField('skills', 'lookingForAJobDescription', [], Textarea, {}, '')}
                 </div>
                 <div>
+                    {
+                        error && <div className={style.formSummeryError}>{error}</div>
+
+                    }
                     <button>Save</button>
+
                 </div>
             </div>
         </form>

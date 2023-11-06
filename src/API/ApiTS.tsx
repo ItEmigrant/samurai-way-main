@@ -28,7 +28,7 @@ export const userApi = {
     },
 
     getUsersForProfile(id: string) {
-        console.warn('Obsolete method! Please profileApi used')
+        //console.warn('Obsolete method! Please profileApi used')
         return profileApi.getUsersForProfile(id)
     }
 }
