@@ -12,7 +12,7 @@ type ProfileInfoPropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) =>  Promise<any>
+    saveProfile: (profile: ProfileType) => Promise<any>
 }
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoPropsType) => {
 
@@ -26,13 +26,13 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
         }
     }
     const onSubmit = (formData: ProfileType) => {
-        //const copyProfile = {...profile, ...formData}
         saveProfile(formData).then(
-            (rej) => {
+            () => {
                 setEditMode(false)
             }
         )
     }
+
     return (
         <>
             {/*<div><img className={s.image}
