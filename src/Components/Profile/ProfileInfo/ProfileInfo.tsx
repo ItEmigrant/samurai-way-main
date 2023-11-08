@@ -12,7 +12,7 @@ type ProfileInfoPropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) =>  Promise<any>
 }
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoPropsType) => {
 
@@ -27,9 +27,11 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
     }
     const onSubmit = (formData: ProfileType) => {
         //const copyProfile = {...profile, ...formData}
-        saveProfile(formData)
-       //setEditMode(false)
-
+        saveProfile(formData).then(
+            (rej) => {
+                setEditMode(false)
+            }
+        )
     }
     return (
         <>
@@ -41,7 +43,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                 <img src={profile.photos.large || UserPhoto} className={s.mainPhoto} alt={"avatar"}/>
                 {isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                 {editMode
-                    ? <ProfileDataFormRedux  profile={profile} initialValues={profile}  onSubmit={onSubmit}/>
+                    ? <ProfileDataFormRedux profile={profile} initialValues={profile} onSubmit={onSubmit}/>
                     : <ProfileData
                         profile={profile}
                         updateStatus={updateStatus}

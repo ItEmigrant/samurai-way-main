@@ -71,7 +71,7 @@ type mapDispatchToPropsType = {
     getStatus: (userId: string) => void
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 }
 export type CommonProfileType = mapStateToPropsType & mapDispatchToPropsType;
 
