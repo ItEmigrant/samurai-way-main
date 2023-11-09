@@ -15,8 +15,8 @@ export const userApi = {
     async getUsers(currentPage: number, pageSize: number) {
         let response = await instance.get<getUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`);
         return response.data
-
     },
+
     async unFollowUsers(id: number) {
         let response = await instance.delete<ResponseApiType<{}>>(`follow/${id}`);
         return response.data;
@@ -73,9 +73,17 @@ export const authApi = {
     async singUp() {
         let response = await instance.delete(`auth/login/`);
         return await response.data;
-
     }
 }
+
+export const securityApi = {
+    async getCaptchaURL() {
+        let response = await instance.get(`security/get-captcha-url`);
+        return await response.data;
+    }
+}
+
+
 //types
 type ResponseApiType<T> = {
     resultCode: number,
