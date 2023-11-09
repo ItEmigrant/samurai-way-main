@@ -77,9 +77,9 @@ export const authApi = {
 }
 
 export const securityApi = {
-    async getCaptchaURL() {
-        let response = await instance.get(`security/get-captcha-url`);
-        return await response.data;
+    async getCaptchaUrl() {
+        let response = await instance.get<getCaptchaUrlType>(`security/get-captcha-url`);
+        return response.data;
     }
 }
 
@@ -93,6 +93,10 @@ type ResponseApiType<T> = {
 
 type savePhotoType = {
     photos: { small: string, large: string }
+}
+
+type getCaptchaUrlType = {
+    url: string
 }
 
 type getUsersResponseType = {
