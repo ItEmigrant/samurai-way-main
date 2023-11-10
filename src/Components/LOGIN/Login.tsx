@@ -5,7 +5,7 @@ import {loginSingIn} from "../../Redux/AuthReducer";
 import {ReduxStateType} from "../../Redux/reduxStore";
 import {Redirect} from "react-router-dom";
 
-const Login = ({loginSingIn, isAuth}: LoginProps) => {
+const Login = ({loginSingIn, isAuth, Captcha}: LoginProps) => {
     const onSubmit = (formData: FormDataType) => {
         loginSingIn(formData.email, formData.password, formData.rememberMe)
     }
@@ -16,20 +16,22 @@ const Login = ({loginSingIn, isAuth}: LoginProps) => {
     return (
         <div>
             <h1>Login</h1>
-            <ReduxLoginForm onSubmit={onSubmit}/>
+            <ReduxLoginForm onSubmit={onSubmit} captchaURL={Captcha}/>
         </div>
     )
 }
 
 
 const mapStateToProps = (state: ReduxStateType) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    Captcha: state.auth.captcha
 })
 export default connect(mapStateToProps, {loginSingIn})(Login);
 
 
 //types
 type LoginProps = {
+    Captcha: string | null;
     isAuth: boolean;
     loginSingIn: (email: string, password: string, rememberMe: boolean) => void;
 }

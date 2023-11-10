@@ -6,18 +6,17 @@ import styles from '../../Common/FormsControls/FormControls.module.css';
 
 
 const maxLength = maxLengthCreator(20);
-export const LoginForm = ({handleSubmit, error}: InjectedFormProps<FormDataType>) => {
-
+export const LoginForm = (props: LoginFormProps) => {
+    const {handleSubmit, error, captchaURL} = props
     return (
         <form onSubmit={handleSubmit}>
-            {CreateField('Login', 'email', [required, maxLength], Input,{})}
+            {CreateField('Login', 'email', [required, maxLength], Input, {})}
             {/* <Field placeholder={'Login'} name={'email'} component={Input} validate={[required, maxLength]}/>*/}
-            {CreateField('Password', 'password', [required, maxLength], Input, {type:"password"})}
-           {/* <Field placeholder={'Password'} name={'password'} type={'password'} component={Input}
+            {CreateField('Password', 'password', [required, maxLength], Input, {type: "password"})}
+            {/* <Field placeholder={'Password'} name={'password'} type={'password'} component={Input}
                        validate={[required, maxLength]}/>*/}
-            {CreateField('','rememberMe',[], Input, {type:'checkbox'}, 'Remember me')}
-              {/*  <Field name={'rememberMe'} component={'input'} type={"checkbox"}/> remember me*/}
-
+            {CreateField('', 'rememberMe', [], Input, {type: 'checkbox'}, 'Remember me')}
+            {captchaURL && <img src={captchaURL} alt="captchaURL"/>}
             {error && <div className={styles.formSummeryError}>
                 {error}
             </div>}
@@ -33,6 +32,17 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captchaURL: string | null
+
 }
 
-export const ReduxLoginForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
+type LoginFormProps =
+    InjectedFormProps<FormDataType, {
+        captchaURL: string | null
+    }>
+    & {
+    captchaURL: string | null
+}
+export const ReduxLoginForm = reduxForm<FormDataType, {
+    captchaURL: string | null
+}>({form: 'login'})(LoginForm)

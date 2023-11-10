@@ -5,7 +5,7 @@ import {stopSubmit} from "redux-form";
 
 
 const SET_USER_DATA = "AuthReducer/SET-USER-DATA"
-const GET_CAPTCHA='AuthReducer/GET_CAPTCHA'
+const GET_CAPTCHA = 'AuthReducer/GET_CAPTCHA'
 
 export type AuthStatePropsType = {
     userId: number | null,
@@ -21,7 +21,7 @@ let initialAuthState: AuthStatePropsType = {
     email: null,
     login: null,
     isAuth: false,
-    captcha: null
+    captcha: null //if null, then captcha is not required
 }
 
 
@@ -34,7 +34,9 @@ const AuthReducer = (state: AuthStatePropsType = initialAuthState, action: AuthA
         case SET_USER_DATA:
             return {...state, ...action.data};
         case GET_CAPTCHA:
-           // return {}
+     return {
+         ...state, captcha: action.captchaURL
+     }
         default:
             return state;
 
@@ -45,7 +47,6 @@ export default AuthReducer;
 export type AuthActionType =
     ReturnType<typeof setAuthUserData> |
     ReturnType<typeof getCaptchaUrl>
-
 
 
 export const setAuthUserData = (data: AuthStatePropsType) => ({
@@ -74,6 +75,9 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
         if (res.resultCode === 0) {
             await dispatch(authMeThunkCreator())
         } else {
+            if (res.resultCode === 10) {
+                dispatch(getCaptchaURL)
+            }
             let message: string = res.messages.length > 0 ? res.messages[0] : 'Some Error!'
             dispatch(stopSubmit('login', {_error: message}))
         }
@@ -92,9 +96,8 @@ export const loginSingUp = (): AppThunk => {
 export const getCaptchaURL = (): AppThunk => {
     return async (dispatch) => {
         const res = await securityApi.getCaptchaUrl();
-        const CaptchaURL = res.url;
-
-
+        const CaptchaURL = res;
+        dispatch(getCaptchaUrl(CaptchaURL))
     }
 
 }

@@ -78,8 +78,8 @@ export const authApi = {
 
 export const securityApi = {
     async getCaptchaUrl() {
-        let response = await instance.get<getCaptchaUrlType>(`security/get-captcha-url`);
-        return response.data;
+                let response = await instance.get<getCaptchaUrlType>(`/security/get-captcha-url`);
+        return response.data.url;
     }
 }
 
