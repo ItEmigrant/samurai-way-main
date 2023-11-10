@@ -34,9 +34,7 @@ const AuthReducer = (state: AuthStatePropsType = initialAuthState, action: AuthA
         case SET_USER_DATA:
             return {...state, ...action.data};
         case GET_CAPTCHA:
-     return {
-         ...state, captcha: action.captchaURL
-     }
+            return {...state, captcha: action.captchaURL}
         default:
             return state;
 
@@ -76,7 +74,7 @@ export const loginSingIn = (email: string, password: string, rememberMe: boolean
             await dispatch(authMeThunkCreator())
         } else {
             if (res.resultCode === 10) {
-                dispatch(getCaptchaURL)
+                dispatch(getCaptchaURL())
             }
             let message: string = res.messages.length > 0 ? res.messages[0] : 'Some Error!'
             dispatch(stopSubmit('login', {_error: message}))
@@ -96,10 +94,8 @@ export const loginSingUp = (): AppThunk => {
 export const getCaptchaURL = (): AppThunk => {
     return async (dispatch) => {
         const res = await securityApi.getCaptchaUrl();
-        const CaptchaURL = res;
-        dispatch(getCaptchaUrl(CaptchaURL))
+        dispatch(getCaptchaUrl(res.url))
     }
-
 }
 
 
