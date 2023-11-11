@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Nawbar/Navbar";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
@@ -50,15 +50,18 @@ class App extends React.Component<CommonAppType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-
-                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-                    <Route path='/login' render={() => <Login/>}/>
-                    <Route path='/friends' render={() => <MyFriendsContainer/>}/>
-                    <Route path='/users' render={() => <UserContainer/>}/>
-                    <Route path='/news' component={ActualNews}/>
-                    <Route path='/music' component={Track}/>
-                    <Route path='/settings' component={YourSettings}/>
+                    <Switch>
+                        <Route exact path='/' render={()=><Redirect from="/" to="/profile" />}/>
+                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/friends' render={() => <MyFriendsContainer/>}/>
+                        <Route path='/users' render={() => <UserContainer/>}/>
+                        <Route path='/news' component={ActualNews}/>
+                        <Route path='/music' component={Track}/>
+                        <Route path='/settings' component={YourSettings}/>
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
             </div>
 
