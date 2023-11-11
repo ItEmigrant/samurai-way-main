@@ -83,7 +83,6 @@ export const securityApi = {
     }
 }
 
-
 //types
 type ResponseApiType<T> = {
     resultCode: number,

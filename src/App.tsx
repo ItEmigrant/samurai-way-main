@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Nawbar/Navbar";
-import {HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import {ActualNews} from "./Components/ActualNews/ActualNews";
 import {Track} from "./Components/Track/Track";
 import {YourSettings} from "./Components/YourSettings/YourSettings";
@@ -38,7 +38,7 @@ const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 
 class App extends React.Component<CommonAppType> {
     componentDidMount() {
-        this.props.InitializedAppTC()
+        this.props.InitializedAppTC();
     }
 
     render() {
@@ -50,6 +50,7 @@ class App extends React.Component<CommonAppType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
+
                     <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                     <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                     <Route path='/login' render={() => <Login/>}/>
@@ -70,11 +71,11 @@ let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {InitializedAppTC}))(App);
 
 const SamuraiJSApp = () => {
-    return <HashRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
 }
 export default SamuraiJSApp;
 
