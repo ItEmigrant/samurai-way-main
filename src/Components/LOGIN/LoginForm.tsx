@@ -17,6 +17,7 @@ export const LoginForm = (props: LoginFormProps) => {
                        validate={[required, maxLength]}/>*/}
             {CreateField('', 'rememberMe', [], Input, {type: 'checkbox'}, 'Remember me')}
             {captchaURL && <img src={captchaURL} alt="captchaURL"/>}
+            {captchaURL && CreateField('Captcha', 'captcha', [required], Input, {})}
             {error && <div className={styles.formSummeryError}>
                 {error}
             </div>}
@@ -32,7 +33,7 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
-    captchaURL: string | null
+    captcha: string | null
 
 }
 

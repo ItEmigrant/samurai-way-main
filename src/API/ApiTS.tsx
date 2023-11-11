@@ -66,8 +66,8 @@ export const authApi = {
         let response = await instance.get(`auth/me`);
         return await response.data;
     },
-    async singIn(email: string, password: string, rememberMe: boolean = false) {
-        const response = await instance.post(`auth/login/`, {email, password, rememberMe});
+    async singIn(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
+        const response = await instance.post(`auth/login/`, {email, password, rememberMe, captcha: captcha});
         return response.data;
     },
     async singUp() {

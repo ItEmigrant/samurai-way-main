@@ -35,6 +35,7 @@ const AuthReducer = (state: AuthStatePropsType = initialAuthState, action: AuthA
             return {...state, ...action.data};
         case GET_CAPTCHA:
             return {...state, captcha: action.captchaURL}
+
         default:
             return state;
 
@@ -67,9 +68,9 @@ export const authMeThunkCreator = () => { //authMy
     }
 }
 
-export const loginSingIn = (email: string, password: string, rememberMe: boolean): AppThunk => {
+export const loginSingIn = (email: string, password: string, rememberMe: boolean, captcha: string | null): AppThunk => {
     return async (dispatch) => {
-        let res = await authApi.singIn(email, password, rememberMe)
+        let res = await authApi.singIn(email, password, rememberMe, captcha)
         if (res.resultCode === 0) {
             await dispatch(authMeThunkCreator())
         } else {
