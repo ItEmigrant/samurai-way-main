@@ -16,6 +16,7 @@ import {ReduxStateType, store} from "./Redux/reduxStore";
 import {Preloader} from "./Common/Preloader/Preloader";
 import {withSuspense} from "./HOC/withSuspense";
 
+
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
 
@@ -37,9 +38,12 @@ const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 }
 
 class App extends React.Component<CommonAppType> {
+
     catchAllUnhandledErrors = (promiseRejection: PromiseRejectionEvent) => {
-        alert('Some Error')
-        // console.error(promiseRejection)
+        alert(promiseRejection.reason.message)
+        console.log(promiseRejection.reason.message)
+
+
     }
 
     componentDidMount() {
