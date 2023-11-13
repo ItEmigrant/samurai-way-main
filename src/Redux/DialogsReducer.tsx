@@ -54,6 +54,7 @@ export default DialogsReducer;
 export type DialogActionType =
     ReturnType<typeof sendMessageActionCreator>
 
+
 export const sendMessageActionCreator = (newMessageBody: string) => ({
     type: "SEND-MESSAGE",
     newMessageBody

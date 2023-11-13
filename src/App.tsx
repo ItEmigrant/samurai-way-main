@@ -37,8 +37,17 @@ const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 }
 
 class App extends React.Component<CommonAppType> {
+    catchAllUnhandledErrors = (promiseRejection: PromiseRejectionEvent) => {
+        alert('Some Error')
+        // console.error(promiseRejection)
+    }
+
     componentDidMount() {
         this.props.InitializedAppTC();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -51,7 +60,7 @@ class App extends React.Component<CommonAppType> {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
-                        <Route exact path='/' render={()=><Redirect from="/" to="/profile" />}/>
+                        <Route exact path='/' render={() => <Redirect from="/" to="/profile"/>}/>
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                         <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                         <Route path='/login' render={() => <Login/>}/>

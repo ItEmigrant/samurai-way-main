@@ -4,6 +4,7 @@ import {profileApi, userApi} from "../API/ApiTS";
 import {AppActionType, AppThunk} from "./reduxStore";
 import {stopSubmit} from "redux-form";
 
+
 export type postsType = {
     id: number
     message: string
@@ -15,6 +16,7 @@ export type  profilePageType = {
     profile: ProfileType
     status: string
 
+
 }
 
 export type ProfileType = {
@@ -25,6 +27,7 @@ export type ProfileType = {
     fullName: string
     userId: number
     photos: profilePhotosType
+    error: string | null
 
 
 }
@@ -99,6 +102,15 @@ const ProfileReducer = (state: profilePageType = initialReducerState, action: Ac
             }
         }
 
+        case 'SET_ERROR':
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    error: action.error
+                }
+            }
+
         default:
             return state;
     }
@@ -111,7 +123,8 @@ export type ProfileActionsType =
     ReturnType<typeof setStatus> |
     ReturnType<typeof deletePostActionCreator> |
     ReturnType<typeof savePhotoSuccess> |
-    ReturnType<typeof saveProfileSuccess>
+    ReturnType<typeof saveProfileSuccess> |
+    ReturnType<typeof setProfileError>
 
 export const addPostActionCreator = (NewPostBody: string) => ({
     type: "ADD-STATE-POST-MESSAGE",
@@ -152,6 +165,11 @@ export const saveProfileSuccess = (profile: ProfileType) => ({
     profile
 }) as const
 
+export const setProfileError = (error: string|null) => ({
+    type: "SET_ERROR",
+    error
+}) as const
+
 export const getStatus = (userId: string) => {
     return async (dispatch: Dispatch) => {
         let data = await profileApi.getStatus(userId);
@@ -187,6 +205,13 @@ export const updateStatus = (status: string) => {
         let res = await profileApi.updateStatus(status);
         if (res.data.resultCode === 0) {
             dispatch(setStatus(status))
+        } else {
+            let message: string = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error!'
+            dispatch(setProfileError(message))
+            setTimeout(() => {
+                dispatch(setProfileError(null))
+            }, 5000);
         }
+
     }
 }

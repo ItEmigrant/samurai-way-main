@@ -4,9 +4,11 @@ import {authMeThunkCreator} from "./AuthReducer";
 
 export type AppInitialStateType = {
     initialized: boolean
+    globalError: string | null
 }
 let initialState = {
-    initialized: false
+    initialized: false,
+    globalError: null
 }
 const AppReducer = (state: AppInitialStateType = initialState, action: AppActionsReducerType): AppInitialStateType => {
     switch (action.type) {

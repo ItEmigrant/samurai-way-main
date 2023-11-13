@@ -12,6 +12,7 @@ const ProfileDataForm = (props: ProfileDataFormProps) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
+
                 <div>
                     <b>Name:</b>{CreateField('Name', 'fullName', [], Input, {}, '')}
                 </div>
@@ -33,7 +34,6 @@ const ProfileDataForm = (props: ProfileDataFormProps) => {
                 <div>
                     {
                         error && <div className={style.formSummeryError}>{error}</div>
-
                     }
                     <button>Save</button>
 
