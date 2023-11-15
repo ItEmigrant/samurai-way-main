@@ -11,10 +11,12 @@ import UserContainer from "./Components/Users/UserApiContainer";
 import Login from "./Components/LOGIN/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {InitializedAppTC} from "./Redux/AppReducer";
-import {ReduxStateType, store} from "./Redux/reduxStore";
+import {globalError, InitializedAppTC} from "./Redux/AppReducer";
+import {AppActionType, ReduxStateType, store} from "./Redux/reduxStore";
 import {Preloader} from "./Common/Preloader/Preloader";
 import {withSuspense} from "./HOC/withSuspense";
+import {ThunkDispatch} from "redux-thunk";
+import style from "./Common/FormsControls/FormControls.module.css";
 
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
@@ -23,33 +25,46 @@ const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsCo
 
 type MapStateToPropsType = {
     initialized: boolean
+    Errors: string | null
 }
 
 type MapDispatchToPropsType = {
     InitializedAppTC: () => void;
+    dispatch: Function
 }
 
 export type CommonAppType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
     return {
-        initialized: state.App.initialized
+        initialized: state.App.initialized,
+        Errors: state.App.globalError
+    }
+}
+const mapDispatchToProps = (dispatch: ThunkDispatch<ReduxStateType, any, AppActionType>) => {
+    return {
+        InitializedAppTC: () => dispatch(InitializedAppTC()),
+        dispatch: dispatch
     }
 }
 
 class App extends React.Component<CommonAppType> {
 
     catchAllUnhandledErrors = (promiseRejection: PromiseRejectionEvent) => {
-        alert(promiseRejection.reason.message)
-        console.log(promiseRejection.reason.message)
-
-
+        if (promiseRejection.reason.message) {
+            this.props.dispatch(globalError(promiseRejection.reason.message))
+            setTimeout(() => {
+                this.props.dispatch(globalError(null))
+            }, 5000)
+        } else this.props.dispatch(globalError('Some Error'))
     }
 
     componentDidMount() {
         this.props.InitializedAppTC();
         window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+
     }
+
     componentWillUnmount() {
         window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
@@ -60,9 +75,13 @@ class App extends React.Component<CommonAppType> {
         }
         return (
             <div className='app-wrapper'>
+
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
+
+                    {this.props.Errors && <div className={style.formSummeryError}><h3>{this.props.Errors}</h3></div>}
+
                     <Switch>
                         <Route exact path='/' render={() => <Redirect from="/" to="/profile"/>}/>
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
@@ -84,7 +103,7 @@ class App extends React.Component<CommonAppType> {
 
 let AppContainer = compose<React.ComponentType>(
     withRouter,
-    connect(mapStateToProps, {InitializedAppTC}))(App);
+    connect(mapStateToProps, mapDispatchToProps))(App);
 
 const SamuraiJSApp = () => {
     return <BrowserRouter>
